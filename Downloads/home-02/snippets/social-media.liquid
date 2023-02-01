@@ -1,0 +1,80 @@
+<ul class="social-icon">
+  {% if settings.social_icon_1_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_1_color }};" href="{{ settings.social_icon_1_link }}">
+      {{ settings.social_icon_1_name }}
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_2_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_2_color }};" href="{{ settings.social_icon_2_link }}">
+      {{ settings.social_icon_2_name }}
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_3_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_3_color }};" href="{{ settings.social_icon_3_link }}">
+      {{ settings.social_icon_3_name }}
+    </a>
+  </li>        
+  {% endif %}
+
+  {% if settings.social_icon_4_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_4_color }};" href="{{ settings.social_icon_4_link }}">
+      {{ settings.social_icon_4_name }}
+    </a>
+  </li>        
+  {% endif %}
+  {% if settings.social_icon_5_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_5_color }};" href="{{ settings.social_icon_5_link }}">
+      {{ settings.social_icon_5_name }}
+    </a>
+  </li>        
+  {% endif %}
+  {% if settings.social_icon_6_name != blank %}
+  <li>
+    <a style="color: {{ settings.social_icon_6_color }};" href="{{ settings.social_icon_6_link }}">
+      {{ settings.social_icon_6_name }}
+    </a>
+  </li>        
+  {% endif %}
+</ul>
+<style>
+  /* social icon css */
+  ul.social-icon li{
+    display: inline;
+    line-height: 1;
+    {% if settings.enable_rtl %}
+    margin-left: 25px;
+    {% else %}
+    margin-right: 25px;
+    {% endif %}
+  }
+  ul.social-icon li:last-child{
+    {% if settings.enable_rtl %}
+    margin-left: 0px;
+    {% else %}
+    margin-right: 0px;
+    {% endif %}
+  }
+  ul.social-icon li a{
+    font-size: 16px;
+  }
+  @media(max-width: 767px){
+    ul.social-icon li{
+      display: inline;
+      line-height: 1;
+      {% if settings.enable_rtl %}
+      margin-left: 15px;
+      {% else %}
+      margin-right: 15px;
+      {% endif %}
+    }
+  }
+</style>

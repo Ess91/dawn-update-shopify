@@ -1,0 +1,138 @@
+<section class="page-not-found section-ptb">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 xol-lg-12 col-md-12 col-12">
+        <div class="search-error-wrapper">
+          <h2>
+            <b>{{ section.settings.section_title_bold }}</b>
+            {{ section.settings.section_title }}
+          </h2>
+          
+          <div class="section-img">
+            <img class="img-fluid" src="{% if section.settings.section_img %}{{ section.settings.section_img | img_url: 'master' }}{% else %}https://dummyimage.com/660x350/f6f6f6/999{% endif %}" alt="" />
+          </div>
+          <p>{{ section.settings.section_des }}</p>
+          <div class="home-btn">
+            <form>
+            <input class="btn btn-style10" type="button" value="{{ section.settings.back_button }}" onclick="history.go(-1)">
+            </form>
+
+            {% if settings.button_title !='' %}
+            <a href="/" class="btn btn-style10">
+              {{ section.settings.home_button }}
+            </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "404 Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title_bold",
+      "label": "section title bold",
+      "default": "Oops!"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "section title",
+      "default": "Page not found!"
+    },
+    {
+      "type": "image_picker",
+      "id": "section_img",
+      "label": "404 Image",
+      "info": "Recommended Size: 660 X 350px"
+    },
+    {
+      "type": "text",
+      "id": "section_des",
+      "label": "Section Description",
+      "default": "Sorry, But the page you are looking for does't exist!"
+    },
+    {
+      "type": "text",
+      "id": "home_button",
+      "label": "home button",
+      "default": "Home page"
+    },
+    {
+      "type": "text",
+      "id": "back_button",
+      "label": "back button",
+      "default": "Go back"
+    }
+  ]
+}
+{% endschema %}
+<style>
+.page-not-found .search-error-wrapper{
+  text-align: center;
+}
+.page-not-found .search-error-wrapper h2{
+  color: var(--color-primary);;
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 200;
+  margin-bottom: 30px;
+}
+.page-not-found .search-error-wrapper h2 b{
+  font-weight: 500;
+}
+
+.page-not-found .search-error-wrapper p{
+  font-size: 24px;
+  font-weight: 300;
+  margin-top: 15px;
+}
+.page-not-found .search-error-wrapper .home-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+.page-not-found .search-error-wrapper .home-btn a{
+  {%- if settings.enable_rtl -%}
+  margin-right: 30px;
+  {%- else -%}
+  margin-left: 30px;
+  {%- endif -%}
+}
+
+@media (max-width: 1199px) {
+  .page-not-found .search-error-wrapper h2{
+    font-size: 24px;
+  }
+  .page-not-found .search-error-wrapper p{
+    font-size: 20px;
+  }
+  .page-not-found .search-error-wrapper .home-btn{
+    margin-top: 60px;
+  }
+}
+
+@media (max-width: 767px) {
+  .page-not-found .search-error-wrapper h2{
+    font-size: 20px;
+  }
+  .page-not-found .search-error-wrapper p{
+    font-size: 16px;
+  }
+  .page-not-found .search-error-wrapper .home-btn{
+    margin-top: 30px;
+  }
+  .page-not-found .search-error-wrapper .home-btn a{
+  {%- if settings.enable_rtl -%}
+  margin-right:15px;
+  {%- else -%}
+  margin-left: 15px;
+  {%- endif -%}
+  }
+}
+</style>

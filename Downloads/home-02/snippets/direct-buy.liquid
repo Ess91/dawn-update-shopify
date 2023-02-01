@@ -1,0 +1,33 @@
+{% if product.available %}
+<a href="javascript:void(0)" class="btn btn-cart btn_theme" onClick="instantBuy()">
+  <span>{{ section.settings.buy_now_title }}</span>
+</a>
+{% else %}
+<a href="javascript:void(0)" class="btn btn-cart btn_theme disabled" disabled="disabled" onClick="instantBuy()">
+  <span>{{ section.settings.buy_now_title }}</span>
+</a>
+{% endif %}
+<style>
+    .pro-aff-che a{
+        color: #fff;
+        font-size: 14px;
+        padding: 10px 15px;
+        background-color: var(--color-primary);
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 400;
+        border-radius: 0;
+        line-height: normal;
+    }
+    .pro-aff-che a:hover{
+        color: #fff;
+        background-color: #222;
+    }
+    .pro-aff-che a.btn[disabled],
+	.pro-aff-che a.btn.disabled{
+		color: #eaeaea;
+		background-color: #ababab;
+		opacity: .65;
+		pointer-events: none;
+	}
+</style>

@@ -1,0 +1,183 @@
+<section class="return-policy3">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-7 col-lg-6 col-md-12 col-12">
+          <div class="quots-title wow animate__fadeIn">
+
+            <h2>
+              <img class="img-fluid" src="{% if section.settings.quots_icon %}{{ section.settings.quots_icon | img_url: 'master' }}{% else %}https://dummyimage.com/94x78/f7f7f7/999999{% endif %}">
+              <span>{{ section.settings.quots_title }}</span>
+            </h2>
+          </div>
+        </div>
+        <div class="col-xl-5 col-lg-6 col-md-12 col-12">
+          <div class="quots-description wow animate__fadeIn">
+            <p>{{ section.settings.quots_description }}</p>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Return Policy section 3",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Quots Title"
+  },
+  {
+            "type": "image_picker",
+            "id": "quots_icon",
+            "label": "Image"
+        },
+  {
+    "type": "text",
+    "id": "quots_title",
+    "label": "Quots title",
+    "default": "We know that good tech matters to build our future."
+  },
+  {
+    "type": "textarea",
+    "id": "quots_description",
+    "label": "Quots Description",
+    "default": "We help our clients succeed by creating brand identities, digital experiences, and print materials that communicate clearly, achieve marketing goals, and look fantastic."
+  }
+  ],
+  "presets":[
+    {
+      "name": "Return Policy section 3",
+      "category": "Return Policy"
+    }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .return-policy3 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media(max-width: 1199px){
+    .return-policy3 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy3 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  .return-policy3 .quots-title h2{
+    position: relative;
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+  }
+  .return-policy3 .quots-title h2 img{
+    {% if settings.enable_rtl %}
+    margin-left: 30px;
+    {% else %}
+    margin-right: 30px;
+    {% endif %}
+  } 
+  .return-policy3 p{
+    font-size: 18px;
+    line-height: 30px;
+  }
+  @media(max-width: 1199px){
+    .return-policy3 .quots-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 991px){
+    .return-policy3 .quots-description{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy3 .quots-title h2{
+      font-size: 20px;
+    }
+    .return-policy3 p{
+      font-size: 16px;
+    }
+  }
+</style>

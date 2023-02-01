@@ -1,0 +1,219 @@
+<!-- our-brand-area start -->
+<section class="our-brand-logo">
+  <div class="container-fluid container-col">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <div class="brand-logo owl-carousel owl-theme" id="brand-logo-{{ section.id }}">
+          {% for block in section.blocks %}
+          <div class="item">
+            <div class="brand-img">
+              <a href="{{ block.settings.brand_url }}">
+                <img class="img-fluid" src="{% if block.settings.brand_image %}{{ block.settings.brand_image | img_url: 'master' }} {% else %}https://dummyimage.com/200x80/f7f7f7/999999 {% endif %}" alt="{{ block.settings.brand_image.alt }}">
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- our-brand-area end -->
+<script>
+  $( document ).ready(function() {
+  $('#brand-logo-{{ section.id }}').owlCarousel({
+    loop: true,
+    rewind: true,
+    margin: 30,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    autoplay: true,
+    sautoplayTimeout: 1000,
+    autoplayHoverPause: true,
+    responsive:{
+      0:{
+        items: 2,
+        margin: 15
+      },
+      479:{
+        items: 3,
+         margin: 15
+      },
+      540:{
+        items: 3,
+         margin: 15
+      },
+      768:{
+        items: 4
+      },
+      979:{
+        items: 5
+      },
+      1199:{
+        items: 5
+      }
+    }
+  });
+  });
+</script>
+{% schema %}
+{
+  "name": "Brand Logo",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_bottom_ipad",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "brand_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  }
+  ],
+  "blocks":[
+  {
+    "type": "single_brand",
+    "name": "Single Brand Logo",
+    "settings": [
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Brand Image",
+      "info": "Recommended Size: 160 x 120px"
+    },
+    {
+      "type": "url",
+      "id": "brand_url",
+      "label": "Brand URL"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Brand Logo",
+    "category": "brand logo"
+  }
+  ]
+}
+{% endschema %}
+
+<style>
+
+.our-brand-logo {
+  padding-top:{{ section.settings.brand_padding_top }}px;
+  padding-bottom:{{ section.settings.brand_padding_bottom }}px;
+  border-top: 1px solid #e2e2e2;
+}
+@media (max-width: 1199px){
+  .our-brand-logo {
+    padding-top:{{ section.settings.brand_padding_top_ipad }}px;
+    padding-bottom:{{ section.settings.brand_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px){
+  .our-brand-logo {
+    padding-top:{{ section.settings.brand_padding_top_xs }}px;      
+    padding-bottom:{{ section.settings.brand_padding_bottom_xs }}px;
+  }
+}
+.our-brand-logo .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .our-brand-logo .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .our-brand-logo .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .our-brand-logo .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.our-brand-logo .brand-logo .brand-img{
+  text-align: center;
+}
+
+</style>

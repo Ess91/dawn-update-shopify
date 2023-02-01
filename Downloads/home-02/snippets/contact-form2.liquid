@@ -1,0 +1,122 @@
+{% form 'contact' %}
+{{ form.errors | default_errors }}
+<ul class="form-fill2">
+  
+    <li>
+    <input type="text" placeholder="{{ section.settings.name_placeholder }}" class="{% if form.errors contains 'name' %}error{% endif %}" name="contact[name]" id="ContactFormName" value="{% if form.name %}{{ form.name }}{% elsif customer.name %}{{ customer.name }}{% endif %}" required>
+  </li>
+  <li>
+    <input type="email" placeholder="{{ section.settings.email_placeholder }}" class="{% if form.errors contains 'email' %}error{% endif %}" name="contact[email]" id="ContactFormEmail" value="{% if form.email %}{{ form.email }}{% elsif customer.email %}{{ customer.email }}{% endif %}" required>
+  </li>
+  <li>
+    <input type="text" placeholder="{{ section.settings.phone_placeholder }}" class="{% if form.errors contains 'phone' %}error{% endif %}" name="contact[phone]" id="ContactFormPhone" value="{% if form.phone %}{{ form.phone }}{% elsif customer.phone %}{{ customer.phone }}{% endif %}" required>
+  </li>
+
+ 
+    <li class="textarea">
+      <input type="text" placeholder="{{ section.settings.message_placeholder }}" class="custom-textarea" name="contact[body]" id="ContactFormMessage" required></textarea>
+    </li>
+  
+</ul>
+<div class="contact-submit">
+  <button type="submit" class="btn btn-style3">
+    <span>{{ section.settings.form_button_name }}</span>
+  </button>
+</div>
+{% if form.posted_successfully? %}
+<div class="post-success">
+  <ul>
+    <li class="text-success">{{ 'contact.form.post_success' | t }}</li>
+  </ul>
+</div>
+{% endif %}
+{% endform %}
+<style>
+ /* error css */
+  .errors{
+    margin: 30px 0 15px;
+    border-radius: 0;
+  }
+  .errors ul{
+    list-style: disc;
+    {% if settings.enable_rtl %}
+    margin-right: 15px;
+    text-align: right;
+    {% else %}
+    margin-left: 15px;
+    text-align: left;
+    {% endif %}
+  }
+  @media (max-width: 767px){
+    .errors{
+      margin: 20px 0 15px;
+    }
+  }
+
+  /* form css */
+  ul.form-fill2 li{
+    margin-top: 40px;
+  }
+  ul.form-fill2 li:first-child{
+    margin-top: 0px;
+  }
+
+  ul.form-fill2 li textarea,
+  ul.form-fill2 li input {
+    padding: 0;
+    padding-bottom: 15px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #e2e2e2;
+    background-color: transparent;
+  }
+  ul.form-fill2 li textarea::placeholder,
+  ul.form-fill2 li input::placeholder {
+    color: #232323;
+  }
+  ul.form-fill2 li label{
+    display: block;
+    cursor: auto;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+  ul.form-fill2 li input,
+  ul.form-fill2 li textarea{
+    display: block;
+    width: 100%;
+  }
+  .contact-form-list2 .contact-submit{
+    margin-top: 100px;
+  }
+
+  /* success css */
+  .post-success{
+    font-size: 0.9em;
+    padding: 6px 12px;
+    margin-top: 15px;
+    background-color: #f5fff7;
+    border: 1px solid #28a745;
+  }
+  .post-success ul{
+    list-style: disc;
+    {% if settings.enable_rtl %}
+    margin-right: 15px;
+    {% else %}
+    margin-left: 15px;
+    {% endif %}
+  }
+
+  @media (max-width: 991px){
+    ul.form-fill2 li{
+      margin-top: 30px;
+    }
+    .contact-form-list2 .contact-submit {
+      margin-top: 60px;
+    }
+  }
+  @media(max-width: 767px){
+    .contact-form-list2 .contact-submit {
+      margin-top: 30px;
+    }
+  }
+</style>

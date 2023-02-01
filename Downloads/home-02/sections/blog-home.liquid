@@ -1,0 +1,286 @@
+<section class="blog-wrap">
+  <div class="container-fluid container-col">
+    <div class="section-capture">
+      <div class="section-title">
+        {% if section.settings.section_title !='' %}
+        <h2>
+          {{ section.settings.section_title }}
+        </h2>
+        {% endif %}
+      </div>
+    </div>
+    {%- if section.settings.blog != blank -%}
+    {%- assign blog_handle = blogs[section.settings.blog] -%}
+      <div class="blog-slider owl-carousel owl-theme" id="blog-slider">
+        {% for article in blog_handle.articles %}
+        <div class="item">
+          {% include 'blog-grid-item' %}
+        </div>
+        {% endfor %}
+      </div>
+    {%- endif -%}
+
+    {% if section.settings.view_all_button != '' %}
+    <div class="view-all-collection">
+      <a href="{{ section.settings.view_all_button_url }}" class="btn btn-style8">{{ section.settings.view_all_button }}</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+<script type="text/javascript">
+$( document ).ready(function() {
+  $('#blog-slider').owlCarousel({
+    loop: false,
+    rewind: true,
+    margin: 30,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    responsive:{
+      0:{
+        items: 1,
+        margin: 15
+      },
+      479:{
+        items: 1,
+        margin: 15
+      },
+      768:{
+        items: 2
+      },
+      979:{
+        items: 3
+      },
+      1199: {
+        items: 3
+      },
+      1599: {
+        items: 4
+      }
+    }
+  });
+});
+</script>
+{% schema %}
+{
+  "name": "Home Blog",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 90
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  }, 
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "blog_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type" : "header",
+    "content" : "Background Color"
+  },
+  {
+    "type" : "color",
+    "id" : "blog_bgcolor",
+    "label" : "Background Color",
+    "default" : "#fff"
+  },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Blog"
+  },
+  {
+    "type": "header",
+    "content": "View all collections"
+  },
+  {
+    "type": "text",
+    "id": "view_all_button",
+    "label": "Button Text",
+    "default": "View all blog"
+  },
+  {
+    "type": "url",
+    "id": "view_all_button_url",
+    "label": "Button URL"
+  },
+  {
+    "type": "header",
+    "content": "Choose blog settings"
+  },
+  {
+    "type": "blog",
+    "id": "blog",
+    "label": "Choose blog"
+  },
+  {
+    "type": "text",
+    "id": "article_through",
+    "label": "Blog Post Through Text",
+    "default": "By"
+  }
+  ],
+  "presets": [
+  {
+    "name": "Home Blog",
+    "category": "Blog Post"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.blog-wrap {
+  overflow: hidden;
+  padding-top: {{ section.settings.blog_padding_top }}px;
+  padding-bottom: {{ section.settings.blog_padding_bottom }}px;
+  background-color: {{ section.settings.blog_bgcolor }};
+}
+@media (max-width: 1199px) {
+  .blog-wrap {
+    padding-top: {{ section.settings.blog_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.blog_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px) {
+  .blog-wrap {
+    padding-top:{{ section.settings.blog_padding_top_xs }}px;
+    padding-bottom:{{ section.settings.blog_padding_bottom_xs }}px;
+  }
+}
+
+.blog-wrap .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .blog-wrap .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .blog-wrap .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .blog-wrap .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/*section title*/
+.blog-wrap .section-title h2{
+  margin-top: 0;
+}
+.blog-wrap .section-title p{
+  font-size: 32px;
+  margin-top: 0;
+  width: 30%;
+  line-height: normal;
+}
+.blog-wrap .view-all-collection{
+  margin-top: 80px;
+  text-align: center;
+}
+@media(max-width: 1199px){
+  .blog-wrap .view-all-collection{
+    margin-top: 50px;
+  }
+}
+@media(max-width: 767px){
+  .blog-post .blog-post-content{
+    padding-top: 15px;
+  }
+  .blog-wrap .section-title > h2 {
+    max-width: 100%;
+    text-align: center;
+  }
+  .blog-wrap .section-title > p{
+    width: 100%;
+  }
+  .blog-wrap .view-all-collection{
+    margin-top: 30px;
+  }
+}
+
+</style>

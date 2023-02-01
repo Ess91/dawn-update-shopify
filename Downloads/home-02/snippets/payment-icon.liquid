@@ -1,0 +1,4 @@
+<a href="javascript:void(0)" class="payment-icon">
+	<img src="{% if settings.payment_masterimg %}{{ settings.payment_masterimg | img_url: 'master' }}{% else %}https://dummyimage.com/181x23/f7f7f7/999999{% endif %}" class="img-fluid" alt="{{ settings.payment_masterimg.alt | default: shop.name }}">
+    {% comment %}<img src="{% if settings.payment_discoverimg %}{{ settings.payment_discoverimg | img_url: 'master' }}{% else %}https://dummyimage.com/32x22/f7f7f7/999999{% endif %}" class="img-fluid" alt="{{ settings.payment_discoverimg.alt | default: shop.name }}">{% endcomment %}
+</a>

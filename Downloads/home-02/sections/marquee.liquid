@@ -1,0 +1,244 @@
+{% if section.settings.show_section %}
+<!-- our-brand-area start -->
+<section class="marquee-section">
+  <div class="marquee-slider owl-carousel owl-theme" id="marquee-slider-{{ section.id }}">
+    {% for block in section.blocks %}
+    <div class="item">
+        <a href="{{ block.settings.marquee_text_url }}">
+          <h6>{{ block.settings.marquee_text }}</h6>
+        </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<!-- our-brand-area end -->
+<script>
+  $( document ).ready(function() {
+  $('#marquee-slider-{{ section.id }}').owlCarousel({
+    loop: true,
+    rewind: true,
+    items:5,
+    autoWidth:true,
+    margin: 80,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    slideTransition: 'linear',
+    autoplaySpeed: 5000,
+    autoplay:true,
+    autoplayHoverPause:true
+    // responsive:{
+    //     0:{
+    //       items: 1,
+    //       margin: 15,
+    //       autoWidth:false
+    //     },
+    //     479:{
+    //       items: 1,
+    //       margin: 15,
+    //       autoWidth:false
+    //     },
+    //     540:{
+    //       items: 1,
+    //       margin: 30,
+    //       autoWidth:false
+    //     },
+    //     768:{
+    //       items: 3,
+    //       margin: 30
+    //     },
+    //     979:{
+    //       items: 4,
+    //       margin: 30
+    //     },
+    //     1199:{
+    //       items: 5,
+    //       margin: 30
+    //     }
+    // }
+  });
+  });
+</script>
+{% schema %}
+{
+  "name": "Marquee section",
+  "settings": [
+  {
+    "type" : "checkbox",
+    "id" : "show_section",
+    "label" : "Show section",
+    "default" : true
+  },
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_ipad",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type" : "color",
+    "id" : "blog_bgcolor",
+    "label" : "Background Color",
+    "default" : "#fff"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "marquee_text",
+    "name": "marquee text",
+    "settings": [
+    {
+      "type": "textarea",
+      "id": "marquee_text",
+      "label": "marquee text",
+      "default": "Get your fashion style"
+    },
+    {
+      "type": "url",
+      "id": "marquee_text_url",
+      "label": "Marquee text URL"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Marquee section"
+  }
+  ]
+}
+{% endschema %}
+
+<style>
+.marquee-section {
+  padding-top:{{ section.settings.section_padding_top }}px;
+  padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.blog_bgcolor }};
+}
+@media (max-width: 1199px){
+  .marquee-section {
+    padding-top:{{ section.settings.section_padding_top_ipad }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px){
+  .marquee-section {
+    padding-top:{{ section.settings.section_padding_top_xs }}px;      
+    padding-bottom:{{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+
+.marquee-section .owl-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.marquee-section .owl-item:after {
+  content: "-";
+  position: absolute;
+  right: -40px;
+  bottom: 50%;
+  transform: translateY(50%);
+  color: var(--color-primary);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: .8;
+  line-height: 1;
+}
+.marquee-section .owl-carousel .owl-item{
+  white-space: nowrap;
+}
+.marquee-section .item h6{
+  color: var(--color-primary);
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 500;
+  opacity: .8;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+@media(max-width: 767px){
+  .marquee-section .item h6{
+    font-size: 14px;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+}
+</style>

@@ -1,0 +1,356 @@
+<section class="faq-section3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12 col-center">
+        <div class="section-capture">
+          <div class="main-title">
+            {% if section.settings.section_sub_title != '' %}
+            <span class="sub-title">{{ section.settings.section_sub_title }}</span>
+            {% endif %}
+            {% if section.settings.section_title != '' %}
+            <h2>{{ section.settings.section_title }}</h2>
+            {% endif %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4 col-lg-6 col-md-12 col-12">
+            <div class="faq-bg-img wow animate__fadeIn">
+            </div>
+          </div>
+          <div class="col-xl-8 col-lg-6 col-md-12 col-12">
+            <div class="que-ans nth-child">
+              {% assign c = 0 %}
+              <ul id="collapse3-{{ c }}">
+                {% assign k = 0 %}
+                {% for block in section.blocks %}
+                {% assign k = k | plus: 1 %}
+                <li>
+                  <a href="#collapse3-{{ k }}" class="question" data-bs-toggle="collapse" {% if forloop.first %}aria-expanded="true"{% endif %}>
+                    <span class="que">{{ block.settings.accordion_title }}</span>
+                    <span class="que-accordian"><i class="ti-angle-down"></i></span>
+                  </a>
+                  <div class="ans-accordian collapse {% if k == 1 %} show{% endif %}" id="collapse3-{{ k }}" data-bs-parent="#collapse3-{{ c }}">
+                    <p>{{ block.settings.accordion_ans1 }}</p>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+              {% if section.settings.faq_button != '' %}
+              <a href="{{ section.settings.faq_button_url }}" class="faq-button btn btn-style7">
+                  <span>{{ section.settings.faq_button }}</span>
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Faq seciotn 3",
+  "settings": [
+{
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "image_picker",
+    "id": "faq_bg_img",
+    "label": "Background Image",
+    "info": "Recommended Size: 547px x 708px"
+  },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Frequently asked questions"
+  },
+  {
+    "type": "text",
+    "id": "section_sub_title",
+    "label": "Section Sub Title",
+    "default": "Most common questions"
+  },
+  {
+    "type": "header",
+    "content": "Section Background Color"
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color", 
+    "label": "Background Color",
+    "default":   "#f6f6f6"
+  },
+  {
+    "type": "url",
+    "id": "faq_button_url",
+    "label": "Button URL"
+  },
+  {
+    "type": "text",
+    "id": "faq_button",
+    "label": "Faqs Button",
+    "default": "Browse all topics"
+  }
+  ],
+  "blocks": [
+  {
+    "type": "accordion_area",
+    "name": "Faq Accordion",
+    "settings": [
+    {
+      "type": "text",
+      "id": "accordion_title",
+      "label": "Accordion Title",
+      "info": "Type Here For Question?",
+      "default": "How do I activate my account?"
+    },
+    {
+      "type": "textarea",
+      "id": "accordion_ans1",
+      "label": "Answer1",
+      "info": "Type Here For Answer",
+      "default": "As Sample Store uses some of the latest graphics designs which may not be supported in lower version of browsers"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Faq seciotn 3",
+    "category": "8. Faq Page"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .faq-section3 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.section_bg_color }};
+    border-top: 1px solid #e2e2e2;
+  }
+  @media (max-width: 1199px) {
+    .faq-section3 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .faq-section3 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+
+  .faq-section3 .main-title {
+    text-align: center;
+  }
+  .faq-section3 .main-title span.sub-title{
+    font-size: 18px;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  .faq-section3 .main-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 25px;
+  }
+  .faq-section3 .faq-bg-img{
+    background-image: url({% if section.settings.faq_bg_img %}{{ section.settings.faq_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/547x708/f7f7f7/999999{% endif %}); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 708px;
+    width: 100%;
+  }
+  .faq-section3 .que-ans {
+    width: 80%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .faq-section3 .que-ans ul {
+    width: 100%;
+  }
+  .faq-section3 .que-ans ul li {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .faq-section3 .que-ans ul li:last-child{
+    margin-bottom: 0;
+  }
+  .faq-section3 .que-ans ul li a.question{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .faq-section3 .que-ans ul li a.question span.que {
+    display: block;
+  }
+  .faq-section3 .que-ans ul li a.question span.que-accordian {
+    color: var(--color-primary);
+    font-size: 14px;
+    position: absolute;
+    {%- if settings.enable_rtl -%}
+    left: 0;
+    {%- else -%}
+    right: 0;
+    {%- endif -%}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .faq-section3 .que-ans ul li a.question[aria-expanded="true"] span.que-accordian i::before {
+    content: "\e648";
+  }
+  .faq-section3 .que-ans ul li a.question span.que,
+  .faq-section3 .que-ans ul li .ans-accordian {
+    width: 80%;
+  }
+  .faq-section3 .que-ans ul li .ans-accordian p{
+    font-size: 16px;
+    line-height: 30px;
+    padding-top: 30px;
+    letter-spacing: 0;
+  }
+  .faq-section3 .faq-button{
+    margin-top: 60px;
+  }
+  @media(max-width: 1199px){
+    .faq-section3 .main-title span.sub-title{
+      font-size: 16px;
+    }
+    .faq-section3 .main-title h2{
+      font-size: 26px;
+          margin-top: 15px;
+    }
+    .faq-section3 .que-ans {
+      width: 100%;
+    }
+    .faq-section3 .que-ans ul li{
+          padding-bottom: 15px;
+    margin-bottom: 15px;
+    }
+    .faq-section3 .que-ans ul li a.question{
+      font-size: 16px;
+    }
+    .faq-section3 .que-ans ul li .ans-accordian p{
+      font-size: 14px;
+      padding-top: 15px;
+    }
+  }
+  @media(max-width: 991px){
+    .faq-section3 .que-ans.nth-child{
+       margin-top: 30px;
+    }
+    .faq-section3 .faq-button{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .faq-section3 .faq-bg-img{
+      min-height: 445px;
+    }
+    .faq-section3 .main-title span.sub-title{
+      font-size: 14px;
+    }
+    .faq-section3 .main-title h2{
+      font-size: 20px;
+    }
+    .faq-section3 .que-ans ul li a.question {
+      font-size: 14px;
+    }
+    .faq-section3 .que-ans ul li .ans-accordian p {
+      font-size: 13px;
+    }
+  }
+</style>

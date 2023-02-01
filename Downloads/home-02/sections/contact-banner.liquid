@@ -1,0 +1,217 @@
+<!-- banner-area start -->
+<section class="contact-banner wow animate__fadeIn">
+     <ul class="banner-block">
+        <li class="big-banner">
+            <div class="big-banner-img">
+                <div class="banner-hover">
+                    <img class="img-fluid" src="{% if section.settings.banner_img %}{{ section.settings.banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x693/f7f7f7/999999{% endif %}">
+                    <div class="view-collection">
+                        {% if section.settings.banner_button != '' %}
+                        <a href="{{ section.settings.banner_button_url }}" class="btn btn-style7">
+                            <span>{{ section.settings.banner_button }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Contact Banner",
+    "settings": [
+        {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+        {
+            "type": "header",
+            "content": "Custom Banner1"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Banner Image",
+            "info": "Recommended Size: 1920px x 693px"
+        },
+        {
+            "type": "header",
+            "content": "Banner Button"
+        },
+        {
+            "type": "text",
+            "id": "banner_button",
+            "label": "Button Text",
+            "default": "view collection"
+        },
+        {
+            "type": "url",
+            "id": "banner_button_url",
+            "label": "Button URL"
+        }
+    ],
+    "presets":[
+        {
+            "name": "Contact Banner",
+            "category": "Banner Grid"
+        }
+    ]
+}
+{% endschema %}
+<style>
+    .contact-banner{
+        padding-top: {{ section.settings.section_padding_top }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+    @media (max-width: 1199px){
+        .contact-banner{
+            padding-top: {{ section.settings.section_padding_top_lg }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+        }
+    }
+    @media (max-width: 767px){
+        .contact-banner{
+            padding-top: {{ section.settings.section_padding_top_xs }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+        }
+    }
+    .contact-banner ul.banner-block {
+        display: flex;
+        {%- if settings.enable_rtl -%}
+        margin-right: -30px;
+        {%- else -%}
+        margin-left: -30px;
+        {%- endif -%}
+    }
+    .contact-banner ul.banner-block li {
+        {%- if settings.enable_rtl -%}
+        margin-right: 30px;
+        {%- else -%}
+        margin-left: 30px;
+        {%- endif -%}
+    }
+    .contact-banner ul.banner-block li .banner-hover{
+        position: relative;
+    }
+    .contact-banner ul.banner-block li .banner-hover .view-collection{
+        position: absolute;
+        bottom: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(50%);
+        margin-left: auto;
+        margin-right: auto;
+        max-width: max-content;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1;
+        border-radius: 5px;
+        -webkit-transition: all 0.3s ease-in-out 0s;
+        -o-transition: all 0.3s ease-in-out 0s;
+        transition: all 0.3s ease-in-out 0s;
+    }
+    .contact-banner ul.banner-block li .banner-hover:hover .view-collection{
+        opacity: 1;
+        visibility: visible;
+            -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    }
+    .contact-banner ul.banner-block li .banner-hover .view-collection a{
+        transform: translateY(30px);
+            -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    }
+    .contact-banner ul.banner-block li .banner-hover:hover .view-collection{
+        transform: translateY(0px);
+            -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+    }
+    @media (max-width: 767px){
+        .contact-banner ul.banner-block {
+            flex-direction: column;
+        }
+        .contact-banner ul.banner-block li {
+            margin-top: 20px;
+        }
+        .contact-banner ul.banner-block li:first-child {
+            margin-top: 0px;
+        }
+        .contact-banner ul.banner-block li .banner-hover img{
+            height: 250px;
+            object-fit: cover;
+        }
+    }
+</style>

@@ -1,0 +1,149 @@
+<section class="privacy-policy4">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="text-block wow animate__fadeInLeft">
+          <h6>{{ section.settings.content_title1 }}</h6>
+          <p>{{ section.settings.content_description1 }}</p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="text-block wow animate__fadeInRight">
+          <h6>{{ section.settings.content_title2 }}</h6>
+          <p>{{ section.settings.content_description2 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Privacy Policy section 3",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "text",
+    "id": "content_title1",
+    "label": "Title",
+    "default": "Changes to personally identifiable information"
+  },
+  {
+    "type": "text",
+    "id": "content_description1",
+    "label": "Content Description",
+    "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
+  },
+  {
+    "type": "text",
+    "id": "content_title2",
+    "label": "Title",
+    "default": "Our detail information"
+  },
+  {
+    "type": "text",
+    "id": "content_description2",
+    "label": "Content Description",
+    "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .privacy-policy4{
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media(max-width: 1199px){
+    .privacy-policy4{
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .privacy-policy4{
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  .privacy-policy4 .text-block h6{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .privacy-policy4 .text-block p{
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 30px;
+  }
+</style>

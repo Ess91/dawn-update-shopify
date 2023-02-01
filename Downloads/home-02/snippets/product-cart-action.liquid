@@ -1,0 +1,58 @@
+{% if product.available %}
+<button type="submit" class="btn add-to-cart ajax-spin-cart" id="AddToCart">
+  <span class="cart-title" id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+  <span class="cart-loading animated infinite rotateOut"><i class="feather-loader"></i></span>
+  <span class="cart-added"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"/></svg>
+  </span>
+  <span class="cart-unavailable">{{ 'products.product.sold_out' | t }}</span>
+</button>
+{% else %}
+<button class="btn add-to-cart disabled" disabled="disabled">
+  <span class="cart-title" id="AddToCartText">{{ 'products.product.sold_out' | t }}</span>
+</button>
+{% endif %}
+<script>
+  jQuery('.ajax-spin-cart').click(function(e) {
+    e.preventDefault();
+    Shopify.addItemFromForm('add-item-form');
+  });
+</script>
+<style>
+  .product-actions button.add-to-cart{
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 30px;
+    background-color: #222;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 400;
+    min-width: 190px;
+    border-radius: 0;
+    line-height: 1;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product-actions button.add-to-cart svg{
+    width: 16px;
+    height: 16px;
+  }
+  .product-actions button.add-to-cart:hover{
+    color: #fff;
+    background-color: var(--color-primary);
+  }
+  .product-actions button.add-to-cart.btn[disabled],
+  .product-actions button.add-to-cart.btn.disabled{
+    color: #eaeaea;
+    background-color: #ababab;
+    opacity: .65;
+    pointer-events: none;
+  }
+  @media(max-width: 767px){
+    .product-actions button.add-to-cart{
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  }
+</style>

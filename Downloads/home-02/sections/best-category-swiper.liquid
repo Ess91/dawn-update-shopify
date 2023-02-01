@@ -1,0 +1,304 @@
+<section class="best-collection-category">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col category-col">
+        <div class="section-capture">
+          <div class="section-title">
+            {% if section.settings.section_best_title !='' %}
+            <h2><span>{{ section.settings.section_best_title }}</span></h2>
+            {% endif %}
+          </div>
+        </div>
+        {% assign category_product = collections[section.settings.best_label_product] %}
+        <div class="collection-slider swiper-container" id="best_product">
+          <div class="swiper-wrapper">
+          {% assign category_product_limit = section.settings.category_best_product_limit_handle %}
+          {% for product in category_product.products limit: category_product_limit %}
+          <div class="swiper-slide">
+            {% include 'product-grid-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  var swiper = new Swiper('.swiper-container#best_product', {
+    slidesPerColumn: {{ section.settings.product_col }},
+    slidesPerView: 4,
+    spaceBetween: 0,
+    observer: true,
+    observeParents: true,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    navigation: {
+      nextEl: '.swiper-next',
+      prevEl: '.swiper-prev',
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 2
+      },
+      640: {
+        slidesPerView: 2
+      },
+      768: {
+        slidesPerView: 3
+      },
+      979: {
+        slidesPerView: 3
+      },
+      1199: {
+        slidesPerView: 4
+      }
+    }
+  });
+</script>
+{% schema %}
+{
+  "name": "Best Product Swiper",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "category_best_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 200,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "category_best_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 200,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "category_best_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "category_best_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Section Background color"
+  },
+  {
+    "type": "color",
+    "id": "section_background_color",
+    "label": "Background Color",
+    "default": "#f4f4f4"
+  },
+  {
+    "type": "checkbox",
+    "id": "section_bg_color_enable",
+    "label": "Show Background Image",
+    "default": true
+  },
+  {
+    "type": "header",
+    "content": "Collection Title"
+  },
+  {
+    "type": "text",
+    "id": "section_best_title",
+    "label": "Section Title",
+    "default": "Best Seller Products"
+  },
+  {
+    "type": "header",
+    "content": "Collection Bottom Title"
+  },
+  {
+    "type": "text",
+    "id": "section_bottom_main_title",
+    "label": "Section Bottom Title",
+    "default": "Featured Products"
+  },
+  {
+    "type": "header",
+    "content": "Product"
+  },
+  {
+    "type": "select",
+    "id": "product_col",
+    "label": "slides Per Column",
+    "options":[
+    {
+      "label": "1 Products",
+      "value": "1"
+    },
+    {
+      "label": "2 Products",
+      "value": "2"
+    },
+    {
+      "label": "3 Products",
+      "value": "3"
+    }
+    ],
+    "default": "1"
+  },
+  {
+    "type": "select",
+    "id": "slide_product_limit",
+    "label": "slides Per View",
+    "options":[
+    {
+      "label": "2 Products",
+      "value": "2"
+    },
+    {
+      "label": "3 Products",
+      "value": "3"
+    },
+    {
+      "label": "4 Products",
+      "value": "4"
+    }
+    ],
+    "default": "4"
+  },
+  {
+    "type": "text",
+    "id": "category_best_product_limit_handle",
+    "label": "Product Limit",
+    "default": "10"
+  },
+  {
+    "type" : "collection",
+    "id" : "best_label_product",
+    "label" : "Best Product"
+  }
+  ],
+  "presets":[
+  {
+    "name": "Best Product Swiper",
+    "category": "Collecton"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .best-collection-category{
+    position: relative;
+    padding-top:{{ section.settings.category_best_padding_top }}px;
+    padding-bottom:{{ section.settings.category_best_padding_bottom }}px;
+    {% if section.settings.section_bg_color_enable %}
+    background-color: {{ section.settings.section_background_color }};
+    {% endif %}
+  }
+  @media (max-width: 1599px) and (min-width: 1200px){
+    .best-collection-category{
+      padding-bottom: 120px;
+    }
+  }
+  @media (max-width: 1199px){
+    .best-collection-category{
+      padding-bottom: 110px;
+    }
+  }
+  @media (max-width: 991px){
+    .best-collection-category{
+      padding-bottom: 100px;
+    }
+  }
+  @media (max-width: 767px){
+    .best-collection-category{
+      padding-top:{{ section.settings.category_best_padding_top_xs }}px;
+      padding-bottom:{{ section.settings.category_best_padding_bottom_xs }}px;
+    }
+  }
+
+  {% if section.settings.section_bottom_main_title !='' %}
+  .best-collection-category::after{
+    content: '{{ section.settings.section_bottom_main_title }}';
+    position: absolute;
+    bottom: -55px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #fff;
+    font-size: 140px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    line-height: 1;
+  }
+  @media (max-width: 1599px) and (min-width: 1200px){
+    .best-collection-category::after{
+      font-size: 90px;
+      bottom: -35px;
+    }
+  }
+  @media (max-width: 1199px) {
+    .best-collection-category::after{
+      font-size: 75px;
+      bottom: -30px;
+      letter-spacing: 3px;
+    }
+  }
+  @media (max-width: 991px) {
+    .best-collection-category::after{
+      font-size: 50px;
+      bottom: -20px;
+    }
+  }
+  @media (max-width: 767px) {
+    .best-collection-category::after{
+      font-size: 24px;
+      bottom: -10px;
+    }
+  }
+  {% endif %}
+  
+  .best-collection-category .category-col{
+    padding: 0;
+  }
+  .best-collection-category .collection-slider.swiper-container .swiper-slide{
+    padding: 15px;
+  }
+  .best-collection-category .single-product-wrap .product-content{
+    padding-bottom: 45px;
+  }
+  @media (max-width: 1199px) {
+    .best-collection-category .single-product-wrap .product-content{
+      padding-bottom: 15px;
+    }
+  }
+
+
+</style>

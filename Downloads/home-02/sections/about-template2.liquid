@@ -1,0 +1,281 @@
+<section class="about-section2">
+  <div class="container">
+    <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+            <div class="main-title">
+              {% if section.settings.section_title != '' %}
+              <h3>{{ section.settings.section_title }}</h3>
+              {% endif %}
+              {% if section.settings.section_desc != '' %}
+              <p>{{ section.settings.section_desc }}</p>
+              {% endif %}
+              {% if section.settings.more_button != '' %}
+              <a href="{{ block.settings.more_button_url }}" class="btn btn-style8">
+                  {{ section.settings.more_button }}
+              </a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+            <div class="list-content">
+              <ul>
+                {% for block in section.blocks %}
+                <li>
+                  <div class="list-block">
+                    <h6>{{ block.settings.list_title }}</h6>
+                    <p>{{ block.settings.list_desc }}</p>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "About Section2",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Page Title"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Perfect powerful theme for corporate business"
+  },
+  {
+    "type": "text",
+    "id": "section_desc",
+    "label": "Description",
+    "default": "These website standard terms and conditions written on this webpage shall manage your use of our website, webiste name accessible at website these terms will be applied fully and affect to your use of this website."
+  },
+  {
+      "type": "text",
+      "id": "more_button",
+      "label": "Read Button",
+      "default": "ABOUT SERVICES"
+  },
+  {
+      "type": "url",
+      "id": "more_button_url",
+      "label": "Button URL"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "about_template2",
+    "name": "About Section2",
+    "settings": [
+    {
+      "type": "text",
+      "id": "list_title",
+      "label": "List Title",
+      "default": "Men's collection"
+    },
+    {
+      "type": "textarea",
+      "id": "list_desc",
+      "label": "List Description",
+      "default": "Lorem Ipsum is simply dummy text been the printing show typesetting industry."
+    }
+    ]
+  }
+  ],
+  "presets":[
+    {
+        "name": "About Section 2",
+        "category": "About us"
+    }
+    ]
+}
+{% endschema %}
+<style type="text/css">
+  .about-section2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: #faf9f9;
+  }
+  @media (max-width: 1199px) {
+    .about-section2 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-section2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*section title*/
+  .about-section2 .main-title {
+    width: 85%;
+  }
+  .about-section2 .main-title h3{
+    font-size: 40px;
+    font-weight: 500;
+  }
+  .about-section2 .main-title p{
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 30px;
+  }
+  .about-section2 .main-title a{
+    margin-top: 40px;
+  }
+  @media(max-width: 1599px){
+    .about-section2 .main-title {
+      width: 100%;
+    }
+  }
+
+  @media(max-width: 1199px){
+    .about-section2 .main-title h3{
+      font-size: 26px;
+    }
+  }
+
+
+  @media(max-width: 991px){
+    .about-section2 .main-title p{
+      margin-top: 15px;
+    }
+    .about-section2 .main-title a{
+      margin-top: 25px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-section2 .main-title h3{
+      font-size: 20px;
+    }
+  }
+  /*section content*/
+  .about-section2 .list-content ul li {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .about-section2 .list-content ul li:first-child {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  .about-section2 .list-content ul li .list-block{
+    width: 55%;
+  }
+  .about-section2 .list-content ul li h6{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .about-section2 .list-content ul li p {
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  @media (max-width: 1599px) {
+    .about-section2 .list-content ul li .list-block{
+      width: 100%;
+    }
+  }
+  @media (max-width: 1199px) {
+    .about-section2 .list-content ul li h6{
+      font-size: 18px;
+    }
+  }
+  @media (max-width: 991px) {
+    .about-section2 .list-content {
+      margin-top: 30px;
+    }
+    .about-section2 .list-content ul li {
+      margin-top: 15px;
+      padding-top: 0;
+    }
+    .about-section2 .list-content ul li p{
+      margin-top: 5px;
+    }
+  }
+  @media (max-width: 767px) {
+
+    .about-section2 .list-content ul li {
+      margin-top: 20px;
+    }
+  }
+</style>

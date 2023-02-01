@@ -1,0 +1,267 @@
+<!-- deal start -->
+<section class="deal-section">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="section-capture">
+          <div class="section-title">
+            {% if section.settings.deal_title !='' %}
+            <h2>{{ section.settings.deal_title }}</h2>
+            {% endif %}
+          </div>
+        </div>
+        <div class="deal-slider owl-carousel owl-theme" id="deal-slider">
+          {% for product in collections[section.settings.label_deal_product].products %}
+          <div class="item">
+            {% include 'product-deal-timer' %}
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- deal end -->
+<script type="text/javascript">
+  $('#deal-slider').owlCarousel({
+    loop: false,
+    rewind: true,
+    margin: 30,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
+    responsive:{
+      0:{
+        items: 1,
+        margin: 15
+      },
+      479:{
+        items: 1,
+        margin: 15
+      },
+      768:{
+        items: 1
+      },
+      979:{
+        items: 1
+      },
+      1199: {
+        items: 2
+      }
+    }
+  });
+</script>
+{% schema %}
+{
+  "name": "Deal Section",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "deal_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "deal_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "deal_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "deal_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type" : "header",
+    "content" : "Section Background Color"
+  },
+  {
+    "type": "color",
+    "id": "deal_bg_color",
+    "label": "Section Background Color",
+    "default": "#f7f7f7"
+  },
+  {
+    "type": "checkbox",
+    "id": "deal_bg_color_enable",
+    "label": "Show Background Color",
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "deal_title",
+    "label": "Section Title",
+    "default": "Deal Of The Week"
+  },
+  {
+    "type" : "header",
+    "content" : "Collection"
+  },
+  {
+    "type" : "collection",
+    "id" : "label_deal_product",
+    "label" : "Deal Collection"
+  }
+
+  ],
+  "presets": [
+  {
+    "name": "Deal Section",
+    "category": "deal section"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .deal-section{
+    padding-top: {{ section.settings.deal_padding_top }}px;
+    padding-bottom: {{ section.settings.deal_padding_bottom }}px;
+
+    {% if section.settings.deal_bg_color_enable %}
+    background-color: {{ section.settings.deal_bg_color }};
+    {% endif %}
+  }
+  @media (max-width: 767px) {
+    .deal-section{
+      padding-top: {{ section.settings.deal_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.deal_padding_bottom_xs }}px;
+    }
+  }
+  .deal-slider .single-product-wrap{
+    display: flex;
+    align-items: center;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .deal-slider .single-product-wrap .product-image{
+    width: 41.67%;
+  }
+  .deal-slider .single-product-wrap:hover .product-image a.pro-img .img1{
+    opacity: 1;
+    visibility: visible;
+  }
+  .deal-slider .single-product-wrap .product-content{
+    width: calc(58.33% - 30px);
+    align-items: flex-start;
+    padding-top: 0;
+    {%- if settings.enable_rtl -%}
+    margin-right: 30px;
+    text-align: right;
+    {%- else -%}
+    margin-left: 30px;
+    text-align: left;
+    {%- endif -%}
+  }
+  .deal-slider .single-product-wrap .product-content h6{
+    font-size: 16px;
+    margin-top: 0;
+  }
+  .deal-slider .single-product-wrap .product-content .product-ratting{
+    margin-top: 7px;
+  }
+  .deal-slider .single-product-wrap .product-content .price-box{
+    margin-top: 12px;
+  }
+  .deal-slider .single-product-wrap .product-content .price-box .old-price{
+    {%- if settings.enable_rtl -%}
+    margin-right: 5px;
+    {%- else -%}
+    margin-left: 5px;
+    {%- endif -%}
+  }
+  .deal-slider .single-product-wrap .product-content p.product-description{
+    display: block;
+    margin-top: 20px;
+  }
+  .deal-slider .single-product-wrap .product-content .timer-section{
+    margin-top: 22px;
+    width: 100%;
+  }
+  @media (max-width: 1199px) {
+    .deal-slider .single-product-wrap .product-image{
+      width: 33.33%;
+    }
+    .deal-slider .single-product-wrap .product-content {
+      width: calc(66.67% - 30px);
+    }
+    .deal-slider .single-product-wrap .product-content .timer-section{
+      width: 250px;
+    }
+  }
+  @media (max-width: 767px) {
+    .deal-slider .single-product-wrap{
+      flex-direction: column;
+    }
+    .deal-slider .single-product-wrap .product-image{
+      width: 100%;
+    }
+    .deal-slider .single-product-wrap .product-content{
+      width: 100%;
+      {%- if settings.enable_rtl -%}
+      margin-right: 0px;
+      {%- else -%}
+      margin-left: 0px;
+      {%- endif -%}
+      margin-top: 15px;
+    }
+    .deal-slider .single-product-wrap .product-content .price-box{
+      align-items: flex-end;
+      flex-direction: row;
+      min-height: auto;
+    }
+    .deal-slider .single-product-wrap .product-content .price-box .old-price{
+      margin-top: 0;
+    }
+    .deal-slider .single-product-wrap .product-content p.product-description{
+      margin-top: 10px;
+    }
+    .deal-slider .single-product-wrap .product-content .timer-section{
+      margin-top: 12px;
+    }
+    .deal-slider .single-product-wrap .product-content .timer-section{
+      width: 100%;
+    }
+  }
+</style>

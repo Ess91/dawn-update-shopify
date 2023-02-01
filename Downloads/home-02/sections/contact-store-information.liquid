@@ -1,0 +1,321 @@
+<section class="contact-store-information">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xl-10 col-center">
+			    <div class="row">
+			    	<div class="col-xl-3 col-lg-3 col-md-3">
+			    		<div class="contact-store-title wow animate__fadeIn">
+					        {% if section.settings.contact_drop_title != '' %}
+					        <h6>{{ section.settings.contact_drop_title }}</h6>
+					        {% endif %}
+					    </div>
+			    	</div>
+			    	<div class="col-xl-9 col-lg-9 col-md-9 info-list-col">
+			    		<div class="info-list">
+			    			<ul class="info_wrap">
+			    				<li class="info_wrapper wow animate__fadeIn">
+			    					<div class="info-block">
+			    						<div class="icon">
+			    							{{ section.settings.info_icon1 }}
+			    						</div>
+			    						<div class="text-block">
+		    								<h6>{{ section.settings.info_title1 }}</h6>
+		    								<p>{{ section.settings.info_link1 }}</p>
+			    						</div>
+			    					</div>
+			    				</li>
+			    				<li class="info_wrapper wow animate__fadeIn">
+			    					<div class="info-block">
+			    						<div class="icon">
+			    							{{ section.settings.info_icon2 }}
+			    						</div>
+			    						<div class="text-block">
+		    								<h6>{{ section.settings.info_title2 }}</h6>
+		    								<p>{{ section.settings.info_link2 }}</p>
+			    						</div>
+			    					</div>
+			    				</li>
+			    				<li class="info_wrapper wow animate__fadeIn">
+			    					<div class="info-block">
+			    						<div class="icon">
+			    							{{ section.settings.info_icon3 }}
+			    						</div>
+			    						<div class="text-block">
+		    								<h6>{{ section.settings.info_title3 }}</h6>
+		    								<p>{{ section.settings.info_link3 }}</p>
+			    						</div>
+			    					</div>
+			    				</li>
+			    			</ul>
+			    		</div>
+			    	</div>
+			    </div>
+		    </div>
+	    </div>
+	</div>
+</section>
+{% schema %}
+{
+  "name": "Contact Store Information",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "text",
+    "id": "contact_drop_title",
+    "label": "Form Title",
+    "default": "Drop us message"
+  },
+  {
+    "type": "header",
+    "content": "Information Content"
+  },
+  {
+    "type": "textarea",
+    "id": "info_icon1",
+    "label": "Icon"
+  },
+  {
+    "type": "text",
+    "id": "info_title1",
+    "label": "Title1",
+    "default": "How can help you?"
+  },
+  {
+    "type": "text",
+    "id": "info_link1",
+    "label": "Link Title",
+    "default": "Give us a call toady"
+  },
+    {
+    "type": "textarea",
+    "id": "info_icon2",
+    "label": "Icon"
+  },
+  {
+    "type": "text",
+    "id": "info_title2",
+    "label": "Title2",
+    "default": "Free to get in touch?"
+  },
+  {
+    "type": "text",
+    "id": "info_link2",
+    "label": "Link Title2",
+    "default": "Give us a call toady"
+  },
+    {
+    "type": "textarea",
+    "id": "info_icon3",
+    "label": "Icon"
+  },
+  {
+    "type": "text",
+    "id": "info_title3",
+    "label": "Title3",
+    "default": "To request a quote?"
+  },
+  {
+    "type": "text",
+    "id": "info_link3",
+    "label": "Link Title3",
+    "default": "Describe your project"
+  }
+
+ 
+  ],
+  "presets":[
+  {
+    "name": "Contact Store information",
+    "category": "contact us"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+    .contact-store-information {
+        padding-top: {{ section.settings.section_padding_top }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+    @media (max-width: 1199px){
+        .contact-store-information {
+            padding-top: {{ section.settings.section_padding_top_ipad }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+        }
+    }
+    @media (max-width: 767px){
+        .contact-store-information {
+            padding-top: {{ section.settings.section_padding_top_xs }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+        }
+    }
+
+    /*section title*/
+    .contact-store-title h6{
+		font-size: 36px;
+		font-weight: 500;
+    }
+    @media(max-width: 1199px){
+    	.contact-store-title h6{
+			font-size: 26px;
+    	}
+    }
+    @media(max-width: 767px){
+    	.contact-store-title{
+    		text-align: center;
+    	}
+    	.contact-store-title h6{
+			font-size: 20px;
+    	}
+    }
+
+    .info-list-col {
+		display: flex;
+		align-items: center;
+    }
+    .info-list-col .info-list{
+	    width: 100%;
+    } 
+    /*information block*/
+    .info-list ul.info_wrap{
+    	display: flex;
+    	align-items: center;
+    	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	    overflow-x: auto;
+	    scrollbar-width: thin;
+	    -webkit-scrollbar-width: thin;
+    }
+    .info-list ul.info_wrap::-webkit-scrollbar{
+    	height: 1px;
+    }
+    .info-list ul.info_wrap li.info_wrapper{
+    	width: 33.33%;
+	    min-width: 330px;
+    }
+    .info-list ul.info_wrap li.info_wrapper:nth-child(2){
+      animation-delay: 0.2s;
+    }
+    .info-list ul.info_wrap li.info_wrapper:nth-child(3){
+      animation-delay: 0.3s;
+    }
+    .info-list ul li .info-block{
+    	display: flex;
+    	align-items: center;
+    }
+    .info-list ul li .info-block .text-block {
+      {% if settings.enable_rtl %}
+      margin-right: 30px;
+      {% else %}
+      margin-left: 30px;
+      {% endif %}
+    }
+    .info-list ul li .info-block .icon svg{
+    	width: 38px;
+    	height: 38px;
+    	stroke: var(--color-primary);
+    }
+    .info-list ul li .info-block .text-block h6{
+    	font-size: 20px;
+    }
+    .info-list ul li .info-block .text-block p{
+    	font-size: 16px;
+    	padding-top: 3px;
+    	display: inline-block;
+    	border-bottom: 2px solid #c5c5c5;
+    }
+    @media(max-width: 1199px){
+    	.info-list ul li .info-block .text-block h6{
+	    	font-size: 18px;
+    	}
+    }
+    @media(max-width: 767px){
+    	.info-list-col{
+    		padding-top: 30px;
+    	}
+    	.info-list ul li .info-block .text-block h6{
+	    	font-size: 16px;
+    	}
+    	.info-list ul li .info-block .text-block p{
+    		font-size: 14px;
+    	}
+    }
+</style>

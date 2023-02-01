@@ -1,0 +1,383 @@
+<div class="main-content-wrap shop-page section-ptb">
+  <div class="container">
+    <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}position-left{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}position-right{% endif %}">
+      <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-lg-9 col-md-8 col-12 pro-grli-wrap{% endif %}">
+        {%- if section.settings.collection_info_enable -%}
+        <div class="collection-main-bg">
+          {%- if section.settings.collection_img -%}
+          <img src="{% if collection.image %}{{ collection.image | img_url: 'master' }}{% else %}https://dummyimage.com/1920x500/f7f7f7/999999{% endif %}">
+          {%- else -%}
+          <img src="{% if section.settings.collection_banner %}{{ section.settings.collection_banner | img_url: 'master' }}{% else %}https://dummyimage.com/1920x500/f7f7f7/999999{% endif %}">
+          {%- endif -%}
+          {%- if section.settings.collection_desc -%}
+          <div class="collection-dec">{{ collection.description }}</div>
+          {%- endif -%}
+        </div> 
+        {%- endif -%}
+        {%- if section.settings.tab_bar_enable or section.settings.short_by_enable -%}
+        {%- include 'collection-sorting' -%}
+        {%- endif -%}
+        <div class="get-data-products">
+          <div class="shop-grid">
+            <div id="ProductGridContainer">
+              {%- assign products_limit = section.settings.products_limit_handle -%}
+              {%- paginate collection.products by products_limit -%}
+              {%- if collection.products.size > 0 -%}
+              <div class="product-grid-view">
+                <div class="shop-product-wrap grid-3 collection">
+                  <ul id="product-grid" data-id="{{ section.id }}" class="product-view">
+                    {%- for product in collection.products -%}
+                    <li class="st-col-item">
+                      {% include 'product-grid-item' %}
+                    </li>
+                    {%- endfor -%}
+                  </ul>
+                  <div class="paginatoin-area">
+                <ul class="paginate">
+                  {% if paginate.pages > 1 %}
+                  <li class="page-numerous">
+                    {%- include 'pagination' -%}
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+                </div>
+              </div>
+              {%- else -%}
+              <div class="collection collection--empty page-width empty-product" id="product-grid" data-id="{{ section.id }}">
+                <span><i class="ti-na"></i></span>
+                <h2>{{ 'collection_template.empty' | t }}<br>
+                {{ 'collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}</h2>
+              </div>
+              {%- endif -%}
+              {%- endpaginate -%}
+              </div>
+          </div>
+        </div>
+      </div>
+      {%- unless section.settings.sidebar_handle == 'without_sidebar' -%}
+      <div class="col-lg-3 col-md-4 col-12 pro-grli-wrap">
+        <div class="shop-sidebar-wrap">
+          <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+          <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+            {% render 'facets', results: collection %}
+          </div>
+          {% if section.settings.showing_sidebar_image %}
+            <div class="shop-sidebar shop-sidebar-banner">
+            <a href="{{ section.settings.sidebanner_url }}">
+              <img src="{% if section.settings.sidebanner_img %}{{ section.settings.sidebanner_img | img_url: 'master' }}{% else %}https://dummyimage.com/500x700/f7f7f7/999999{% endif %}">
+            </a>
+          </div> 
+           {% endif %}
+        </div>
+      </div>
+      {%- endunless -%}
+    </div>
+  </div>
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Collection Template",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section background color"
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Section background color",
+    "default": "#fff"
+  },
+  {
+    "type": "header",
+    "content": "Collection Information"
+  },
+  {
+    "type": "checkbox",
+    "id": "collection_info_enable",
+    "label": "Show Collection Information",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "collection_img",
+    "label": "Show collection Image",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "collection_desc",
+    "label": "Show collection description",
+    "default": true
+  },
+  {
+    "type": "image_picker",
+    "id": "collection_banner",
+    "label": "Banner Image",
+    "info": "Recommended Size: 960px x 260px"
+  },
+  {
+    "type": "checkbox",
+    "id": "categories_enable",
+    "label": "Show collection category",
+    "default": true
+  },
+  {
+        "type": "text",
+        "id": "categories_title",
+        "label": "Categories Title",
+        "default": "Categories"
+      },
+    {
+      "type": "header",
+      "content": "Product Options"
+    },
+    {
+      "type": "text",
+      "id": "products_limit_handle",
+      "label": "Product Limit",
+      "default": "12",
+      "info": "How many posts will appear on each page"
+    },
+    {
+      "type": "header",
+      "content": "Collection Sorting"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_bar_enable",
+      "label": "Show Grid/List View",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "short_by_enable",
+      "label": "short by enable",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Collection Sidebar"
+    },
+    {
+      "type": "radio",
+      "id": "sidebar_handle",
+      "label": "Sidebar Position",
+      "options": [
+        {
+          "label": "Left Sidebar",
+          "value": "left_sidebar_handle"
+        },
+        {
+          "label": "Right Sidebar",
+          "value": "right_sidebar_handle"
+        },
+        {
+          "label": "Without Sidebar",
+          "value": "without_sidebar"
+        }
+      ],
+      "default": "left_sidebar_handle"
+    },
+    {
+      "type": "checkbox",
+      "id": "showing_sidebar_image",
+      "label": "Show Sidebar Banner",
+      "default": true
+    },
+    {
+        "type": "url",
+        "id": "sidebanner_url",
+        "label": "Banner URL"
+    },
+    {
+        "type": "image_picker",
+        "id": "sidebanner_img",
+        "label": "Banner Image",
+        "info": "Recommended Size: 500px x 700px"
+    }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .main-content-wrap.shop-page{
+    background-color: {{ section.settings.section_bg_color }};
+  }
+    .facet-checkbox {
+      position: relative;
+    }
+    .facet-checkbox .icon-checkmark {
+    visibility: hidden;
+    position: absolute;
+    left: 0.3rem;
+    z-index: 5;
+    top: 1.4rem;
+}
+  .facet-checkbox>input[type=checkbox]:checked~.icon-checkmark{
+        visibility: visible;
+  }
+
+  .collection-main-bg {
+    margin-bottom: 30px;
+  } 
+  .collection-main-bg img{
+    width: 100%;
+  }
+  .collection-main-bg .collection-dec{
+    margin-top: 15px;
+  }
+  .shop-page .position-left {
+    flex-direction: row-reverse;
+  }
+  @media (max-width : 767px){
+    .shop-page .position-left,
+    .shop-page .position-right {
+      flex-direction: column-reverse;
+    }
+    .shop-page .pro-grli-wrap{
+      margin-top: 20px;
+    }
+    .shop-page .pro-grli-wrap:last-child{
+      margin-top: 0px;
+    }
+    .collection-main-bg {
+      margin-bottom: 15px;
+    } 
+  }
+
+  /* collection info css */
+  .collection-img-wrap h6{
+    font-size: 16px;
+    text-transform: capitalize;
+    line-height: 1;
+  }
+  {%- if section.settings.collection_info_enable -%}
+  .collection-main-bg .text-content{
+    width: 65%;
+    {% if settings.enable_rtl %}
+    margin-right: 30px;
+    {% else %}
+    margin-left: 30px;
+    {% endif %}
+  } 
+  .collection-main-bg .text-content h6{
+    font-size: 16px;
+    text-transform: capitalize;
+    line-height: 1;
+  }
+  .collection-main-bg .text-content p{
+    margin-top: 5px;
+  }
+  @media (max-width: 767px) {
+    .collection-main-bg .text-content{
+      width: 85%;
+      {% if settings.enable_rtl %}
+      margin-right: 15px;
+      {% else %}
+      margin-left: 15px;
+      {% endif %}
+    }
+  }
+  {%- endif -%}
+
+
+  /* loader filter */
+  .ajax-filter-loader{
+    position: fixed;
+    top: 0;
+    {% if settings.enable_rtl %}
+    right: 0;
+    {% else %}
+    left: 0;
+    {% endif %}
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: none;
+  }
+  .ajax-filter-loader .load-block{
+    position: absolute;
+    top: 0;
+    {% if settings.enable_rtl %}
+    right: 0;
+    {% else %}
+    left: 0;
+    {% endif %}
+    width: 100%;
+    height: 100%;
+  }
+  .ajax-filter-loader .load-block .overlay__content{
+    position: absolute;
+    top: 50%;
+    {% if settings.enable_rtl %}
+    right: 50%;
+    transform: translate(50%, -50%);
+    {% else %}
+    left: 50%;
+    transform: translate(-50%, -50%);
+    {% endif %}
+  }
+  .ajax-filter-loader .load-block .overlay__content .spinner{
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    border-width: 2px;
+    border-color: rgba(0, 0, 0, 0.05);
+    border-top-color: #fff;
+    border-style: solid;
+    border-radius: 100%;
+    animation: spin 1s infinite linear;
+  }
+  @keyframes spin{
+    100% { transform: rotate(360deg); }
+  }
+  .empty-product{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 30px;
+  }
+  .empty-product span{
+    display: block;
+    color: var(--color-primary);;;
+    font-size: 50px;
+    line-height: 0;
+  }
+  .empty-product h2{
+    color: var(--color-primary);;;
+    font-size: 30px;
+    margin-top: 22px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .empty-product p{
+    margin-top: 18px;
+  }
+  .shop-sidebar-wrap .shop-sidebar.shop-sidebar-banner{
+    margin-top: 30px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    border-bottom: 0;
+  }
+  @media (max-width: 767px){
+    .empty-product{
+      margin-top: 20px;
+    }
+    .empty-product h2{
+      margin-top: 12px;
+    }
+    .empty-product p{
+      margin-top: 8px;
+    }
+    .shop-sidebar-wrap .shop-sidebar.shop-sidebar-banner{
+      display: none;
+    }
+  }
+
+</style>

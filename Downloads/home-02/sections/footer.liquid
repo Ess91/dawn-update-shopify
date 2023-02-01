@@ -1,0 +1,482 @@
+<section class="footer-top-area" {% if section.settings.footer_bg_img_enable %}style="background-image: url('{% if section.settings.footer_bg_img %}{{ section.settings.footer_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x877/f7f7f7/999999{% endif %}');"{% endif %}>
+  <div class="container">
+    <div class="footer-list-wrap">
+      <ul class="footer-list">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'linklist1' %}
+        <li class="ftlink-li link-list">
+          <h2 class="ft-title">{{ block.settings.footer_menu_title }}</h2>
+          <a data-bs-toggle="collapse" href="#collapse-{{ block.settings.footer_menu_title | handleize }}" class="ft-title">
+            <span>{{ block.settings.footer_menu_title }}</span>
+            <i class="ti-plus"></i>
+          </a>
+          <ul class="footer-sublist collapse" id="collapse-{{ block.settings.footer_menu_title | handleize }}">
+            {% assign footer_menu = block.settings.footer_menu_handle %}
+            {% for link in linklists[footer_menu].links %}
+            {% if linklists[footer_menu].links != '' %}
+            <li class="ftsublink-li">
+              <a href="{{ link.url }}" class="ft-sublink">{{ link.title }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>          
+        </li>
+        {% endcase %}
+        {% endfor %}
+
+        <li class="ftlink-li footer-info">
+          <div class="center-content">
+            {%- include 'company-logo-footer' -%}
+            <div class="newsletter-content">
+              <p>{{ section.settings.newsletter_description }}</p>
+              {%- include 'newsletter' -%}
+            </div>
+          </div>
+        </li>
+
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'linklist2' %}
+        <li class="ftlink-li link-list">
+          <h2 class="ft-title">{{ block.settings.footer_menu_title }}</h2>
+          <a data-bs-toggle="collapse" href="#collapse-{{ block.settings.footer_menu_title | handleize }}" class="ft-title">
+            <span>{{ block.settings.footer_menu_title }}</span>
+            <i class="ti-plus"></i>
+          </a>
+          <ul class="footer-sublist collapse" id="collapse-{{ block.settings.footer_menu_title | handleize }}">
+            {% assign footer_menu = block.settings.footer_menu_handle %}
+            {% for link in linklists[footer_menu].links %}
+            {% if linklists[footer_menu].links != '' %}
+            <li class="ftsublink-li">
+              <a href="{{ link.url }}" class="ft-sublink">{{ link.title }}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>          
+        </li>
+        {% endcase %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="copyright">{{ section.settings.copy_right }}</p>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "foot_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "image_picker",
+    "id": "footer_bg_img",
+    "label": "Image",
+    "info": "Recommended Size: 1920 x 770px"
+  },
+  {
+    "type": "checkbox",
+    "id": "footer_bg_img_enable",
+    "label": "Show Background Image",
+    "default": false
+  },
+  {
+    "type": "color",
+    "id": "footer_bg_color",
+    "label": "Background Color",
+    "default": "#fff"
+  },
+  {
+    "type": "textarea",
+    "id": "newsletter_description",
+    "label": "newsletter description",
+    "default": "Enjoy 10% off your first order"
+  },
+  {
+    "type": "textarea",
+    "id": "copy_right",
+    "label": "copy right text",
+    "default": "© 2021 Theme Powered by kolly"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "linklist1",
+    "name": "linklist1",
+    "limit": 1,
+    "settings": [
+    {
+      "type": "text",
+      "id": "footer_menu_title",
+      "label": "Menu Title",
+      "default": "Menu Title"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_handle",
+      "label": "Select Menu"
+    }
+    ]
+  },
+  {
+    "type": "linklist2",
+    "name": "linklist2",
+    "limit": 1,
+    "settings": [
+    {
+      "type": "text",
+      "id": "footer_menu_title",
+      "label": "Menu Title",
+      "default": "Menu Title"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu_handle",
+      "label": "Select Menu"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Footer",
+    "category": "Footer"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.footer-top-area{
+  {% if section.settings.footer_bg_img_enable %}
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  {% else %}
+  background-color: {{ section.settings.footer_bg_color }};
+  {% endif %}
+  border-top: 1px solid #e2e2e2;
+}
+
+.footer-top-area .footer-list-wrap{
+  padding-top: {{ section.settings.foot_padding_top }}px;
+  padding-bottom: {{ section.settings.foot_padding_bottom }}px;
+}
+@media (max-width: 1199px){
+  .footer-top-area .footer-list-wrap{
+    padding-top: {{ section.settings.foot_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.foot_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px){
+  .footer-top-area .footer-list-wrap{
+    padding-top: {{ section.settings.foot_padding_top_xs }}px;
+    padding-bottom: {{ section.settings.foot_padding_bottom_xs }}px;
+  }
+}
+
+.footer-top-area .container-col{
+  padding-left: 285px;
+  padding-right: 285px;
+}
+@media(max-width: 1599px){
+  .footer-top-area .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 991px){
+  .footer-top-area .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .footer-top-area .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.footer-list-wrap ul.footer-list{
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  align-items: center;
+  {% if settings.enable_rtl %}
+  margin-right: -30px;
+  {% else %}
+  margin-left: -30px;
+  {% endif %}
+}
+.footer-list-wrap > ul > li.ftlink-li{
+  width: 25%;
+  text-align: center;
+}
+.footer-list-wrap > ul > li.ftlink-li.footer-info{
+  width: 50%;
+}
+
+.footer-list-wrap > ul > li.ftlink-li .footer-sublist{
+  display: block;
+  margin-top: 35px;
+}
+.footer-list-wrap > ul > li.ftlink-li .footer-sublist.collapse:not(.show){
+  display: block;
+}
+.footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li{
+  margin-top: 15px;
+}
+.footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li:first-child{
+  margin-top: 0px;
+}
+.footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li a{
+  font-size: 15px;
+  line-height: 1;
+}
+.footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li a:hover{
+  color: var(--color-primary);
+}
+.footer-list-wrap > ul > li.ftlink-li .ft-title{
+  color: var(--color-primary);
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 1px;
+  font-family: 'Hallenger Serif Font';
+}
+.footer-list-wrap > ul > li.ftlink-li a.ft-title{
+  display: none;
+}
+
+.footer-list-wrap .ftlink-li.footer-info .center-content{
+  max-width: 60%;
+  margin: 0 auto;
+}
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content{
+  margin-top: 50px;
+}
+
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content h4{
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content p{
+  font-size: 16px;
+}
+
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content .news-content{
+  position: relative;
+  margin-top: 30px;
+}
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content .subscribe-block{
+  position: relative;
+}
+
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content input{
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #e2e2e2;
+  font-size: 14px;
+  height: 52px;
+  padding: 0 20px;
+}
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content input:focus{
+  border: 1px solid var(--color-primary);
+}
+.footer-list-wrap .ftlink-li.footer-info .newsletter-content button{
+  color: var(--color-primary);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  {% if settings.enable_rtl %}
+  left: 20px;
+  {% else %}
+  right: 20px;
+  {% endif %}
+}
+.footer-bottom {
+  padding: 30px 0;
+}
+.footer-bottom p.copyright {
+    text-align: center;
+    font-size: 16px;
+}
+
+@media (max-width : 1199px){
+  .footer-list-wrap .ftlink-li.footer-info .center-content{
+    max-width: 80%;
+  }
+  .footer-list-wrap .ftlink-li.footer-info .newsletter-content {
+    margin-top: 30px;
+  }
+}
+@media (max-width : 991px){
+  .footer-list-wrap > ul > li.ftlink-li{
+    margin-top: 15px;
+    text-align: left;
+  }
+  .footer-list-wrap .ftlink-li.footer-info{
+    margin-top: 0;
+    order: -1;
+  }
+  .footer-list-wrap > ul > li.ftlink-li,
+  .footer-list-wrap ul.footer-list{
+    {% if settings.enable_rtl %}
+    margin-right: 0;
+    {% else %}
+    margin-left: 0;
+    {% endif %}
+  }
+  .footer-list-wrap > ul > li.ftlink-li{
+    width: 100%;
+  }
+  .footer-list-wrap > ul > li.ftlink-li a.ft-title{
+    display: flex;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .footer-list-wrap > ul > li.ftlink-li h2.ft-title{
+    display: none;
+  }
+  .footer-list-wrap > ul > li.ftlink-li .footer-sublist{
+    margin-top: 15px;
+  }
+  .footer-list-wrap > ul > li.ftlink-li .footer-sublist.collapse:not(.show){
+    display: none;
+  }
+  .footer-list-wrap > ul > li.ftlink-li a.ft-title i{
+    font-size: 14px;
+  }
+  .footer-list-wrap > ul > li.ftlink-li a.ft-title[aria-expanded="true"] i:before{
+    content: "\e622";
+  }
+  .footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li{
+    margin-top: 10px;
+  }
+  .footer-list-wrap > ul > li.ftlink-li ul.footer-sublist li.ftsublink-li a{
+    font-size: 14px;
+  }
+  .footer-list-wrap .ftlink-li.footer-info .newsletter-content,
+  .footer-list-wrap .ftlink-li.footer-info .newsletter-content .news-content{
+    margin-top: 15px;
+  }
+  .footer-list-wrap .ftlink-li.footer-info .center-content{
+    max-width: 100%;
+  }
+  .footer-bottom {
+    padding: 15px 0;
+  }
+  .footer-bottom p.copyright{
+    font-size: 14px;
+  }
+}
+@media (max-width : 767px){
+  .footer-list-wrap ul.footer-list{
+    {% if settings.enable_rtl %}
+    margin-right: 0px;
+    {% else %}
+    margin-left: 0px;
+    {% endif %}
+  }
+  .footer-list-wrap > ul > li.ftlink-li.footer-info,
+  .footer-list-wrap > ul > li.ftlink-li{
+    width: 100%;
+    {% if settings.enable_rtl %}
+    margin-right: 0px;
+    {% else %}
+    margin-left: 0px;
+    {% endif %}
+  }
+  .footer-list-wrap .ftlink-li.footer-info .newsletter-content p{
+    font-size: 14px;
+  }
+}
+</style>

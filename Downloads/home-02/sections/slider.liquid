@@ -1,0 +1,293 @@
+<section class="slider-content">
+    <div class="owl-carousel home-slider" id="home-slider">
+        {% for block in section.blocks %}
+        <div class="item">
+            <div class="slide-image slider-content-center">
+                <div class="slide-image-cont">
+                    <a href="{{ block.settings.slider_button_url }}">
+                        <img class="img-fluid" src="{% if block.settings.slider_bg_img %}{{ block.settings.slider_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x1080/f7f7f7/999999{% endif %}">
+                    </a>
+                    <div class="slider-text-info slider-text-center">
+                        {% if block.settings.slider_sub_title != '' %}
+                        <span style="color:{{ block.settings.slider_sub_title_color }};">{{ block.settings.slider_sub_title }}</span>
+                        {% endif %}
+                        {% if block.settings.slider_title != '' %}
+                        <h2 style="color:{{ block.settings.slider_title_color }};">
+                            {{ block.settings.slider_title1 }}
+                        </h2>
+                        {% endif %}
+                        {% if block.settings.slider_button != '' %}
+                        <div class="button-block">
+                            <a href="{{ block.settings.slider_button_url }}" class="btn btn-style3">{{ block.settings.slider_button }}</a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<script>
+    $( document ).ready(function() {
+        $('#home-slider').owlCarousel({
+            {%- if settings.enable_rtl -%}
+            rtl: true,
+            {%- endif -%}
+            loop: false,
+            items: 1,
+            rewind: true,
+            nav: false,
+            navText: ['<i class=" feather-arrow-left"></i>','<i class=" feather-arrow-right"></i>'],
+            dots: false
+        });
+    });
+</script>
+{% schema %}
+{
+    "name": "Slider",
+    "blocks":[
+    {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+        {
+            "type": "header",
+            "content": "Slider Image 01"
+        },
+        {
+            "type": "image_picker",
+            "id": "slider_bg_img",
+            "label": "Image",
+            "info": "Recommended Size: 1920x1080px"
+        },
+        {
+            "type": "color",
+            "id": "slider_sub_title_color",
+            "label": "Sub Title color",
+            "default": "#6f6f6f"
+        },
+        {
+            "type": "text",
+            "id": "slider_sub_title",
+            "label": "slider sub title",
+            "default": "The men's shoes"
+        },
+        {
+            "type": "color",
+            "id": "slider_title_color",
+            "label": "Title color",
+            "default": "#353554"
+        },
+        {
+            "type": "text",
+            "id": "slider_title1",
+            "label": "Title",
+            "default": "Smooth"
+        },
+        {
+            "type": "text",
+            "id": "slider_button",
+            "label": "Button Text",
+            "default": "Shop now"
+        },
+        {
+            "type": "url",
+            "id": "slider_button_url",
+            "label": "Button URL"
+        }
+        ]
+    }
+    ],
+    "presets":[
+    {
+        "name": "Slider",
+        "category": "1. slider"
+    }
+    ]
+}
+{% endschema %}
+<style>
+.slider-content .home-slider .slide-image {
+    position: relative;
+    overflow: hidden;
+}
+@media (max-width: 767px){
+    .slider-content .home-slider .slide-image img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+    }
+}
+/* slider content css */
+.slider-content .home-slider .slide-image .slider-text-info{
+    position: absolute;
+    bottom: 50%;
+    -webkit-transform: translateY(50%);
+    -o-transform: translateY(50%);
+    transform: translateY(50%);
+}
+/* content position css */
+.slider-content .home-slider .slide-image.slider-content-center .slider-text-info{
+    left: 0;
+    right: 0;
+}
+
+/* text position css */
+.slider-content .home-slider .slide-image .slider-text-info.slider-text-left{
+    text-align: left;
+}
+.slider-content .home-slider .slide-image .slider-text-info.slider-text-right{
+    text-align: right;
+}
+.slider-content .home-slider .slide-image .slider-text-info.slider-text-center{
+    text-align: center;
+}
+
+/* text effect css */
+.slider-content .home-slider .owl-item.active .slider-text-info > span,
+.slider-content .home-slider .owl-item.active .slider-text-info h2,
+.slider-content .home-slider .owl-item.active .slider-text-info a{
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.slider-content .home-slider .owl-item.active .slider-text-info > span{
+    -webkit-animation-delay: 0.3s;
+    animation-delay: 0.3s;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}
+.slider-content .home-slider .owl-item.active .slider-text-info h2{
+    -webkit-animation-delay: 0.6s;
+    animation-delay: 0.6s;
+    -webkit-animation-duration: 0.6s;
+    animation-duration: 0.6s;
+}
+.slider-content .home-slider .owl-item.active .slider-text-info a{
+    -webkit-animation-delay: 0.9s;
+    animation-delay: 0.9s;
+    -webkit-animation-duration: 0.9s;
+    animation-duration: 0.9s;
+}
+/* slider text css */
+.slider-content .home-slider .slide-image .slider-text-info > span{
+    font-size: 32px;
+    line-height: 1;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+.slider-content .home-slider .slide-image .slider-text-info h2{
+    font-size: 190px;
+    line-height: 1;
+    margin-top: 20px;
+    font-weight: 500;
+    font-family: 'Hallenger Serif Font';
+}
+.slider-content .home-slider .slide-image .slider-text-info h2 span{
+    display: block;
+}
+.slider-content .home-slider .slide-image .slider-text-info h2 span:first-child{
+    margin-top: 0;
+}
+.slider-content .home-slider .slide-image .button-block a{
+    display: inline-flex;
+    align-items: center;
+}
+.slider-content .home-slider .slide-image .button-block{
+    margin-top: 110px;
+}
+@media (max-width: 1599px){
+    .slider-content .home-slider .slide-image .slider-text-info h2{
+        font-size: 110px;
+    }
+    .slider-content .home-slider .slide-image .slider-text-info > span{
+        font-size: 20px;
+    }
+    .slider-content .home-slider .slide-image .button-block{
+        margin-top: 70px;
+    }
+}
+@media (max-width: 1199px){
+    .slider-content .home-slider .slide-image .slider-text-info > span{
+        font-size: 14px;
+        letter-spacing: 3px;
+    }
+    .slider-content .home-slider .slide-image .slider-text-info h2{
+        font-size: 90px;
+    }
+    .slider-content .home-slider .slide-image .button-block{
+        margin-top: 60px;
+    }
+}
+@media (max-width: 991px){
+    .slider-content .home-slider .slide-image .slider-text-info h2 {
+        font-size: 50px;
+        margin-top: 15px;
+    }
+    .slider-content .home-slider .slide-image .button-block{
+        margin-top: 40px;
+    }
+}
+@media (max-width: 767px){
+    .slider-content .home-slider .slide-image .slider-text-info > span{
+        font-size: 12px;
+    }
+    .slider-content .home-slider .slide-image .slider-text-info h2{
+        font-size: 40px;
+        margin-top: 10px;
+    }
+    .slider-content .home-slider .slide-image .button-block{
+        margin-top: 30px;
+    }
+}
+
+
+/*slider arrow*/
+.home-slider.owl-carousel .owl-nav button{
+    color: #fff;
+    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    transform: translateY(50%);
+    border-radius: 100%;
+}
+.home-slider.owl-carousel .owl-nav button:hover{
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.home-slider .owl-nav button.owl-prev{
+    left: 60px;
+}
+.home-slider .owl-nav button.owl-next{
+    right: 60px;
+}
+
+@media(max-width: 1599px){
+    .home-slider.owl-carousel .owl-nav button{
+        font-size: 16px;
+        width: 50px;
+        height: 50px;
+    }
+    .home-slider .owl-nav button.owl-prev{
+        left: 30px;
+    }
+    .home-slider .owl-nav button.owl-next{
+        right: 30px;
+    }
+}
+@media(max-width: 767px){
+    .home-slider.owl-carousel .owl-nav button{
+        display: none;
+    }
+}
+
+</style>

@@ -1,0 +1,290 @@
+<!-- banner-area start -->
+<section class="banner-grid banner2">
+    <div class="container-fluid container-col">
+        <ul class="banner-wrap">
+            <li class="banner-wrapper">
+                <a href="{{ section.settings.banner2_url }}">
+                    <img class="img-fluid" src="{% if section.settings.banner_img %}{{ section.settings.banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/800x648/f7f7f7/999999{% endif %}">
+                </a>
+            </li>
+            <li class="banner-wrapper">
+                <h1 class="pettern-title">{{ section.settings.pettern_title }}</h1>
+                <div class="banner-text">
+                    <h2 class="main-title">{{ section.settings.banner_title }}</h2>
+                    <p>{{ section.settings.banner_description }}</p>
+                    <a class="btn btn-style3" href="{{ block.settings.banner_url }}">{{ section.settings.banner_button }} <i class="feather-arrow-right"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Banner Single",
+    "settings": [
+        {
+            "type" : "header",
+            "content" : "Section Padding"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 100
+        },
+        {
+            "type" : "paragraph",
+            "content" : "Ipad pro / Ipad"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top_ipad",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom_top_ipad",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 60
+        },
+        {
+            "type" : "paragraph",
+            "content" : "Mobile"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top_xs",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom_xs",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 40
+        },
+        {
+            "type": "header",
+            "content": "Banner"
+        },
+        {
+            "type": "image_picker",
+            "id": "banner_img",
+            "label": "Banner Image",
+            "info": "Recommended Size: 800px x 648px"
+        },
+        {
+            "type": "color",
+            "id": "section_bg_color",
+            "label": "section background color",
+            "default": "#f7f4f1"
+        },
+        {
+            "type": "textarea",
+            "id": "pettern_title",
+            "label": "Banner pettern title",
+            "default": "shoes"
+        },
+        {
+            "type": "textarea",
+            "id": "banner_title",
+            "label": "Banner Main Title",
+            "default": "The higher the heel the closer to heaven!!!"
+        },
+        {
+            "type": "textarea",
+            "id": "banner_description",
+            "label": "Banner description",
+            "default": "If you don’t complain when your shoes are too tight, you’ll be wearing tight shoes for the rest of your life."
+        },
+        {
+            "type": "text",
+            "id": "banner_button",
+            "label": "Banner Button",
+            "default": "top rated products"
+        },
+        {
+            "type": "url",
+            "id": "banner2_url",
+            "label": "URL"
+        }
+    ],
+    "presets":[
+        {
+            "name": "Banner Single",
+            "category": "Banner Grid"
+        }
+    ]
+}
+{% endschema %}
+<style>
+.banner2{
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+}
+@media(max-width: 1199px){
+    .banner2{
+        padding-top: {{ section.settings.section_padding_top_lg }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+}
+@media(max-width: 1199px){
+    .banner2{
+        padding-top: {{ section.settings.section_padding_top_xs }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+}
+.banner2 .container-fluid.container-col{
+    padding-right: 160px;
+    padding-left: 160px;
+}
+@media(max-width: 1599px){
+    .banner2 .container-fluid.container-col{
+        padding-right: 60px;
+        padding-left: 60px;
+    }
+}
+@media(max-width: 1199px){
+    .banner2 .container-fluid.container-col{
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+@media(max-width: 767px){
+    .banner2 .container-fluid.container-col{
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+/*banner text content*/
+
+
+.banner-grid.banner2 ul.banner-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: {{ section.settings.section_bg_color }};
+    position: relative;
+    overflow: hidden;
+}
+.banner-grid.banner2 ul.banner-wrap li.banner-wrapper{
+    width: 50%;
+}
+.banner-grid.banner2 .banner-text {
+    max-width: 50%;
+    margin: 0 auto;
+}
+.banner-grid.banner2 h1.pettern-title{
+    color: transparent;
+    -webkit-text-stroke: 1px #746659;
+    opacity: .2;
+    font-size: 150px;
+    font-weight: 600;
+    position: absolute;
+    z-index: 0;
+    bottom: -145px;
+    right: 100px;
+    line-height: 1;
+    writing-mode: vertical-rl;
+    transform: rotate(254deg);
+}
+.banner-grid.banner2 .banner-text h2{
+    font-size: 45px;
+    font-weight: 500;
+}
+
+.banner-grid.banner2 .banner-text p{
+    font-size: 18px;
+    margin-top: 35px;
+}
+.banner-grid.banner2 .banner-text a{
+    margin-top: 55px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1599px){
+    .banner-grid.banner2 .banner-text{
+        max-width: 70%;
+    }
+    .banner-grid.banner2 h1.pettern-title{
+        font-size: 100px;
+        bottom: -100px;
+        right: 50px;
+    }
+}
+@media(max-width: 1199px){
+    .banner-grid.banner2 .banner-text{
+        max-width: 100%;
+        margin: 0 30px;
+    }
+    .banner-grid.banner2 .banner-text h2{
+        font-size: 35px;
+    }
+    .banner-grid.banner2 .banner-text p{
+        font-size: 16px;
+        margin-top: 15px;
+    }
+    .banner-grid.banner2 .banner-text a{
+        margin-top: 30px;
+    }
+}
+@media(max-width: 991px){
+    .banner-grid.banner2 .banner-text h2{
+        font-size: 24px;
+    }
+    .banner-grid.banner2 .banner-text p{
+        font-size: 14px;
+        margin-top: 15px;
+    }
+    .banner-grid.banner2 .banner-text a{
+        margin-top: 20px;
+    }
+    .banner-grid.banner2 h1.pettern-title{
+        font-size: 50px;
+        bottom: -50px;
+        right: 30px;
+    }
+}
+@media(max-width: 767px){
+    .banner-grid.banner2 ul.banner-wrap li.banner-wrapper{
+        width: 100%;
+    }
+    .banner-grid.banner2 .banner-text{
+        margin: 15px;
+    }
+}
+</style>

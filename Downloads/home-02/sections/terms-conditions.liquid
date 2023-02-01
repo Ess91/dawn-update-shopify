@@ -1,0 +1,224 @@
+<section class="terms-condition1">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <div class="rule-wrap">
+          <ul>
+            {% for block in section.blocks %}
+            <li class="wow animate__fadeInUp">
+              <div class="rule-wrapper">
+                <h6>{{ block.settings.list_title }}</h6>
+                <p>{{ block.settings.list_desc }}</p>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Terms & Condition",
+  "settings": [
+     {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  }
+  ],
+  "blocks":[
+  {
+    "type": "terms-condition",
+    "name": "Terms & Condition",
+    "settings": [
+    {
+      "type": "textarea",
+      "id": "list_title",
+      "label": "List Title",
+      "default": "Introduction"
+    },
+    {
+      "type": "textarea",
+      "id": "list_desc",
+      "label": "List Description",
+      "default": "These website standard terms and conditions written on this webpage shall manage your use of our website, webiste name accessible at website these terms will be applied fully and affect to your use of this website. by using this website, you agreed to accept all terms"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Terms & Condition 1",
+    "category": "Terms & Condition"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .terms-condition1 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .terms-condition1 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .terms-condition1 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .terms-condition1 .rule-wrap ul{
+    display: flex;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(1){
+    animation-delay: 0.1s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(2){
+    animation-delay: 0.2s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(3){
+    animation-delay: 0.3s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(4){
+    animation-delay: 0.4s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(5){
+    animation-delay: 0.5s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(6){
+    animation-delay: 0.6s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(7){
+    animation-delay: 0.7s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(8){
+    animation-delay: 0.8s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(9){
+    animation-delay: 0.9s;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(10){
+    animation-delay: 0.10s;
+  }
+  .terms-condition1 .rule-wrap ul li{
+    position: relative;
+    width: 50%;
+  }
+  .terms-condition1 .rule-wrap ul li .rule-wrapper {
+    border-top: 1px solid #e2e2e2;
+    margin-top: 60px;
+    padding-top: 60px;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(1) .rule-wrapper,
+  .terms-condition1 .rule-wrap ul li:nth-child(2) .rule-wrapper{
+    margin-top: 0px;
+    padding-top: 0px;
+    border-top: none;
+  }
+  .terms-condition1 .rule-wrap ul li:nth-child(odd) .rule-wrapper{
+    width: 90%;
+  } 
+  .terms-condition1 .rule-wrap ul li .rule-wrapper h6{
+    font-size: 18px;
+    font-weight: 500;
+  } 
+  .terms-condition1 .rule-wrap ul li .rule-wrapper p{
+    font-size: 16px;
+    margin-top: 15px;
+  }
+
+  @media(max-width: 1199px){
+    .terms-condition1 .rule-wrap ul li .rule-wrapper p{
+      font-size: 14px;
+    }
+
+  }
+  @media(max-width: 1199px){
+    .terms-condition1 .rule-wrap ul li{
+      width: 100%;
+    }
+    .terms-condition1 .rule-wrap ul li .rule-wrapper,
+    .terms-condition1 .rule-wrap ul li:nth-child(2) .rule-wrapper{
+      border-top: 1px solid #e2e2e2;
+      margin-top: 30px;
+      padding-top: 30px;
+    }
+    .terms-condition1 .rule-wrap ul li:nth-child(odd) .rule-wrapper{
+      width: 100%;
+    }  
+  }
+</style>

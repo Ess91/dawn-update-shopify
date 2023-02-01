@@ -1,0 +1,448 @@
+<section class="best-category">
+  <div class="container-fluid container-col">
+    <ul class="category-wrap">
+      <li class="category-wrapper">
+        <div class="banner-content">
+          <a href="{{ section.settings.banner_url }}">
+            <img class="img-fluid" src="{% if section.settings.side_banner %}{{ section.settings.side_banner | img_url: 'master' }}{% else %}https://dummyimage.com/798x690/f7f7f7/999999{% endif %}">
+          </a>
+          <div class="text-content">
+            <div class="left-box">
+              <h6>{{ section.settings.side_banner_item }}</h6>
+              <h1>{{ section.settings.side_banner_title }}</h1>
+            </div>
+            <a class="btn btn-style" href="{{ section.settings.banner_url }}">{{ section.settings.banner_button }}</a>
+          </div>
+        </div>
+      </li>
+      <li class="category-wrapper">
+        <div class="section-title">
+          <h2>{{ section.settings.product_title}}</h2>
+        </div>
+        {% assign category_product = collections[section.settings.best_label_product] %}
+        <div class="collection-slider owl-carousel owl-theme" id="best-{{ section.id }}">
+          {% assign category_product_limit = section.settings.section_product_limit_handle %}
+          {% for product in category_product.products limit: category_product_limit %}
+          <div class="item wow animate__fadeIn">
+            {% include 'product-special-item' %}
+          </div>
+          {% endfor %}
+        </div>
+      </li>
+    </ul>
+</section>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('#best-{{ section.id }}').owlCarousel({
+      {%- if settings.enable_rtl -%}
+      rtl: true,
+      {%- endif -%}
+      items: 1,
+      margin: 0,
+      loop: false,
+      nav: true,
+      dots: false,
+      navText: ['<i class=" feather-arrow-left"></i>','<i class=" feather-arrow-right"></i>']
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Best Product",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Desktop / Laptop / tablet"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+        "type": "header",
+        "content": "Slide Banner"
+    },
+    {
+        "type": "image_picker",
+        "id": "side_banner",
+        "label": "Side Image",
+        "info": "Recommended Size: 798px x 690px"
+    },
+    {
+        "type": "url",
+        "id": "banner_url",
+        "label": "Banner url"
+    },
+    {
+      "type": "text",
+      "id": "side_banner_title",
+      "label": "Side banner title",
+      "default": "Weddings collection"
+    },
+    {
+      "type": "text",
+      "id": "side_banner_item",
+      "label": "Side banner item",
+      "default": "+ 215 items"
+    },
+    {
+      "type": "text",
+      "id": "banner_button",
+      "label": "Side banner button",
+      "default": "Go to store"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product title",
+      "default": "Fot ladies"
+    },
+    {
+      "type" : "collection",
+      "id" : "best_label_product",
+      "label" : "Best Product"
+    },
+    {
+      "type": "text",
+      "id": "section_product_limit_handle",
+      "label": "Product Limit",
+      "default": "10"
+    }
+  ],
+  "presets":[
+    {
+      "name": "Best Product",
+      "category": "Collecton"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+.best-category {
+  padding-top:{{ section.settings.section_padding_top }}px;
+  padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.blog_bgcolor }};
+}
+@media (max-width: 1199px){
+  .best-category {
+    padding-top:{{ section.settings.section_padding_top_ipad }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px){
+  .best-category {
+    padding-top:{{ section.settings.section_padding_top_xs }}px;      
+    padding-bottom:{{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+
+.best-category .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .best-category .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .best-category .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .best-category .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.best-category .category-wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+.best-category .category-wrapper{
+  width: 50%;
+}
+.best-category .category-wrapper:nth-child(2){
+  padding: 0 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*banner content*/
+
+.best-category .banner-content {
+  position: relative;
+}
+.best-category .banner-content > a{
+  display: block;
+  overflow: hidden;
+  border-radius: 7px;
+}
+.best-category .banner-content img{
+  width: 100%;
+  transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+}
+.best-category .banner-content:hover img{
+  opacity: .7;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.best-category .banner-content .text-content {
+  position: absolute;
+  bottom: 100px;
+  left: 70px;
+  right: 70px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.best-category .banner-content .text-content h1{
+  color: #fff;
+  font-size: 100px;
+  line-height: 1;
+  font-family: 'Hallenger Serif Font';
+}
+.best-category .banner-content .text-content h6{
+  color: #fff;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+@media(max-width: 1599px){
+  .best-category .banner-content .text-content{
+    bottom: 40px;
+    left: 30px;
+    right: 30px;
+  }
+  .best-category .banner-content .text-content h6{
+    font-size: 18px;
+  }
+  .best-category .banner-content .text-content h1{
+    font-size: 80px;
+  }
+  .best-category .category-wrapper:nth-child(2){
+    padding: 0 30px;
+  }
+}
+@media(max-width: 1199px){
+  .best-category .banner-content .text-content h6{
+    font-size: 16px;
+  }
+  .best-category .banner-content .text-content h1{
+    font-size: 60px;
+  }
+}
+@media(max-width: 991px){
+  .best-category .banner-content .text-content{
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .best-category .banner-content .text-content h6{
+    font-size: 14px;
+  }
+  .best-category .banner-content .text-content a{
+    margin-top: 15px;
+  }
+  .best-category .banner-content .text-content h1{
+    font-size: 40px;
+  }
+}
+@media(max-width: 767px){
+  .best-category .category-wrapper{
+    width: 100%;
+  }
+  .best-category .category-wrapper:nth-child(2){
+    margin-top: 30px;
+    padding: 0;
+  }
+}
+
+
+/* product content */
+.best-category .section-title h2{
+  margin-top: 0;
+}
+.best-category .collection-slider{
+  position: relative;
+  overflow: hidden;
+  margin-top: 60px;
+}
+.best-category .product-image {
+  text-align: center;
+}
+.best-category .product-image .product-content {
+  margin-top: 70px;
+}
+.best-category .product-content .price-box {
+  margin-top: 0;
+}
+.best-category .product-content .price-box span{
+  font-size: 24px;
+}
+.best-category .product-content a.product-title {
+  margin-top: 20px;
+  font-weight: 600;
+}
+@media(max-width: 1599px){
+  .best-category .collection-slider{
+    margin-top: 30px;
+  }
+  .best-category .product-image .product-content{
+    margin-top: 30px;
+  }
+  .best-category .product-content .price-box span{
+    font-size: 18px;
+  }
+  .best-category .product-content a.product-title{
+    margin-top: 15px;
+  }
+}
+@media(max-width: 991px){
+  .best-category .collection-slider,
+  .best-category .product-image .product-content{
+    margin-top: 15px;
+  }
+  .best-category .product-content .price-box span{
+    font-size: 14px;
+  }
+  .best-category .product-content a.product-title{
+    margin-top: 10px;
+  }
+
+}
+
+
+
+/*slider arrow*/
+
+.best-category .collection-slider.owl-carousel .owl-nav button{
+  color: var(--color-primary);
+  font-size: 22px;
+  line-height: 1;
+  margin: 0;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  border: 1px solid var(--color-primary);
+}
+.best-category .collection-slider.owl-carousel .owl-nav button.owl-prev{
+  left: 0px;
+}
+.best-category .collection-slider.owl-carousel .owl-nav button.owl-next{
+  right: 0px;
+}
+.best-category .collection-slider.owl-carousel .owl-nav button:hover{
+  color: #fff;
+  background-color: var(--color-primary);
+}
+
+@media(max-width: 1599px){
+  .best-category .collection-slider.owl-carousel .owl-nav button{
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+  }
+}
+@media(max-width: 1199px){
+  .best-category .collection-slider.owl-carousel .owl-nav button{
+    width: 40px;
+    height: 40px;
+  }
+}
+@media(max-width: 767px){
+
+}
+</style>

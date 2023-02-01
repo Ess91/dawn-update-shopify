@@ -1,0 +1,637 @@
+<div class="productmodal">
+  <div class="modal fade" id="quickViewModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="quick-view-img">
+            <div class="product-main-image__item">
+              <div class="img_box_1"></div>
+              <div class="qv-product-images"></div>
+            </div>
+          </div>
+          <div class="quick-view-content">
+            <table>
+              <tbody>
+                <tr class="product-info">
+                  <th class="head">{{ 'products.general.sku' | t }}</th>
+                  <td class="product_sku"></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="product-title">
+              <h6 class="product_title">FROM_JS</h6>
+            </div>
+            <div class="price-box price-part">
+              <span class="new-price">jsprice</span>
+              <span class="old-price">jsprice</span>
+            </div>
+            <div class="product-ratting">
+              <div class="rating">FROM_JS</div>
+            </div>
+            <!-- <div class="product-desc">
+              <p class="product-short-desc"></p>
+            </div> -->
+            <form id="add-item-qv" action="/cart/add" method="post">
+              <div class="quick-view-select variants select-option-part"></div>
+              <div class="product-info product-quantity">
+                <h6 class="head">Quantity:</h6>
+                <div class="cart-plus-minus">
+                  <input value="1" type="text" name="quantity" min="1" pattern="[0-9]*">
+                </div>
+              </div>
+              <div class="quickview-buttons">
+                <button type="submit" class="btn btn-style2 addtocartqv">
+                  <span class="cart-title" id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+                </button>
+                <div class="quickview-btn-wishlist">
+                <a class="action-wishlist tile-actions--btn wishlist-btn wishlist btn btn-style2 style2-diff" data-page="product" href="javascript:void(0)" data-product-handle="{{ product.handle }}">
+                  <span class="add-wishlist">
+                    <i class="feather-heart"></i>
+                  </span>
+                  <span class="loading-wishlist animated infinite rotateOut"><i class="feather-loader"></i>
+                  </span>
+                  <span class="remove-wishlist">
+                    <i class="fa fa-heart"></i>
+                  </span>
+                  <span class="wishlist-add-title">{{ settings.add_wishlit_title }}</span>
+                  <span class="wishlist-remove-title">{{ settings.remove_wishlit_title }}</span>
+                </a>
+              </div>
+              </div>
+              <script>
+                jQuery('.addtocartqv').click(function(e) {
+                  e.preventDefault();
+                  Shopify.addItemFromForm('add-item-qv');
+                  jQuery('#quickViewModal').modal('hide');
+                });
+              </script>
+            </form>
+            <div class="bottom-content">
+              <table>
+                <tbody>
+                  <tr class="product-info">
+                    <th class="head">{{ 'products.general.vendor' | t }}</th>
+                    <td class="product_vendor"></td>
+                  </tr>
+                  <tr class="product-info">
+                    <th class="head">{{ 'products.general.type' | t }}</th>
+                    <td class="product_type"></td>
+                  </tr>
+                  <tr class="product-info">
+                    <th class="head">{{ 'products.general.share' | t }}</th>
+                    <td class="share-icon">
+                      {% include 'social-share' %}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <button type="button" class="close" data-bs-dismiss="modal"><i class="ti-close"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="quickViewModal_info" style="display: none;">
+  <div class="button">{{ settings.qcv_add_to_cart_text }}</div>
+  <div class="button_added">{{ settings.qcv_cart_added_text }}</div>
+  <div class="button_error">{{ settings.qcv_cart_error_text }}</div>
+  <div class="button_wait">{{ settings.qcv_cart_wait_text }}</div>
+</div>
+<script>
+  var mainImage = '';
+  jQuery(function ($) {
+    quiqview = function(product_handle) {
+      Shopify.getProduct(product_handle);
+    }
+    Shopify.onProduct = function(product) {
+      $('.viewfullinfo').attr('href', product.url);
+// product description without shortcode
+text_truncate = function(str, length, ending) {
+  if (length == null) {
+    length = 500;
+  }
+  if (ending == null) {
+    ending = '...';
+  }
+  if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending;
+  }
+  else {
+    return str;
+  }
+};
+var _parent = '#quickViewModal';
+var productHandle = product.handle;
+$(_parent+' .product_title').text(product.title);
+//alert(product.handle)
+var wishlist = localStorage.getItem('user_wishlist') || [];
+if (wishlist.length > 0) {
+  wishlist = JSON.parse(localStorage.getItem('user_wishlist'));
+}
+if (wishlist.indexOf(productHandle) > -1) {
+  $('.quickview-btn-wishlist .action-wishlist .add-wishlist').css('display','none');
+  $('.quickview-btn-wishlist .action-wishlist .remove-wishlist').css('display','block');
+  $('.quickview-btn-wishlist .action-wishlist').addClass('is-active');
+}else{
+  $('.quickview-btn-wishlist .action-wishlist .add-wishlist').css('display','inline-block');
+  $('.quickview-btn-wishlist .action-wishlist .remove-wishlist').css('display','none');
+  $('.quickview-btn-wishlist .action-wishlist').removeClass('is-active');
+}
+$('.quickview-btn-wishlist .wishlist-btn').attr('data-product-handle', product.handle);
+// product rating
+$(_parent+' .rating').empty();
+$(_parent+' .rating').append("<span class=\"shopify-product-reviews-badge\" data-id=\""+product.id+"\"></span>");
+//check variants
+var variant = '';
+for (i = 0; i < product.variants.length; i++) {
+  if(product.variants[i].inventory_quantity > 0) {
+    variant = product.variants[i];
+    break;
+  }
+}
+if(variant == '') {
+  for (i = 0; i < product.variants.length; i++) {
+    if(product.variants[i].inventory_policy == "continue") {
+      variant = product.variants[i];
+      break;
+    }
+  }
+  if(variant == '') {
+    variant = product.variants[0];
+  }
+}
+mainImage = product.featured_image;
+var shopifyimgurl = variant.featured_image ? variant.featured_image.src : product.featured_image;
+var imgurl = "<img class=\"full-width img-fluid\" alt=\"\" src = \""+shopifyimgurl+"\" >";
+jQuery(_parent+' .product-main-image__item .img_box_1').empty();
+jQuery(_parent+' .product-main-image__item .img_box_1').append(imgurl);
+// product description with shortcode
+var desc = product.description;
+if (desc.indexOf("[short_description]") >= 0) {
+  desc = desc.split("[short_description]");
+  desc = desc[1].split("[/short_description]");
+  $(_parent+' .product-short-desc').show();
+  $(_parent+' .product-short-desc').html(desc[0]);
+}
+else {
+  $(_parent+' .product-short-desc').html(text_truncate(product.description, 120));
+}
+//set variants property
+var inv_qua = variant.inventory_quantity;
+//price
+if(variant.price < variant.compare_at_price) {
+  $('.price-part .new-price').addClass('amount');
+  $('.price-part .old-price').show();
+  changePriceValue('.price-part .new-price', variant.compare_at_price);
+  changePriceValue('.price-part .old-price', variant.price);
+}
+else {
+  $('.price-part .old-price').hide();
+  $('.price-part .new-price').removeClass('amount');
+  changePriceValue('.price-part .new-price', variant.price);
+}
+$(_parent+' .product_sku').text(variant.sku);
+$(_parent+' .product_vendor').text(product.vendor);
+$(_parent+' .product_type').text(product.type);
+$(_parent+' .product_barcode').text(variant.barcode);
+//product images
+var images = product.images;
+var imageCount = $(images).length;
+$('.qv-product-images').html('');
+var main_div = '<div class="qv-popup-slider owl-carousel slider-style2 qvowl-dots owl-theme"></div>';
+$('.qv-product-images').append(main_div);
+$(images).each(function (i, image) {
+  if(imageCount >= 2) {
+    var image_embed = '<div class="tab-pane" id="pic"><a href="javaScript:void(0)"><img src="' + image + '" class="img-fluid w-100"></a></div>';
+    image_embed = image_embed.replace('.jpg', '_800x600_crop_center.jpg').replace('.png', '_800x600_crop_center.png');
+    $('.qv-popup-slider').append(image_embed);
+    $('.qv-popup-slider').owlCarousel('destroy');
+    $('.qv-popup-slider').owlCarousel({
+      {%- if settings.enable_rtl -%}
+      rtl: true,
+      {%- endif -%}
+      nav:false,
+      dots : false,
+      paginationSpeed : 400,
+      items : 4,
+      margin : 15
+    });
+  } else {
+    image_embed = '<div class="tab-pane" id="pic"><a href="javaScript:void(0)"><img src="' + image + '" class="img-fluid w-100"></a></div>';
+    image_embed = image_embed.replace('.jpg', '_800x600_crop_center.jpg').replace('.png', '_800x600_crop_center.png');
+    $('.qv-product-images').html(image_embed);
+  }
+});
+// Variants select
+if(product.variants.length > 1) {
+  var variants_margin = product.options.length == 2 ? 'variants_margin' : '';
+  var select = '<select id="product-select-qv" name="id">';
+  var selected = 'selected';
+  for (i = 0; i < product.variants.length; i++) {
+    var _var = product.variants[i];
+    if(_var.available) {
+      select += '<option value="' + _var.id + '"' + selected +'>' + _var.title + ' - ' + Shopify.formatMoney(_var.price, "{{ shop.money_format }}") + '</option>'
+      selected = '';
+    }
+  }
+  select += '</select>';
+  var variant_select = '<div class="variants_selects ' + variants_margin + '">';
+  variant_select += select;
+  variant_select += '</div><div class="divider divider--sm"></div>';
+  select = variant_select;
+}
+else {
+  var select = '<input type="hidden" name="id" value="' + product.variants[0].id + '" />';
+}
+$('.variants').empty();
+$('.variants').html(select);
+  //parametres
+  setParametresText(_parent+' .product-sku', variant.sku);
+  if(jQuery(_parent + ' .product-sku').length) {
+    var $ava = jQuery(_parent + " .product-info__availabilitu");
+    if(variant.sku != "") {
+      if($ava.hasClass('pull-left')) {
+        $ava.removeClass('pull-left')
+      }
+    }
+    else {
+      if(!$ava.hasClass('pull-left')) {
+        $ava.addClass('pull-left')
+      }
+    }
+  }
+  //quantity
+  var out_of_stock = false;
+  if(variant.inventory_management) {
+    if(inv_qua > 0) {
+      $(_parent+' .product-availability').text(inv_qua + " {{ 'popup_quick_view.general.in_stock' | t }}");
+    }
+    else {
+      out_of_stock = true;
+      $(_parent+' .product-availability').text("{{ 'popup_quick_view.general.in_stock' | t }}");
+    }
+  }
+  else {
+    $(_parent+' .product-availability').text("{{ 'popup_quick_view.general.many_in_stock' | t }}");
+  }
+  // button
+  if(!out_of_stock || variant.inventory_policy == "continue") {
+    $('.product-available').show();
+    $('.product-disable').hide();
+    $('.addtocartqv').attr('id', product.id );
+  }
+  else {
+    $('.product-available').hide();
+    $('.product-disable').show();
+  }
+  if (product.available && product.variants.length > 1) {
+    new Shopify.OptionSelectors("product-select-qv", { product: product, onVariantSelected: selectCallbackQv, enableHistoryState: true });
+    if($('#quickViewModal .variants_selects .selector-wrapper').length > 0) {
+      $.each( jQuery('#quickViewModal .variants_selects .selector-wrapper'), function(index) {
+  //alert('fdf43');
+  //console.log($(this).find('label'));
+  $(this).find('label').text(product.options[index].name);
+});
+    }
+  }
+  else {
+    jQuery('.currency .active').trigger('click');
+  }
+  selectGrid(_parent,product);
+  if($(".spr-badge").length > 0) {
+    $.getScript(window.location.protocol + "//productreviews.shopifycdn.com/assets/v4/spr.js");
+  }
+  if($(".selector-wrapper label").length) {
+    $(".selector-wrapper label").each(function( index ) {
+      $(this).text(jQuery(this).text() + ":");
+    });
+  }
+  $(_parent).modal('show');
+  if( !( 'ontouchstart' in window ) &&
+    !navigator.msMaxTouchPoints &&
+    !navigator.userAgent.toLowerCase().match( /windows phone os 7/i ))
+    return false;
+  $('body').css("top", -$('body').scrollTop());
+  $('body').addClass("no-scroll");
+  $('.close').click(function() {
+    var top = parseInt($('body').css("top").replace("px", ""))*-1;
+    $('body').removeAttr("style");
+    $('body').removeClass("no-scroll");
+    $('body').scrollTop(top);
+  });
+}
+function setParametresText(obj, value) {
+  if(value != '') {
+    $(obj).parent().show();
+    $(obj).text(value);
+  }
+  else {
+    $(obj).parent().hide();
+  }
+}
+function changePriceValue (cell, value) {
+  $(cell).html(Shopify.formatMoney(value, "{{ shop.money_format }}"));
+};
+});
+var selectCallbackQv = function(variant, selector) {
+  var _parent = '#quickViewModal';
+  var _parentprice = _parent + ' .price-part';
+  if (!variant) {
+    jQuery(_parent + " .price-box").hide();
+    jQuery(_parent + " .qwt").hide();
+    jQuery(_parent + " .control-console").hide();
+    jQuery(_parent + ' .addtocartqv').attr('disabled','disabled');
+    jQuery(_parent + ' .addtocartqv').text('{{ 'products.product.unavailable' | t }}');
+    return false;
+  }
+  jQuery(_parent + " .price-box").show();
+  jQuery(_parent + " .qwt").show();
+  jQuery(_parent + " .control-console").show();
+  if(variant.price < variant.compare_at_price) {
+    jQuery(_parentprice + ' .new-price').addClass('price-box__old');
+    jQuery(_parentprice + ' .old-price').show();
+    changePriceValue(_parentprice + ' .new-price', variant.price);
+    changePriceValue(_parentprice + ' .old-price', variant.compare_at_price);
+  }
+  else {
+    jQuery(_parentprice + ' .old-price').hide();
+    jQuery(_parentprice + ' .new-price').removeClass('price-box__old');
+    changePriceValue(_parentprice + ' .new-price', variant.price);
+  }
+  newVariantTextDataQv(_parent + ' .product-sku', variant.sku);
+  if(jQuery(_parent + ' .product-sku').length) {
+    var $ava = jQuery(_parent + " .product-info__availabilitu");
+    if(variant.sku != "") {
+      if($ava.hasClass('pull-left')) {
+        $ava.removeClass('pull-left')
+      }
+    }
+    else {
+      if(!$ava.hasClass('pull-left')) {
+        $ava.addClass('pull-left')
+      }
+    }
+  }
+  if (variant.available) {
+    if (variant.inventory_management == null) {
+      jQuery(_parent + " .product-availability").text("{{ 'popup_quick_view.general.many_in_stock' | t }}");
+    }
+    else {
+      jQuery(_parent + " .product-availability").text(" {{ 'popup_quick_view.general.many_in_stock' | t }}");
+    }
+  }
+  else {
+    jQuery(_parent + " .product-availability").text("{{ 'products.product.sold_out' | t }}");
+  }
+  var shopifyimgurl = variant.featured_image ? variant.featured_image.src : mainImage;
+  var imgurl = "<img class=\"img-fluid\" src = \""+shopifyimgurl+"\" >";
+  if(jQuery(_parent+' .product-main-image__item .img_box_1').children().length > 0) {
+    var detach = jQuery(_parent+' .product-main-image__item .img_box_1 img').detach();
+  }
+  jQuery(_parent+' .product-main-image__item .img_box_1').empty();
+  jQuery(_parent+' .product-main-image__item .img_box_1').append(imgurl);
+  if (variant && variant.available) {
+    jQuery(_parent + ' .addtocartqv').removeAttr('disabled');
+    jQuery(_parent + ' .addtocartqv').text('{{ 'products.product.add_to_cart' | t }}');
+    jQuery(_parent + " .control-console").show();
+  }
+  else {
+    jQuery(_parent + ' .addtocartqv').attr('disabled','disabled');
+    jQuery(_parent + ' .addtocartqv').text('{{ 'products.product.unavailable' | t }}');
+    jQuery(_parent + " .control-console").hide();
+  }
+  jQuery('.currency .active').trigger('click');
+};
+function changePriceValue (cell, value) {
+  jQuery(cell).html(Shopify.formatMoney(value, "{{ shop.money_format }}"));
+};
+function newVariantTextDataQv (obj, value) {
+  if(value != '') {
+    jQuery(obj).parent().show();
+    jQuery(obj).text(value);
+  }
+  else {
+    jQuery(obj).parent().hide();
+  }
+};
+function selectGrid(_parent,product) {
+  setTimeout(timeout, 5);
+  function timeout() {
+    if(jQuery(_parent + " .selector-wrapper").length > 2){
+      jQuery(_parent + " .single-option-selector").addClass("select--wd");
+    }
+    else if(jQuery(_parent + " .selector-wrapper").length == 1) {
+      $.each( jQuery('#quickViewModal .variants_selects .selector-wrapper'), function(index) {
+  //alert('fdf43');
+  //console.log($(this).find('label'));
+  jQuery(_parent + " .single-option-selector").before("<label>"+product.options[index].name+"</label>");
+  //$(this).find('label').text(product.options[index].name);
+});
+  //
+  jQuery(_parent + " .single-option-selector").addClass("select--wd");
+}
+}
+};
+</script>
+<style>
+  /* modal css */
+  .productmodal .modal-dialog {
+    max-width: 800px;
+  }
+  .productmodal .modal-dialog .modal-content {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+    border: none;
+    border-radius: 6px;
+    background-color: {{ settings.color_body_bg }};
+  }
+  @media (max-width: 991px) {
+    .productmodal .modal-dialog {
+      max-width: 710px;
+    }
+  }
+  @media (max-width: 767px) {
+    .productmodal .modal-dialog {
+      display: flex;
+      max-width: 100%;
+      height: 100%;
+      margin: 0 0;
+      padding: 15px;
+    }
+    .productmodal .modal-dialog .modal-content{
+      height: 100%;
+    }
+  }
+  /* modal-header css */
+  .productmodal .modal-dialog button.close {
+    font-size: 14px;
+    line-height: 1;
+    position: absolute;
+    top: 15px;
+    {% if settings.enable_rtl %}
+    left: 15px;
+    {% else %}
+    right: 15px;
+    {% endif %}
+  }
+  .productmodal .modal-dialog button.close:hover {
+    color: var(--color-primary);
+  }
+  @media(max-width: 767px){
+    .productmodal .modal-dialog button.close{
+      {% if settings.enable_rtl %}
+      left: 0px;
+      {% else %}
+      right: 0px;
+      {% endif %}
+      top: 0;
+    }
+  }
+  /* modal-body css */
+  .productmodal .modal-dialog .modal-body {
+    padding: 30px;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    max-height: 600px;
+    overflow-y: auto;
+  }
+  .productmodal .quick-view-img {
+    width: 375px;
+  }
+  .productmodal .quick-view-img .img_box_1 img{
+    backface-visibility: hidden;
+  }
+  .productmodal .quick-view-content {
+    padding: 0 15px;
+    width: calc(100% - 375px);
+  }
+  .productmodal .quick-view-img .qv-popup-slider {
+    margin-top: 15px;
+  }
+  .productmodal .quick-view-content .product-info h6.head{
+    font-size: 14px;
+    font-weight: 500;
+    {%- if settings.enable_rtl -%}
+    padding-left: 15px;
+    {%- else -%}
+    padding-right: 15px;
+    {%- endif -%}
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .productmodal .quick-view-content .product-info span{
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+  }
+  .productmodal .quick-view-content .product-title h6 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 19px;
+  }
+  .productmodal .quick-view-content .price-box {
+    margin-top: 8px;
+  }
+  .productmodal .quick-view-content .price-box span{
+    line-height: 1;
+  }
+  .productmodal .quick-view-content .price-box span.new-price{
+    color: var(--color-primary);
+    font-size: 18px;
+  }
+  .productmodal .quick-view-content .product-ratting {
+    margin-top: 14px;
+  }
+  .productmodal .quick-view-content .product-ratting .rating .spr-badge {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+  }
+  .productmodal .quick-view-content .product-ratting .rating .spr-badge .spr-badge-caption {
+    display: block;
+  }
+  .productmodal .quick-view-content .product-desc {
+    margin-top: 10px;
+  }
+  .productmodal .product-quantity{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+  }
+  .productmodal .bottom-content{
+    margin-top: 30px;
+  }
+  .productmodal .bottom-content .share-icon h6{
+    display: none;
+  }
+  /* modal variant css */
+  .productmodal .quick-view-content form {
+    margin-top: 29px;
+  }
+  .productmodal .quick-view-content form .quick-view-select .variants_selects .selector-wrapper {
+    margin-top: 15px;
+  }
+  .productmodal .quick-view-content form .quick-view-select .variants_selects .selector-wrapper:first-of-type {
+    margin-top: 0px;
+  }
+  .productmodal .quick-view-content form .quick-view-select .variants_selects .selector-wrapper label {
+    color: var(--color-secondary);
+    font-size: 14px;
+    font-weight: 500;
+    {%- if settings.enable_rtl -%}
+    padding-left: 15px;
+    {%- else -%}
+    padding-right: 15px;
+    {%- endif -%}
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .productmodal .quick-view-content form .quick-view-select .variants_selects .selector-wrapper select {
+    padding: 10px 30px 10px 15px;
+    text-transform: capitalize;
+  }
+  /* modal button css */
+  .productmodal .quick-view-content form .quickview-buttons{
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  .productmodal .quick-view-content form .quickview-buttons a.wishlist{
+    {% if settings.enable_rtl %}
+    margin-right: 15px;
+    {% else %}
+    margin-left: 15px;
+    {% endif %}
+  }
+  .productmodal .quick-view-content form .quickview-buttons a span.wishlist-remove-title,
+  .productmodal .quick-view-content form .quickview-buttons a span.wishlist-add-title{
+    display: none;
+  }
+  .modal-dialog .modal-body .quick-view-content form .quickview-buttons a svg{
+    height: 16px;
+    width: 16px;
+  }
+  @media (max-width: 767px) {
+    .productmodal .modal-dialog .modal-body{
+      margin: 15px;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      flex-direction: column;
+      max-height: 100%;
+      padding: 0;
+    }
+    .productmodal .modal-dialog .modal-body .quick-view-img{
+      width: 100%;
+    }
+    .productmodal .quick-view-content{
+      width: 100%;
+      padding: 0 0;
+      margin-top: 15px;
+      max-height: 0px;
+      overflow-y: unset;
+    }
+  }
+</style>

@@ -1,0 +1,47 @@
+{% if settings.address_enable %}
+{% if settings.add1 != "" or settings.add2 != "" %}
+	<li class="ftcon-li">
+		{% if settings.add_icon != "" %}
+		<span class="con-icon"><i class="{{ settings.add_icon }}"></i></span>
+		{% endif %}
+		<span class="con-add">
+			{% if settings.add1 != "" %}
+			<span>{{ settings.add1 }}</span>
+			{% endif %}
+			{% if settings.add2 != "" %}
+			<span>{{ settings.add2 }}</span>
+			{% endif %}
+		</span>
+	</li>
+{% endif %}
+{% endif %}
+
+{% if settings.contact != "" %}
+<li class="ftcon-li">
+	{% if settings.con_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.con_icon }}"></i></span>
+	{% endif %}
+	<a href="tel:{{ settings.contact }}" class="con-add">{{ settings.contact }}</a>
+</li>
+{% endif %}
+
+{% if settings.fax_contact != "" %}
+<li class="ftcon-li">
+	{% if settings.con_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.fax_icon }}"></i></span>
+	{% endif %}
+	<a href="tel:{{ settings.fax_contact }}" class="con-add">{{ settings.fax_contact }}</a>
+</li>
+{% endif %}
+
+{% if settings.email != "" %}
+<li class="ftcon-li">
+	{% if settings.mail_icon != "" %}
+	<span class="con-icon"><i class="{{ settings.mail_icon }}"></i></span>
+	{% endif %}
+	<a href="mailto:{{ settings.email }}" class="con-add">{{ settings.email }}</a>
+</li>
+{% endif %}
+{% comment %}<li class="ftcon-li">
+  {%- include 'app-img' -%}
+</li>{% endcomment %}

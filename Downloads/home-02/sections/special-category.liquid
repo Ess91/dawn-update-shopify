@@ -1,0 +1,373 @@
+<section class="special-category special-category-{{ section.id }}">
+  <div class="container-fluid container-col">
+    <div class="cat-wrap">
+      <div class="section-capture">
+        <div class="section-title">
+          {% if section.settings.section_title1 !='' %}
+          <h2>
+            {{ section.settings.section_title1 }}
+          </h2>
+          {% endif %}
+          {% if section.settings.section_title_desc !='' %}
+          <p>
+            {{ section.settings.section_title_desc }}
+          </p>
+          {% endif %}
+          {% if section.settings.view_all_button != '' %}
+          <div class="view-all-collection">
+            <a href="{{ section.settings.view_all_button_url }}" class="btn btn-style8">{{ section.settings.view_all_button }}</a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div class="outside-box-left">
+        {% assign category_product = collections[section.settings.new_label_product] %}
+          <div class="collection-slider swiper-container" id="special-{{ section.id }}">
+            <div class="swiper-wrapper">
+            {% for product in category_product.products %}
+            <div class="swiper-slide">
+              {% include 'product-grid-item' %}
+            </div>
+            {% endfor %}
+          </div>
+        <div class="swiper-scrollbar"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $( document ).ready(function() {
+  var swiper = new Swiper('.swiper-container#special-{{ section.id }}', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: false,
+    freeMode: true,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      hide: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      
+      590: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      979: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      1199:{
+        slidesPerView: 3,
+        spaceBetween: 15
+      }
+    }
+  });
+  });
+</script>
+{% schema %}
+{
+  "name": "Special Product",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Section Background color",
+    "default": "transparent"
+  },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "text",
+    "id": "section_title1",
+    "label": "Section Title",
+    "default": "Fine jewellry"
+  },
+  {
+    "type": "text",
+    "id": "section_title_desc",
+    "label": "Section Title description",
+    "default": "Do well, live well, and dress really well."
+  },
+  {
+    "type": "header",
+    "content": "Product"
+  },
+  {
+    "type" : "collection",
+    "id" : "new_label_product",
+    "label" : "Best Product"
+  },
+  {
+    "type": "header",
+    "content": "View all collections"
+  },
+  {
+    "type": "text",
+    "id": "view_all_button",
+    "label": "Button Text",
+    "default": "Explor collecion"
+  },
+  {
+    "type": "url",
+    "id": "view_all_button_url",
+    "label": "Button URL"
+  }
+  ],
+  "presets":[
+  {
+    "name": "Special Product"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.special-category{
+  padding-top:{{ section.settings.section_padding_top }}px;
+  padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.section_bg_color }};
+}
+@media (max-width: 1199px){
+  .special-category{
+    padding-top:{{ section.settings.section_padding_top_lg }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_lg }}px;
+  }
+}
+@media (max-width: 767px){
+  .special-category{
+    padding-top:{{ section.settings.section_padding_top_xs }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+.special-category .container-col{
+  padding-left: 160px;
+  padding-right: 0px;
+}
+@media(max-width: 1599px){
+  .special-category .container-col{
+    padding-left: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .special-category .container-col{
+    padding-left: 30px;
+  }
+}
+@media(max-width: 767px){
+  .special-category .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+
+.special-category {
+  overflow: hidden;
+}
+.special-category .cat-wrap{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -150px;
+}
+.special-category .section-capture {
+  width: 28%;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.special-category .outside-box-left {
+  width: 72%;
+  margin-right: -200px;
+}
+@media(max-width: 1599px){
+  .special-category .cat-wrap{
+    margin-right: -100px;
+  }
+}
+@media(max-width: 1199px){
+  .special-category .cat-wrap{
+    margin-right: 0px;
+  }
+}
+
+
+.special-category .section-title {
+  text-align: left;
+}
+.special-category .section-title h2{
+  margin-top: 0;
+}
+.special-category .section-title p{
+  font-size: 32px;
+  margin-top: 0;
+  width: 50%;
+  line-height: normal;
+}
+.special-category .section-title .view-all-collection{
+  margin-top: 50px;
+}
+
+@media(max-width: 1599px){
+  .special-category .section-title p{
+      font-size: 20px;
+      width: 80%;
+  }
+  .special-category .section-title .view-all-collection{
+    margin-top: 30px;
+  }
+}
+
+@media(max-width: 991px){
+  .special-category .section-title p{
+    font-size: 16px;
+  }
+}
+
+@media(max-width: 767px){
+  .special-category .outside-box-left,
+  .special-category .section-capture{
+    width: 100%;
+  }
+  .special-category .section-title{
+    width: 100%;
+    text-align: center;
+  }
+
+  .special-category .section-title h2 {
+    max-width: 100%;
+    text-align: center;
+  }
+  .special-category .section-title p {
+    width: 100%;
+  }
+  .special-category .outside-box-left{
+    margin-top: 30px;
+  }
+  .special-category .section-title .view-all-collection{
+    margin-top: 15px;
+  }
+}
+
+.special-category .swiper-scrollbar{
+  width: 75%;
+  height: 2px;
+  left: 0;
+  right: 0;
+  margin-right: auto;
+  opacity: 1 !important;
+  position: relative !important;
+  margin-top: 60px;
+  overflow: hidden;
+}
+.special-category .swiper-scrollbar .swiper-scrollbar-drag{
+  position: absolute !important;
+  background-color: var(--color-body-text);
+  {%- if settings.enable_rtl -%}
+  right: 0px !important;
+  {%- else -%}
+  left: 0px !important;
+  {%- endif -%}
+}
+ @media (max-width: 1199px) {
+  .populer-dishes-slider .swiper-scrollbar{
+    margin-top: 40px;
+  }
+  .special-category .swiper-scrollbar{
+    margin-top: 30px;
+  }
+}
+@media (max-width: 767px) {
+  .special-category .swiper-scrollbar{
+    width: 100%;
+  }
+  .populer-dishes-slider .swiper-scrollbar{
+      margin-top: 30px;
+  }
+}
+</style>

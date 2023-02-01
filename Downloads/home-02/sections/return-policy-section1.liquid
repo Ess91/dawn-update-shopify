@@ -1,0 +1,315 @@
+<section class="return-policy">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+          <div class="text-wrap">
+            <h2>{{ section.settings.content_title }}</h2>
+            <p>{{ section.settings.content_description }}</p>
+            <a href="{{ section.settings.content_button_url }}">{{ section.settings.content_button }}</a>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+          <div class="return-img wow animate__fadeIn">
+            <a class="play-button popup-youtube" href="{{ section.settings.banner_bg_button_url }}">
+              <i class="{{ section.settings.content_btn_icon }}"></i>
+              <span class="video-icon-sonar">
+                <span class="video-icon-sonar-bfr"></span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Return Policy section 1",
+  "settings": [
+        {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "return_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 610px x 481px"
+    },
+    {
+      "type": "header",
+      "content": "Content Button"
+    },
+    {
+      "type": "text",
+      "id": "content_btn_icon",
+      "label": "Icon Class",
+      "default": "fa fa-play"
+    },
+    {
+      "type": "url",
+      "id": "banner_bg_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "content_title",
+      "label": "Content Title",
+      "default": "The best business solution for you"
+    },
+    {
+      "type": "text",
+      "id": "content_description",
+      "label": "Content Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s,unknown printer ook a galley of type a type specimen book."
+    },
+    {
+      "type": "url",
+      "id": "content_button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "content_button",
+      "label": "Button Text",
+      "default": "See more information"
+    }
+  ],
+    "presets":[
+  {
+    "name": "Return Policy section 1",
+    "category": "Return Policy"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .return-policy {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media(max-width: 1199px){
+    .return-policy {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .return-policy .text-wrap {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .return-policy .text-wrap h2{
+    font-size: 40px;
+    font-weight: 600;
+  }
+  .return-policy .text-wrap p{
+    font-size: 16px;
+    margin-top: 30px;
+    line-height: 30px;
+  }
+  .return-policy .text-wrap a{
+    margin-top: 40px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+    text-transform: uppercase;
+    border: 1px solid #232323;
+    padding: 18px 30px;
+  }
+  .return-policy .text-wrap a:hover{
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  @media(max-width: 1199px){
+    .return-policy .text-wrap h2{
+      font-size: 26px;
+    }
+  }
+  @media (max-width: 991px){
+    .return-policy .text-wrap {
+        width: 100%;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy .text-wrap h2{
+      font-size: 20px;
+    }
+    .return-policy .text-wrap a{
+      font-size: 14px;
+      margin-top: 35px;
+    }
+  }
+  /* magificant css */
+  .return-policy .return-img {
+    background-image: url({% if section.settings.return_img %}{{ section.settings.return_img | img_url: 'master' }}{% else %}https://dummyimage.com/610x481/f7f7f7/999999{% endif %});
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 0;
+    margin-left: -15px;
+  }
+  .return-policy .return-img a.play-button {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 100%;
+  }
+  .return-policy .return-img a.play-button span.video-icon-sonar{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-animation: video-icon-sonar 2s linear infinite;
+    animation: video-icon-sonar 2s linear infinite;
+  }
+  .return-policy .return-img a.play-button span.video-icon-sonar-bfr{
+    width: 110px;
+    height: 110px;
+    top: -15px;
+    left: -15px;
+    opacity: 1;
+    position: absolute;
+    border-radius: 100%;
+    background-color: #fff;
+  }
+  .mfp-container.mfp-iframe-holder{
+    width: auto;
+    left: 15px;
+    right: 15px;
+  }
+  .mfp-iframe-holder .mfp-close {
+    display: block!important;
+    font-size: 30px;
+    padding: 0;
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: -30px;
+    right: 0;
+    opacity: 1;
+    background-color: transparent!important;
+    line-height: 1;
+  }
+  .mfp-iframe-scaler iframe{
+    border: none;
+  }
+  @media(max-width: 767px) {
+    .mfp-iframe-holder .mfp-content{
+      max-width: 100%;
+    }
+    .return-policy .return-img{
+      height: 300px;
+      margin-top: 30px;
+      margin-left: 0px;
+    }
+  }
+  @-webkit-keyframes video-icon-sonar{0%{opacity:1;-webkit-transform:scale(.1);transform:scale(.1)}100%{opacity:0;-webkit-transform:scale(1.1);transform:scale(1.1)}}@keyframes video-icon-sonar{0%{opacity:1;-webkit-transform:scale(.1);transform:scale(.1)}100%{opacity:0;-webkit-transform:scale(1.1);transform:scale(1.1)}}
+</style>
+<script>
+  $(document).ready(function() {
+    $('.play-button, .popup-vimeo, .popup-gmaps').magnificPopup({
+      tClose: 'Close (Esc)',
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false
+    });
+  });
+</script>

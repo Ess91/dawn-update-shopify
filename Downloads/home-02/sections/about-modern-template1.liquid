@@ -1,0 +1,289 @@
+<section class="about-modern-section1 wow animate__fadeIn">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+              <div class="about-banner-img-cont">
+                  <div class="single-banner">
+                    <img src="{% if section.settings.about_banner_img %}{{ section.settings.about_banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/505x553/f7f7f7/999999{% endif %}">
+                  </div>
+                  <div class="single-banner-title">
+                    <h1>{{ section.settings.banner_title }}</h1>
+                    <span>{{ section.settings.banner_sub_title }}</span>
+                  </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                <div class="about-content">
+                  <div class="abt-banner-desc">
+                            {% if section.settings.about_title != '' %}
+                            <h2>{{ section.settings.about_title }}</h2>
+                            {% endif %}
+
+                            {% if section.settings.about_des1 != '' %}
+                            <p>{{ section.settings.about_des1 }}</p>
+                            {% endif %}
+
+                            {% if section.settings.about_des2 != '' %}
+                            <p>{{ section.settings.about_des2 }}</p>
+                            {% endif %}
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "About Modern Section 1",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Banner Image Title",
+        "default": "185+"
+    },
+    {
+        "type": "text",
+        "id": "banner_sub_title",
+        "label": "Banner Image Sub Title",
+        "default": "Worldwide store"
+    },
+    {
+        "type": "image_picker",
+        "id": "about_banner_img",
+        "label": "Image",
+        "info": "Recommended Size: 505 x 553px"
+    },
+    {
+        "type": "text",
+        "id": "about_title",
+        "label": "Title",
+        "default": "Our company"
+    },
+    {
+        "type": "textarea",
+        "id": "about_des1",
+        "label": "Description Text",
+        "default": "In early 1982, staffy founder and creative director had the idea to design a shoe collection where comfort, fashion, and distinction are key. Staffy was born: a shoe brand that believes fashion should go hand in hand with comfort. "
+    },
+    {
+        "type": "textarea",
+        "id": "about_des2",
+        "label": "Description Text",
+        "default": "The background of several generations of shoemaking within the company was the ground for a versatile collection of styles."
+    }
+    ],
+    "presets":[
+    {
+        "name": "About Modern Section 1",
+        "category": "About Modern"
+    }
+    ]
+}
+{% endschema %}
+<style>
+    .about-modern-section1{
+      padding-top: {{ section.settings.section_padding_top }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+    @media (max-width: 1199px){
+      .about-modern-section1{
+        padding-top: {{ section.settings.section_padding_top_ipad }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+      }
+    }
+    @media (max-width: 767px){
+      .about-modern-section1{
+        padding-top: {{ section.settings.section_padding_top_xs }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+      }
+    }
+    .about-modern-section1 .about-banner-img-cont {
+      position: relative;
+    }
+    .about-modern-section1 .about-banner-img-cont .single-banner{
+      text-align: right;
+      margin-bottom: 60px;
+      width: 86%;
+      margin-left: auto;
+    }
+    .about-modern-section1 .about-banner-img-cont .single-banner{
+      border-radius: 5px;
+    }
+    .about-modern-section1 .about-banner-img-cont .single-banner-title{
+      background-color: var(--color-primary);
+      border-radius: 5px;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+      padding: 40px 60px;
+      bottom: -60px;
+    }
+    .about-modern-section1 .about-banner-img-cont .single-banner-title h1{
+      color: #fff;
+      font-size: 90px;
+      line-height: 1;
+      font-weight: 500;
+    }
+    .about-modern-section1 .about-banner-img-cont .single-banner-title span{
+      color: #fff;
+      font-size: 20px;
+      line-height: 1;
+      margin-top: 5px;
+    }
+
+
+    .about-modern-section1 .about-content{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%
+    }
+    .about-modern-section1 .about-content .abt-banner-desc {
+      width: 80%;
+      margin-left: auto;
+    }
+    .about-modern-section1 .about-content .abt-banner-desc h2{
+      font-size: 40px;
+    }
+    .about-modern-section1 .about-content .abt-banner-desc p{
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    @media (max-width: 1199px) {
+      .about-modern-section1 .about-banner-img-cont .single-banner-title h1{
+        font-size: 40px;
+      }
+      .about-modern-section1 .about-banner-img-cont .single-banner-title span{
+        margin-top: 10px; 
+      }
+      .about-modern-section1 .about-banner-img-cont .single-banner-title span{
+        font-size: 16px;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc{
+        width: 90%;
+        margin-left: auto;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc h2{
+        font-size: 26px;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc p{
+        margin-top: 15px;
+        font-size: 16px;
+      }
+    }
+    @media (max-width: 991px) {
+      .about-modern-section1 .about-banner-img-cont .single-banner{
+        margin-bottom: 30px;
+        width: 90%;
+      }
+      .about-modern-section1 .about-banner-img-cont .single-banner-title{
+        bottom: -30px;
+        padding: 20px 30px;
+      }
+      .about-modern-section1 .about-banner-img-cont .single-banner-title h1{
+        font-size: 30px;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc{
+        width: 100%;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc p{
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+    @media (max-width: 767px) {
+      .about-modern-section1 .about-banner-img-cont .single-banner{
+        margin-bottom: 0px;
+        width: 100%;
+      }
+      .about-modern-section1 .about-banner-img-cont .single-banner-title{
+        bottom: 0;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc{
+        margin-top: 30px;
+      }
+      .about-modern-section1 .about-content .abt-banner-desc h2{
+        font-size: 20px;
+      }
+    }
+</style>

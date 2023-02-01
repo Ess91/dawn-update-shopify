@@ -1,0 +1,286 @@
+<section class="faq-section2">
+	<div class="container">
+    <div class="row">
+    	<div class="col-xl-6 col-lg-6 col-md-12 info-list-col wow animate__fadeInUp">
+        <div class="info-block">
+          <div class="icon">
+            {{ section.settings.info_icon1 }}
+          </div>
+          <div class="text-block">
+            <h6>{{ section.settings.info_title1 }}</h6>
+            <p>{{ section.settings.info_des1 }}</p>
+            <a href="{{ section.settings.info_url1 }}">{{ section.settings.info_link1 }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 info-list-col wow animate__fadeInUp">
+    		
+					<div class="info-block">
+						<div class="icon">
+							{{ section.settings.info_icon2 }}
+						</div>
+						<div class="text-block">
+							<h6>{{ section.settings.info_title2 }}</h6>
+							<p>{{ section.settings.info_des2 }}</p>
+              <a href="{{ section.settings.info_url2 }}">{{ section.settings.info_link2 }}</a>
+						</div>
+					</div>
+    		</div>
+    	
+    </div>
+	</div>
+</section>
+{% schema %}
+{
+  "name": "Faq seciotn 2",
+  "settings": [
+ {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+  {
+    "type": "header",
+    "content": "Information Content"
+  },
+  {
+    "type": "textarea",
+    "id": "info_icon1",
+    "label": "Icon"
+  },
+  {
+    "type": "text",
+    "id": "info_title1",
+    "label": "Title1",
+    "default": "How can help you?"
+  },
+  {
+    "type": "text",
+    "id": "info_link1",
+    "label": "Link Title",
+    "default": "Give us a call toady"
+  },
+  {
+    "type": "text",
+    "id": "info_des1",
+    "label": "Info Description",
+    "default": "Lorem ipsum is simply dummy text of the simply dummy typesetting industry ipsum."
+  },
+  {
+    "type": "url",
+    "id": "info_url1",
+    "label": "info Link"
+  },
+    {
+    "type": "textarea",
+    "id": "info_icon2",
+    "label": "Icon"
+  },
+  {
+    "type": "text",
+    "id": "info_title2",
+    "label": "Title2",
+    "default": "Live chat support"
+  },
+  {
+    "type": "text",
+    "id": "info_des2",
+    "label": "Info Description",
+    "default": "Lorem ipsum is simply dummy text of the simply dummy typesetting industry ipsum."
+  },
+  {
+    "type": "text",
+    "id": "info_link2",
+    "label": "Link Title2",
+    "default": "Costomer care"
+  },
+  {
+    "type": "url",
+    "id": "info_url2",
+    "label": "info Link"
+  }
+ 
+  ],
+  "presets":[
+  {
+    "name": "Faq seciotn 2",
+    "category": "8. Faq Page"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+    .faq-section2 {
+        padding-top: {{ section.settings.section_padding_top }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+    @media (max-width: 1199px){
+        .faq-section2 {
+            padding-top: {{ section.settings.section_padding_top_ipad }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+        }
+    }
+    @media (max-width: 767px){
+        .faq-section2 {
+            padding-top: {{ section.settings.section_padding_top_xs }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+        }
+    }
+    .faq-section2 .info-block{
+    	display: flex;
+    	align-items: center;
+      width: 85%;
+    }
+    .faq-section2 .info-list-col:nth-child(1){
+      animation-delay: 0.2s;
+    }
+    .faq-section2 .info-list-col:nth-child(2){
+      animation-delay: 0.4s;
+    }
+    .faq-section2 .info-block .icon{
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffff;
+      border-radius: 100%;
+      -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+      -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    }
+    .faq-section2 .info-block .text-block {
+      {% if settings.enable_rtl %}
+      margin-right: 30px;
+      {% else %}
+      margin-left: 30px;
+      {% endif %}
+      width: calc(100% - 150px);
+    }
+    .faq-section2 .info-block .icon svg{
+    	width: 50px;
+    	height: 50px;
+    	stroke: var(--color-primary);
+    }
+    .faq-section2 .info-block .text-block h6{
+	    font-size: 18px;
+      font-weight: 500;
+    }
+
+    .faq-section2 .info-block .text-block p{
+      font-size: 16px;
+      padding-top: 10px;
+    }
+    .faq-section2 .info-block .text-block a{
+      margin-top: 10px;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #999;
+      border-bottom: 1px solid #999;
+    }
+    .faq-section2 .info-block .text-block a:hover{
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+    @media(max-width: 1199px){
+      .faq-section2 .info-block{
+        width: 100%;
+      }
+      .faq-section2 .info-block .icon svg{
+            width: 40px;
+    height: 40px;
+      }
+      .faq-section2 .info-block .icon{
+        width: 100px;
+    height: 100px;
+      }
+      .faq-section2 .info-block .text-block{
+            width: calc(100% - 130px);
+      }
+    }
+    @media(max-width: 991px){
+      .faq-section2 .info-list-col:first-child{
+        margin-top: 0;
+      }
+      .faq-section2 .info-list-col{
+        margin-top: 30px;
+      }
+    }
+    @media(max-width: 767px){
+    	.faq-section2 .info-block .text-block h6{
+	    	font-size: 16px;
+    	}
+    	.faq-section2 .info-block .text-block p{
+    		font-size: 14px;
+    	}
+    }
+</style>

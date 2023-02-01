@@ -1,0 +1,444 @@
+<section class="about-modern-section2">
+  <div class="section-capture">
+    <div class="main-title">
+      {% if section.settings.section_sub_title != '' %}
+      <span>{{ section.settings.section_sub_title }}</span>
+      {% endif %}
+      {% if section.settings.section_title != '' %}
+      <h2>{{ section.settings.section_title }}</h2>
+      {% endif %}
+    </div>
+  </div>
+  <div class="storeloc-slider swiper-container" id="storeloc-slider">
+    <div class="swiper-wrapper">
+      {% for block in section.blocks %}
+      <div class="swiper-slide wow animate__fadeIn">
+        <div class="loc-store-img">
+          <img src="{% if block.settings.slider_store_img %}{{ block.settings.slider_store_img | img_url: 'master' }}{% else %}https://dummyimage.com/442x564/f7f7f7/999999{% endif %}">
+          <div class="location-block">
+            <div class="loc-img">
+              <img src="{% if block.settings.loc_img %}{{ block.settings.loc_img | img_url: 'master' }}{% else %}https://dummyimage.com/44x26/f7f7f7/999999{% endif %}">
+              <h2>{{ block.settings.flag_country }}</h2>
+            </div>
+            <div class="contact-wrap">
+              <div class="mobile">
+                <span>{{ block.settings.phone_title }}</span>
+                <a href="tel:{{ block.settings.contact_mobile }}">{{ block.settings.contact_mobile }}</a>
+              </div>
+              <div class="email">
+                <span>{{ block.settings.mail_title }}</span>
+                <a href="mailto:{{ block.settings.contact_mail }}">{{ block.settings.contact_mail }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+  <div class="swiper-pagination"></div>
+</section>
+{% schema %}
+{
+  "name": "About Modern Section 2",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Page Title"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Store locations"
+    },
+    {
+      "type": "text",
+      "id": "section_sub_title",
+      "label": "Title Sub Title",
+      "default": "Good deal: "
+    }
+  ],
+  "blocks":[
+    {
+      "type": "about_template2",
+      "name": "About Section2",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "slider_store_img",
+          "label": "Image",
+          "info": "Recommended Size: 442px x 564px"
+        },
+        {
+          "type": "header",
+          "content": "location block"
+        },
+        {
+          "type": "image_picker",
+          "id": "loc_img",
+          "label": "Flag Img",
+          "info": "Recommended Size: 44px x 26px"
+        },
+        {
+          "type": "text",
+          "id": "flag_country",
+          "label": "Flag Country",
+          "default": "Canada"
+        },
+        {
+          "type": "text",
+          "id": "phone_title",
+          "label": "Phone Title",
+          "default": "Phone :"
+        },
+        {
+          "type": "text",
+          "id": "contact_mobile",
+          "label": "Contact Mobile Number",
+          "default": "+44 12345 67890"
+        },
+        {
+          "type": "text",
+          "id": "mail_title",
+          "label": "Mail Title",
+          "default": "Email :"
+        },
+        {
+          "type": "text",
+          "id": "contact_mail",
+          "label": "Contact Email id",
+          "default": "info@staffy.com"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "About Modern Section 2",
+      "category": "About Modern"
+    }
+  ]
+}
+{% endschema %}
+<script type="text/javascript">
+  var swiper = new Swiper('.swiper-container#storeloc-slider', {
+    loop: true,
+    slidesPerView: 4,
+    spaceBetween: 30,
+    centeredSlides: true,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      640: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      768: {
+        slidesPerView: 2
+      },
+      979: {
+        slidesPerView: 3
+      },
+      1199: {
+        slidesPerView: 3
+      },
+      1599: {
+        slidesPerView: 3
+      }
+    }
+  });
+</script>
+<style type="text/css">
+  .about-modern-section2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: #faf9f9;
+  }
+  @media (max-width: 1199px) {
+    .about-modern-section2 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-modern-section2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /*section title*/
+  .about-modern-section2 .main-title {
+    text-align: center;
+  }
+  .about-modern-section2 .main-title span{
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #6f6f6f;
+    line-height: 1;
+  }
+  .about-modern-section2 .main-title h2{
+    font-size: 40px;
+    line-height: 1;
+    margin-top: 15px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section2 .main-title span{
+      font-size: 16px;
+    }
+    .about-modern-section2 .main-title h2{
+      font-size: 26px;
+      margin-top: 10px
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section2 .main-title h3{
+      font-size: 20px;
+    }
+    .about-modern-section2 .main-title span{
+      font-size: 14px;
+    }
+    .about-modern-section2 .main-title h2{
+      font-size: 20px;
+      margin-top: 5px;
+    }
+  }
+
+  /*section content*/
+  .about-modern-section2 .storeloc-slider .loc-store-img {
+    cursor: pointer;
+    position: relative;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img > img{
+    border-radius: 5px;
+    width: 100%;
+  }
+  .about-modern-section2 .storeloc-slider .swiper-slide .loc-store-img .location-block {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    right: 40px;
+    background-color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    opacity: 0;
+    visibility: visible;
+    transform: translateY(15px);
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .about-modern-section2 .storeloc-slider .swiper-slide.swiper-slide-prev .loc-store-img:hover .location-block,
+  .about-modern-section2 .storeloc-slider .swiper-slide.swiper-slide-active .loc-store-img:hover .location-block,
+  .about-modern-section2 .storeloc-slider .swiper-slide.swiper-slide-next .loc-store-img:hover .location-block {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0px);
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .loc-img{
+    padding: 30px 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .loc-img h2{
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 500;
+    {% if settings.enable_rtl %}
+    margin-right: 15px;
+    {% else %}
+    margin-left: 15px;
+    {% endif %}
+    
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap{
+    padding: 30px;
+    margin-top: 30px;
+    border-top: 1px solid #e2e2e2;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap .mobile{
+    line-height: 1;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap .email{
+    margin-top: 15px;
+    line-height: 1;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap a,
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap span{
+    font-size: 16px;
+    color: #6f6f6f;
+  }
+  .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap a:hover{
+    color: var(--color-primary);
+  }
+  @media(max-width: 1199px){
+    .about-modern-section2 .storeloc-slider .swiper-slide .loc-store-img .location-block{
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+    }
+    .about-modern-section2 .storeloc-slider .swiper-slide.swiper-slide-active .loc-store-img .location-block{
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .loc-img{
+      padding: 15px 15px 0;
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .loc-img h2{
+      font-size: 18px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap{
+      padding: 15px;
+      margin-top: 15px;
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap a, 
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap span {
+      font-size: 14px;
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img .location-block .contact-wrap .email{
+      margin-top: 10px;
+    }
+  }
+
+  @media(max-width: 991px){
+    .about-modern-section2 .storeloc-slider .swiper-slide .loc-store-img .location-block{
+      bottom: 15px;
+      left: 15px;
+      right: 15px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section2 .storeloc-slider .swiper-slide .loc-store-img .location-block{
+      left: 30px;
+      right: 30px;
+    }
+    .about-modern-section2 .storeloc-slider .loc-store-img{
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+
+  /*swiper bullets*/
+  .about-modern-section2 .swiper-pagination {
+    position: unset;
+    margin-top: 100px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .about-modern-section2 .swiper-pagination .swiper-pagination-bullet{
+    background-color: #cccccc;
+    opacity: 1;
+    margin-left: 10px;
+    outline: 0;
+    border: 0;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .about-modern-section2 .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active{
+    background-color: #676767;
+    height: 16px;
+    width: 16px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section2 .swiper-pagination{
+      margin-top: 60px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section2 .swiper-pagination{
+      margin-top: 40px;
+    }
+  }
+</style>

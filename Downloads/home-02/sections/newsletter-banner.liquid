@@ -1,0 +1,379 @@
+<section class="newsletter-banner">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+        <div class="banner-content">
+          <a href="{{ section.settings.banner_url }}">
+            <img src="{% if section.settings.banner_img %}{{ section.settings.banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/620x380/f7f7f7/999999{% endif %}">
+          </a>
+          <div class="text-content">
+            <span>{{ section.settings.banner_sub_title }}</span>
+            <h2>
+              {{ section.settings.banner_title }}
+            </h2>
+            <a class="btn btn-style4" href="{{ section.settings.banner_url }}">
+              {{ section.settings.banner_button }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+        <div class="newsletter-wrap">
+          <div class="news-content">
+            <span>{{ section.settings.newsletter_sub_title }}</span>
+            <h2>
+              {{ section.settings.newsletter_title }}
+            </h2>
+            {% form 'customer' %}
+            {{ form.errors | default_errors }}
+            {% if form.posted_successfully? %}
+            <p class="text-success">
+              <span>{{ 'general.newsletter_form.confirmation' | t }}</span>
+            </p>
+            {% endif %}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="subscribe-block">
+              <input type="email" name="contact[email]" class="email mail" id="E-mail" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" autocapitalize="off" required>
+              <button type="submit" name="commit" id="Subscribe">
+                {{ 'general.newsletter_form.submit' | t }}
+              </button>
+            </div>
+            {% endform %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Banner with newsletter",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Banner Image"
+  },
+  {
+    "type": "image_picker",
+    "id": "banner_img",
+    "label": "Banner Image",
+    "info": "Recommended Size: 620px x 380px"
+  },
+  {
+    "type": "url",
+    "id": "banner_url",
+    "label": "Banner URL"
+  },
+  {
+    "type": "text",
+    "id": "banner_sub_title",
+    "label": "Banner Sub Title",
+    "default": "Excellent quality"
+  },
+  {
+    "type": "text",
+    "id": "banner_title",
+    "label": "Banner Title",
+    "default": "Your dream daimond ring!!!"
+  },
+  {
+    "type": "text",
+    "id": "banner_button",
+    "label": "Banner Button",
+    "default": "Shop now"
+  },
+  {
+    "type": "header",
+    "content": "Newsletter"
+  },
+  {
+    "type": "color",
+    "id": "newsletter_bg_color",
+    "label": "Newsletter Background Color",
+    "default": "#e4ebe8"
+  },
+  {
+    "type": "text",
+    "id": "newsletter_sub_title",
+    "label": "Newsletter Title",
+    "default": "Newsletter & subscription"
+  },
+  {
+    "type": "textarea",
+    "id": "newsletter_title",
+    "label": "Newsletter title",
+    "default": "Register for get exclusive offers 5% and the latest news from anoma"
+  }
+  ],
+  "presets":[
+  {
+    "name": "Banner with newsletter",
+    "category": "Newsletter"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.newsletter-banner{
+  padding-top:{{ section.settings.section_padding_top }}px;
+  padding-bottom:{{ section.settings.section_padding_bottom }}px;
+}
+@media (max-width: 991px){
+  .newsletter-banner{
+    padding-top:{{ section.settings.section_padding_top_lg }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_lg }}px;
+  }
+}
+@media (max-width: 767px){
+  .newsletter-banner{
+    padding-top:{{ section.settings.section_padding_top_xs }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+.newsletter-banner .container-col{
+  padding-left: 225px;
+  padding-right: 225px;
+}
+@media(max-width: 1599px){
+  .newsletter-banner .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .newsletter-banner .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+/*banner block*/
+.newsletter-banner .banner-content{
+  position: relative;
+}
+.newsletter-banner .banner-content > a{
+  display: block;
+}
+.newsletter-banner .banner-content img{
+  width: 100%;
+}
+.newsletter-banner .banner-content .text-content{
+  position: absolute;
+  bottom: 50%;
+  {%- if settings.enable_rtl -%}
+  left: 15%;
+  {%- else -%}
+  right: 15%;
+  {%- endif -%}
+  transform: translateY(50%);
+}
+.newsletter-banner .banner-content .text-content > span{
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 1px;
+}
+.newsletter-banner .banner-content .text-content h2{
+  color: #fff;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 35px;
+  margin-top: 30px;
+  font-family: 'Hallenger Serif Font';
+}
+.newsletter-banner .newsletter-wrap h2 > span,
+.newsletter-banner .banner-content .text-content h2 > span{
+  display: block;
+  margin-top: 5px;
+}
+.newsletter-banner .newsletter-wrap h2 > span:first-child,
+.newsletter-banner .banner-content .text-content h2 > span:first-child{
+  margin-top: 0;
+}
+.newsletter-banner .banner-content .text-content a{
+  margin-top: 35px;
+}
+/*newsletter*/
+.newsletter-banner .newsletter-wrap .news-content{
+  width: 75%;
+  margin: 0 auto;
+}
+.newsletter-banner .newsletter-wrap form{
+  margin-top: 30px;
+}
+.newsletter-banner .newsletter-wrap h2{
+  color: #fff;
+  font-size: 28px;
+  font-weight: 300;
+  margin-top: 30px;
+  font-family: 'Hallenger Serif Font';
+}
+.newsletter-banner .newsletter-wrap span{
+  font-size: 15px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #fff;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #fff;
+}
+.newsletter-banner .newsletter-wrap {
+  height: 100%;
+  background-color: {{ section.settings.newsletter_bg_color }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+.newsletter-banner .newsletter-wrap form {
+  position: relative;
+}
+.newsletter-banner .newsletter-wrap .subscribe-block input{
+  font-size: 16px;
+  border: none;
+  width: 100%;
+  height: 50px;
+  padding: 10px 20px;
+}
+.newsletter-banner .newsletter-wrap .subscribe-block button{
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  height: 100%;
+  border-left: 1px solid #e2e2e2;
+  padding: 10px 20px;
+  position: absolute;
+  {% if settings.enable_rtl %}
+  left: 0px;
+  {% else %}
+  right: 0px;
+  {% endif %}
+  bottom: 50%;
+  transform: translateY(50%);
+}
+.newsletter-banner .newsletter-wrap .subscribe-block button:hover{
+  color: #fff;
+  background-color: var(--color-secondary);
+}
+@media(max-width: 1199px){
+  .newsletter-banner .newsletter-wrap .subscribe-block input{
+    font-size: 14px;
+  }
+}
+@media(max-width: 1599px){
+  .newsletter-banner .banner-content .text-content h2,
+  .newsletter-banner .newsletter-wrap h2{
+    font-size: 24px;
+  }
+}
+
+@media(max-width: 1199px){
+  .newsletter-banner .newsletter-wrap h2,
+  .newsletter-banner .newsletter-wrap form,
+  .newsletter-banner .banner-content .text-content h2{
+    margin-top: 15px;
+  }
+  .newsletter-banner .newsletter-wrap span,
+  .newsletter-banner .banner-content .text-content > span{
+    font-size: 13px;
+  }
+  .newsletter-banner .banner-content .text-content a{
+    margin-top: 15px;
+  }
+}
+
+@media(max-width: 991px){
+  .newsletter-banner .newsletter-wrap{
+    padding: 15px;
+    margin-top: 30px;
+    height: auto;
+  }
+}
+
+@media(max-width: 767px){
+  .newsletter-banner .banner-content .text-content h2,
+  .newsletter-banner .newsletter-wrap h2{
+    font-size: 20px;
+    line-height: 28px;
+  }
+  .newsletter-banner .newsletter-wrap .news-content{
+    width: 100%;
+  }
+  .newsletter-banner .newsletter-wrap .subscribe-block button{
+    font-size: 13px;
+  }
+}
+</style>

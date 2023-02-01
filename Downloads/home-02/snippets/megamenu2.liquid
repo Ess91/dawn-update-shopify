@@ -1,0 +1,90 @@
+{%- assign link_active = canonical_url | split: shop.url | last -%}
+{% assign menu = block.settings.select_menu %}
+<li class="menu-link megamenu megamenu2 parant">
+  {% if linklists[menu].title.size > 0 %}
+  {%-assign menu_link = block.settings.custom_link-%}
+  <a href="{{ block.settings.custom_link }}" {% if link_active == menu_link %}aria-current="page"{% endif %} class="link-title {% if link_active == menu_link %}active{% endif %}">
+    <span class="sp-link-title">{{ block.settings.title }}</span>
+    {% if block.settings.menu_flag != '' %}
+    <span class="sale">{{ block.settings.menu_flag }}</span>
+    {% endif %}
+    <i class="fa fa-angle-down"></i>
+  </a>
+  <a data-bs-toggle="collapse" href="#collapse-{{ block.settings.title | handleize }}" class="link-title link-title-lg">
+    <span class="sp-link-title">{{ block.settings.title }}</span>
+    <i class="fa fa-angle-down"></i>
+  </a>
+  {% endif %}
+  <div class="dropdown-submenu mega-menu collapse" id="collapse-{{ block.settings.title | handleize }}">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-7">
+          <ul class="mega-linklist">
+            {% assign collection_menu = block.settings.collection_menu %}
+            {% if collection_menu != '' %}
+            <li class="megamenu-li collection-link">
+            {% for link in linklists[collection_menu].links %}
+            {% assign child_list_handle = link.title | handleize %}
+              <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- for child_link in link.links -%}
+              <a href="{{ child_link.url }}" class="suplink-title">{{ child_link.title }}</a>
+              {%- for grand_childlink in child_link.links -%}
+              <a href="{{ grand_childlink.url }}" class="suplink-title">{{ grand_childlink.title }}</a>
+              {% endfor %}
+              {% endfor %}
+            {% endfor %}
+            </li>
+            {% endif %}
+
+            {% for link in linklists[menu].links %}
+            {% assign child_list_handle = link.title | handleize %}
+            {% if linklists[child_list_handle].links != '' %}
+            <li class="megamenu-li parant">
+              <h6 class="sublink-title">
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                </a>
+              </h6>
+              <ul class="dropdown-supmenu">
+                {%- for child_link in link.links -%}
+                <li class="supmenu-li">
+                  <a href="{{ child_link.url }}" class="suplink-title">{{ child_link.title }}</a>
+                </li>
+                {%- for grand_childlink in child_link.links -%}
+                <li class="supmenu-li">
+                  <a href="{{ grand_childlink.url }}" class="suplink-title">{{ grand_childlink.title }}</a>
+                </li>
+                {% endfor %}
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li class="megamenu-li {% if link_active == custom_link %} active{% endif %}" {% if link_active == custom_link %}aria-current="page" {% endif %}>
+              <a href="{{ link.url }}">
+                {{ link.title }}
+              </a>
+            </li>
+            {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-xl-5">
+          <ul class="cat-menu-banner">
+            <li class="cat-banner">
+              <a href="{{ block.settings.cat_url1 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.cat_img1 %}{{ block.settings.cat_img1 | img_url: '550x500', crop: 'center' }}{% else %}https://dummyimage.com/550x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.cat_title1 }}</span>
+              </a>
+            </li>
+            <li class="cat-banner">
+              <a href="{{ block.settings.cat_url2 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.cat_img2 %}{{ block.settings.cat_img2 | img_url: '550x500', crop: 'center' }}{% else %}https://dummyimage.com/550x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.cat_title2 }}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

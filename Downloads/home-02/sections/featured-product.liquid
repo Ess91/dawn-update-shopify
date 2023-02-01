@@ -1,0 +1,402 @@
+<!-- product-area start -->
+<div class="product-area">
+  <div class="container-fluid container-col">
+    <div class="section-capture tab">
+      <div class="section-title">
+        {% if section.settings.section_sub_title !='' %}
+        <span>{{ section.settings.section_sub_title }}</span>
+        {% endif %}
+        {% if section.settings.section_title !='' %}
+        <h2>{{ section.settings.section_title }}</h2>
+        {% endif %}
+      </div>
+      {%- if section.settings.featured_tab_enable -%}
+      <ul class="nav nav-tabs" role="tablist">
+        {% for block in section.blocks %}
+        {% case block.type %}
+        {% when 'product_tab' %}
+        {% assign category_product = collections[block.settings.tab_product] %}
+        <li role="presentation">
+          <a class="{% if forloop.first == true %}active show{% endif %}" role="tab" data-bs-toggle="tab" href="#tab-{{ block.id }}">{{ category_product.title }}</a>
+        </li>
+        {% endcase %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+    <div class="tab-content tabs">
+      {% for block in section.blocks %}
+      {% case block.type %}
+      {% when 'product_tab' %}
+      {% assign category_product = collections[block.settings.tab_product] %}
+      <div class="tab-pane fade{% if forloop.first == true %} active show{% endif %}" id="tab-{{ block.id }}" role="tabpanel">
+        <div class="swiper-container" id="feture_pro_tab">
+          <div class="swiper-wrapper">
+            {% assign category_product_limit = section.settings.featured_product_limit_handle %}
+            {% for product in collections[block.settings.tab_product].products limit: category_product_limit %}
+            <div class="swiper-slide">
+              {% include 'product-grid-item' %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <script>
+          var swiper = new Swiper('.swiper-container#feture_pro_tab', {
+            slidesPerColumn: {{ section.settings.product_col }},
+            slidesPerView: {{ section.settings.slide_product_limit }},
+            spaceBetween: 30,
+            observer: true,
+            loop: false,
+            observeParents: true,
+            {%- if settings.enable_rtl -%}
+            rtl: true,
+            {%- endif -%}
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+                spaceBetween: 15
+              },
+              479: {
+                slidesPerView: 1,
+                spaceBetween: 15
+              },
+              540: {
+                slidesPerView: 2,
+                spaceBetween: 15
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 15
+              },
+              979: {
+                slidesPerView: 4,
+                spaceBetween: 15
+              },
+              1199: {
+                slidesPerView: 4,
+                spaceBetween: 15
+              }
+            }
+          });
+        </script>
+      </div>
+      {% endcase %}
+      {% endfor %}
+    </div>
+    {% if section.settings.view_all_button != '' %}
+    <div class="view-all-collection">
+      <a href="{{ section.settings.view_all_button_url }}" class="btn btn-style3">{{ section.settings.view_all_button }}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+<!-- product-area end -->
+{% schema %}
+{
+  "name": "Product Tab Slider",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "pro_tab_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "header",
+    "content": "Section Heading"
+  },
+  {
+    "type": "text",
+    "id": "section_sub_title",
+    "label": "Section Sub Title",
+    "default": "Featured Plants"
+  },
+  {
+    "type": "textarea",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Featured Products"
+  },
+  {
+    "type": "checkbox",
+    "id": "featured_tab_enable",
+    "label": "featured tab enable",
+    "default": false
+  },
+  {
+    "type": "header",
+    "content": "Product"
+  },
+  {
+    "type": "select",
+    "id": "product_col",
+    "label": "slides Per Column",
+    "options":[
+    {
+      "label": "1 Products",
+      "value": "1"
+    },
+    {
+      "label": "2 Products",
+      "value": "2"
+    },
+    {
+      "label": "3 Products",
+      "value": "3"
+    }
+    ],
+    "default": "1"
+  },
+  {
+    "type": "select",
+    "id": "slide_product_limit",
+    "label": "slides Per View",
+    "options":[
+    {
+      "label": "2 Products",
+      "value": "2"
+    },
+    {
+      "label": "3 Products",
+      "value": "3"
+    },
+    {
+      "label": "4 Products",
+      "value": "4"
+    },
+    {
+      "label": "5 Products",
+      "value": "5"
+    }
+    ],
+    "default": "5"
+  },
+  {
+    "type": "text",
+    "id": "featured_product_limit_handle",
+    "label": "Product Limit",
+    "default": "50"
+  },
+  {
+    "type": "color",
+    "id": "pro_tab_bg_color",
+    "label": "Background Color",
+    "default": "#fff"
+  },
+  {
+    "type": "header",
+    "content": "View all collections"
+  },
+  {
+    "type": "text",
+    "id": "view_all_button",
+    "label": "Button Text",
+    "default": "Explor collecion"
+  },
+  {
+    "type": "url",
+    "id": "view_all_button_url",
+    "label": "Button URL"
+  }
+  ],
+  "blocks" : [
+  {
+    "type" : "product_tab",
+    "name" : "Our Product",
+    "limit" : 5,
+    "settings" : [
+    {
+      "type" : "collection",
+      "id" : "tab_product",
+      "label" : "Tab With Product"
+    }
+    ]
+  }
+  ],
+  "presets": [
+  {
+    "name": "Featured Product Tab Slider",
+    "category": "Product Tab Slider"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.product-area {
+  padding-top: {{ section.settings.pro_tab_padding_top }}px;
+  padding-bottom: {{ section.settings.pro_tab_padding_bottom }}px;
+  background-color: {{ section.settings.pro_tab_bg_color }};
+}
+@media (max-width: 1199px) {
+  .product-area {
+    padding-top: {{ section.settings.pro_tab_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.pro_tab_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px) {
+  .product-area {
+    padding-top: {{ section.settings.pro_tab_padding_top_xs }}px;
+    padding-bottom: {{ section.settings.pro_tab_padding_bottom_xs }}px;
+  }
+}
+{% if section.settings.section_sub_title == empty %}
+.product-area .section-title h2{
+  margin-top: 0;
+}
+{% endif %}
+
+.product-area .container-col {
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .product-area .container-col {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .product-area .container-col {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+.product-area .view-all-collection{
+  margin-top: 100px;
+  text-align: center;
+}
+.product-area {
+  overflow-x: hidden;
+}
+@media (max-width: 1199px){
+  .product-area .view-all-collection{
+    margin-top: 60px;
+    text-align: center;
+  }
+}
+@media (max-width: 767px){
+  .product-area .view-all-collection{
+    margin-top: 30px;
+  }
+}
+.product-area ul.nav-tabs{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-bottom: none;
+    height: 100%;
+    margin-top: 60px;
+}
+.product-area ul.nav-tabs li a {
+  font-size: 15px;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  padding: 15px 30px;
+  border: 1px solid transparent;
+  color: var(--color-secondary);
+}
+.product-area ul.nav-tabs li a:hover,
+.product-area ul.nav-tabs li a.active{
+  color: var(--color-primary);
+  border: 1px solid #e2e2e2;
+}
+
+@media (max-width: 1599px) {
+  .product-area ul.nav-tabs{
+    margin-top: 40px;
+  }
+}
+@media (max-width: 991px) {
+  .product-area ul.nav-tabs{
+    margin-top: 30px;
+  }
+  .product-area .section-title{
+    flex-direction: column;
+  }
+  .product-area .view-all-collection{
+    margin-top: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .product-area ul.nav-tabs{
+    margin-top: 15px;
+    justify-content: flex-start;
+  }
+  .product-area ul.nav-tabs li a{
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}
+</style>

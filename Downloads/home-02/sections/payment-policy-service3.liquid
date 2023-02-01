@@ -1,0 +1,270 @@
+<section class="payment-service3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12 col-center">
+        <div class="section-capture">
+          <div class="main-title">
+            <h2>{{ section.settings.section_title }}</h2>
+          </div>
+        </div>
+        <ul class="service-wrap">
+          {% for block in section.blocks %}
+          <li class="service-wrapper wow animate__fadeInUp">
+            <div class="service-block">
+              <div class="payment-img">
+                <img src="{% if block.settings.service_img %}{{ block.settings.service_img | img_url: 'master' }}{% else %}https://dummyimage.com/38x24/f7f7f7/999999{% endif %}">
+              </div>
+              {%if block.settings.service_title != '' %}
+              <h6>{{ block.settings.service_title }}</h6>
+              {% endif %}
+              {%if block.settings.service_desc != '' %}
+              <p>{{ block.settings.service_desc }}</p>
+              {% endif %}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Payment Service3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Desktop / Laptop"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_lg",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_lg",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Section Title"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Popular payment methods"
+    }
+  ],
+  "blocks":[
+    {
+      "type": "payment_service3",
+      "name": "Payment Services3",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Service Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "service_img",
+          "label": "Service Image",
+          "info": "Recommended Size: 38px x 24px"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "your payment method"
+        },
+        {
+          "type": "text",
+          "id": "service_desc",
+          "label": "Service Description",
+          "default": "Lorem Ipsum is simply text of the printing and typesetting industry lorem Ipsum."
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Payment Service3",
+      "category": "Our Service"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .payment-service3 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .payment-service3{
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .payment-service3 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /*section title*/
+  .payment-service3 .section-capture {
+    text-align: center;
+  }
+  .payment-service3 .main-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  @media(max-width: 1199px){
+    .payment-service3 .main-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 767px){
+    .payment-service3 .main-title h2{
+      font-size: 20px;
+    }
+  }
+  /*secrvice content*/
+  .payment-service3 ul.service-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -80px;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(6){
+    animation-delay: 0.6s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(5){
+    animation-delay: 0.5s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(4){
+    animation-delay: 0.4s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(3){
+    animation-delay: 0.3s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(2){
+    animation-delay: 0.2s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper {
+    width: 33.33%;
+    text-align: center;
+    margin-top: 80px;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper .service-block {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper .service-block h6{
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 500;
+    margin-top: 25px;
+  }
+  .payment-service3 ul.service-wrap li.service-wrapper .service-block p{
+    font-size: 16px;
+    margin-top: 15px;
+    line-height: 30px;
+  }
+  @media (max-width: 1599px) {
+    .payment-service3 ul.service-wrap li.service-wrapper .service-block{
+      width: 90%;
+    }
+  }
+  @media (max-width: 1199px) {
+    .payment-service3 ul.service-wrap{
+      margin-top: -30px;
+    }
+    .payment-service3 ul.service-wrap li.service-wrapper {
+      margin-top: 30px;
+    }
+    .payment-service3 ul.service-wrap li.service-wrapper .service-block h6{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 991px) {
+    .payment-service3 ul.service-wrap li.service-wrapper{
+      width: 50%;
+    }
+  }
+  @media (max-width: 767px) {
+    .payment-service3 ul.service-wrap{
+      margin-left: -15px;
+    }
+    .payment-service3 ul.service-wrap li.service-wrapper {
+      width: calc(100% - 15px);
+      margin-left: 15px;
+    }
+  }
+</style>

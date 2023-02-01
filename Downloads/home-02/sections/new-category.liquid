@@ -1,0 +1,293 @@
+<section class="new-category new-category-{{ section.id }}">
+
+    <div class="section-capture">
+      <div class="section-title">
+        {% if section.settings.section_title !='' %}
+        <h2>
+          {{ section.settings.section_title }}
+        </h2>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="outside-box-right">
+      {% assign category_product = collections[section.settings.new_label_product] %}
+      <div class="collection-slider owl-carousel owl-theme" id="new-{{ section.id }}">
+        {% for product in category_product.products %}
+        <div class="item">
+          {% include 'product-grid-item' %}
+        </div>
+        {% endfor %}
+      </div>
+      {% if section.settings.view_all_button != '' %}
+      <div class="view-all-collection">
+        <a href="{{ section.settings.view_all_button_url }}" class="btn btn-style9">{{ section.settings.view_all_button }}</a>
+      </div>
+      {% endif %}
+    </div>
+
+</section>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('#new-{{ section.id }}').owlCarousel({
+      rewind: true,
+      loop: true,
+      dots: false,
+      {%- if settings.enable_rtl -%}
+      rtl: true,
+      {%- endif -%}
+      responsive:{
+        0:{
+          items: 1,
+          margin: 15
+        },
+        479:{
+          items: 2,
+          margin: 15
+        },
+        540:{
+          items: 2,
+          margin: 15
+        },
+        768:{
+          items: 3,
+          margin: 15
+        },
+        979:{
+          items: 4,
+          margin: 15
+        },
+        1199:{
+          items: 6,
+          margin: 30
+        }
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "New Product",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 0
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Section Background color",
+    "default": "transparent"
+  },
+  {
+    "type": "header",
+    "content": "Section Title"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "New arrivals"
+  },
+  {
+    "type": "header",
+    "content": "Product"
+  },
+  {
+    "type" : "collection",
+    "id" : "new_label_product",
+    "label" : "Best Product"
+  },
+  {
+    "type": "header",
+    "content": "View all collections"
+  },
+  {
+    "type": "text",
+    "id": "view_all_button",
+    "label": "Button Text",
+    "default": "Explor collecion"
+  },
+  {
+    "type": "url",
+    "id": "view_all_button_url",
+    "label": "Button URL"
+  }
+  ],
+  "presets":[
+  {
+    "name": "New Product",
+    "category": "Collecton"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.new-category-{{ section.id }}{
+  position: relative;
+  overflow: hidden;
+  padding-top:{{ section.settings.section_padding_top }}px;
+  padding-bottom:{{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.section_bg_color }};
+}
+@media (max-width: 1199px){
+  .new-category-{{ section.id }}{
+    padding-top:{{ section.settings.section_padding_top_lg }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_lg }}px;
+  }
+}
+@media (max-width: 767px){
+  .new-category-{{ section.id }}{
+    padding-top:{{ section.settings.section_padding_top_xs }}px;
+    padding-bottom:{{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+
+.new-category .section-title h2{
+  margin-top: 0;
+}
+
+
+.new-category .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .new-category .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .new-category .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .new-category .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.new-category .outside-box-right {
+  margin-left: -200px;
+  margin-right: -200px;
+}
+
+@media (max-width: 1199px){
+  .new-category .outside-box-right {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+
+
+/*slider arrow*/
+.new-category .owl-theme .owl-nav.disabled+.owl-dots,
+.new-category .owl-theme .owl-dots {
+  margin-top: 100px;
+}
+.new-category .owl-theme .owl-dots button {
+  margin-right: 20px;
+}
+.new-category .owl-theme .owl-dots button:last-child {
+  margin-right: 0;
+}
+.new-category .owl-theme .owl-dots button span{
+  margin: 0;
+  width: 13px;
+  height: 13px;
+  opacity: .2;
+  background-color: var(--color-secondary);
+}
+.new-category .owl-theme .owl-dots button.active span,
+.new-category .owl-theme .owl-dots button:hover span{
+  opacity: .6;
+  background-color: var(--color-secondary);
+}
+
+.new-category .view-all-collection{
+  text-align: center;
+  margin-top: 80px;
+}
+@media(max-width: 1199px){
+  .new-category .view-all-collection{
+    margin-top: 50px;
+  }
+}
+@media(max-width: 767px){
+  .new-category .view-all-collection{
+    margin-top: 30px;
+  }
+}
+</style>

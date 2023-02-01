@@ -1,0 +1,21 @@
+{{ 'bootstrap.min.css' | asset_url | stylesheet_tag }}
+{{ 'animate.min.css' | asset_url | stylesheet_tag }}
+{{ 'all.css' | asset_url | stylesheet_tag }}
+{{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
+{{ 'owl.theme.default.min.css' | asset_url | stylesheet_tag }}
+{{ 'swiper.min.css' | asset_url | stylesheet_tag }}
+
+{{ 'themify-icons.css' | asset_url | stylesheet_tag }}
+{{ 'plugins.css' | asset_url | stylesheet_tag }}
+{{ 'magnific-popup.css' | asset_url | stylesheet_tag }}
+{{ 'et-line-icon.css' | asset_url | stylesheet_tag }}
+{{ 'feather.css' | asset_url | stylesheet_tag }}
+{%- if settings.enable_preloader -%}
+{{ 'preloader.css' | asset_url | stylesheet_tag }}
+{% endif %}
+{%- if settings.enable_rtl -%}
+{{ 'style-rtl.css' | asset_url | stylesheet_tag }}
+{%- else -%}
+{{ 'style.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+{{ 'skin-theme.css' | asset_url | stylesheet_tag }}

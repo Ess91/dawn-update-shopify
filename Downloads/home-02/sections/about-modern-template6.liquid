@@ -1,0 +1,328 @@
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12 col-center">
+        <div class="about-modern-section6">
+          <div class="section-capture">
+            <div class="main-title">
+              <h2>{{ section.settings.section_title }}</h2>
+            </div>
+          </div>
+          <div class="list-content">
+            <div class="about-modern-testimonial-slider owl-carousel owl-theme" id="about-modern-testimonial-slider">
+              {% for block in section.blocks %}
+              <div class="item">
+                <div class="testi-content">
+                  <div class="testi-desc">
+                    <p>{{ block.settings.testi_desc }}</p>
+                  </div>
+                  <div class="testi-info">
+                    <span class="quots-icon">
+                      <i class="fa fa-quote-left"></i>
+                    </span>
+                    <div class="testi-author">
+                      <h6>{{ block.settings.testi_authrname }}</h6>
+                      <span class="author-name">{{ block.settings.testi_authrtitle }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $('#about-modern-testimonial-slider').owlCarousel({
+    loop: false,
+    rewind: true,
+    items: 1,
+    margin: 0,
+    nav: true,
+    dots: false,
+    navText: ['{{ section.settings.slider_prev_button }}','{{ section.settings.slider_next_button }}'],
+    {%- if settings.enable_rtl -%}
+    rtl: true
+    {%- endif -%}
+  });
+</script>
+{% schema %}
+{
+  "name": "About Modern Section 6",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Main Title",
+      "default": "What people are saying"
+    },
+    {
+      "type": "header",
+      "content": "Slider Arrow"
+    },
+    {
+      "type": "text",
+      "id": "slider_prev_button",
+      "label": "Slider Prev",
+      "default": "Prev"
+    },
+    {
+      "type": "text",
+      "id": "slider_next_button",
+      "label": "Slider Next",
+      "default": "Next"
+    }
+  ],
+  "blocks" : [
+    {
+      "type" : "store_location",
+      "name" : "Our store",
+      "settings" : [
+        {
+          "type": "textarea",
+          "id": "testi_desc",
+          "label": "Review Content",
+          "default": "When you listen to yourself, everything comes naturally. It comes from inside, like a kind of will to do something. Try to be sensitive. That is yoga. oga takes you into the present moment. The only place where life exists."
+        },
+        {
+          "type": "text",
+          "id": "testi_authrname",
+          "label": "Reviewer Name",
+          "default": "Jeremy Miller"
+        },
+        {
+          "type": "text",
+          "id": "testi_authrtitle",
+          "label": "Reviewer Title",
+          "default": "Corporation Director"
+        }
+
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "About Modern Section 6",
+      "category": "About Modern"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .about-modern-section6 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  @media (max-width: 1199px) {
+    .about-modern-section6 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-modern-section6 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /*section title*/
+  .about-modern-section6 .section-capture{
+    margin-bottom: 60px;
+  }
+  .about-modern-section6 .main-title {
+    text-align: center;
+  }
+  .about-modern-section6 .main-title h2{
+    font-size: 40px;
+    line-height: 1;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section6 .section-capture{
+      margin-bottom: 40px; 
+    }
+    .about-modern-section6 .main-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section6 .main-title h2{
+      font-size: 20px;
+    }
+  }
+  /*list content*/
+  .about-modern-section6 .testi-content{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .about-modern-section6 .testi-content .testi-desc p{
+    font-size: 20px;
+  }
+  .about-modern-section6 .testi-content .testi-info span.quots-icon{
+    color: var(--color-primary);
+    line-height: 1;
+    font-size: 58px;
+    margin-top: 60px;
+  }
+  .about-modern-section6 .testi-content .testi-author {
+    margin-top: 35px;
+  }
+  .about-modern-section6 .testi-content .testi-author h6{
+    font-size: 18px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .about-modern-section6 .testi-content .testi-author span.author-name{
+    font-size: 18px;
+    color: #6f6f6f;
+    margin-top: 10px;
+  }
+
+  @media(max-width: 1199px){
+    .about-modern-section6 .testi-content{
+      width: 70%;
+    }
+    .about-modern-section6 .testi-content .testi-desc p{
+      font-size: 16px;
+    }
+    .about-modern-section6 .testi-content .testi-info span.quots-icon{
+      margin-top: 30px;
+      font-size: 28px;
+    }
+    .about-modern-section6 .testi-content .testi-author{
+      margin-top: 15px;
+    }
+    .about-modern-section6 .testi-content .testi-author span.author-name{
+      font-size: 16px;
+      margin-top: 5px;
+    }
+    .about-modern-section6 .testi-content .testi-author h6{
+      font-size: 16px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section6 .testi-content{
+      width: 100%;
+    }
+  }
+
+  /*slider arrow*/
+  .about-modern-section6 .about-modern-testimonial-slider .owl-nav{
+    margin: 0;
+  }
+  .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-prev,
+  .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-next{
+    position: absolute;
+    bottom: 50%;
+    transform: translate(50%);
+    margin: 0;
+    background: transparent;
+    color: #222;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: 1px solid var(--color-primary);
+    border-radius: 0;
+  }
+  .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-prev{
+    left: -10px;
+  }
+  .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-next{
+    right: 30px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-prev,
+    .about-modern-section6 .about-modern-testimonial-slider .owl-nav button.owl-next{
+      font-size: 14px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section6 .about-modern-testimonial-slider .owl-nav{
+      display: none;
+    }
+  }
+</style>

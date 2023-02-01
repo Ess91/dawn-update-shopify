@@ -1,0 +1,212 @@
+<section class="form-contact">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xl-10 col-center">
+                <div class="contact-content">
+                    <div class="form-warp contact-detail">
+                        <div class="section-capture">
+                            <div class="section-title">
+                                {% if section.settings.section_title != '' %}
+                                <h2>{{ section.settings.section_title }}</h2>
+                                {% endif %}
+                                {% if section.settings.section_title != '' %}
+                                <p>{{ section.settings.section_des }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="contact-form-list">
+                            {% include 'contact-form' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "contact_us_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 1,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "header",
+    "content": "Section Background"
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Section Backgrond color",
+    "default": "#f6f6f6"
+  },
+  {
+    "type": "header",
+    "content": "Form Info"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Got any questions?"
+  },
+  {
+    "type": "text",
+    "id": "section_des",
+    "label": "Section Description",
+    "default": "Use the form below to get in touch with the sales team"
+  },
+  {
+    "type": "text",
+    "id": "name_placeholder",
+    "label": "Name Placeholder",
+    "default": "Your name"
+  },
+  {
+    "type": "text",
+    "id": "email_placeholder",
+    "label": "Email Placeholder",
+    "default": "Your email address"
+  },
+  {
+    "type": "text",
+    "id": "phone_placeholder",
+    "label": "Phone Placeholder",
+    "default": "Your mobile"
+  },
+  {
+    "type": "text",
+    "id": "message_placeholder",
+    "label": "Message Placeholder",
+    "default": "Your message here..."
+  },
+  {
+    "type": "text",
+    "id": "form_button_name",
+    "label": "Button Name",
+    "default": "Send Message"
+  },
+  {
+    "type": "text",
+    "id": "read_agree_text",
+    "label": "Terms Text",
+    "default": "I accept the terms & conditions and I understand that my data will be hold securely in accordance with the privacy policy."
+  }
+  ],
+  "presets":[
+  {
+    "name": "Contact Form",
+    "category": "contact us"
+  }
+  ]
+}
+{% endschema %}
+<style>
+    .form-contact{
+        
+    }
+    .contact-content {
+        padding-top: {{ section.settings.contact_us_padding_top }}px;
+        padding-left: {{ section.settings.contact_us_padding_top }}px;
+        padding-right: {{ section.settings.contact_us_padding_bottom }}px;
+        padding-bottom: {{ section.settings.contact_us_padding_bottom }}px;
+        background-color: {{ section.settings.section_bg_color }};
+    }
+    @media (max-width: 1199px){
+        .contact-content {
+            padding-top: {{ section.settings.contact_us_padding_top_ipad }}px;
+            padding-left: {{ section.settings.contact_us_padding_top_ipad }}px;
+            padding-right: {{ section.settings.contact_us_padding_bottom_ipad }}px;
+            padding-bottom: {{ section.settings.contact_us_padding_bottom_ipad }}px;
+        }
+    }
+    @media (max-width: 767px){
+        .contact-content {
+            padding-top: {{ section.settings.contact_us_padding_top_xs }}px;
+            padding-left: 20px;
+            padding-bottom: {{ section.settings.contact_us_padding_bottom_xs }}px;
+            padding-right: 20px;
+        }
+    }
+    /* contact form css */
+    .contact-content .section-title h2{
+        text-transform: unset;
+        font-weight: 500;
+        margin-top: 0px;
+        font-family: inherit;
+    }
+
+</style>

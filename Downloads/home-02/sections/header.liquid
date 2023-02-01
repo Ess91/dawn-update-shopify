@@ -1,0 +1,734 @@
+<!-- header-area start -->
+{%- if section.settings.header_transparent -%}
+<div class="header-transparent">
+  {%- endif -%}
+  <div class="header-area">
+    <div class="container-fluid header-col">
+      <div class="header-main">
+        <!-- main menu -->
+        <div class="header-element shipping-content">
+          <p>{{ section.settings.shipping_text }}</p>
+        </div>
+        <!-- logo -->
+        <div class="header-element logo">
+          {%- include 'company-logo' -%}
+        </div>
+        <div class="header-element right-block-box">
+          <ul class="shop-element">
+            <li class="side-wrap toggler-wrap">
+              <button class="navbar-toggler" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+              </button>
+            </li>
+            {% for block in section.blocks %}
+            {%- case block.type -%}
+            {%- when 'currency' -%}
+            <li class="side-wrap currency-wrapper">
+              <div class="menu-currency">
+                {%- include "shop-currency" -%}
+              </div>
+            </li>
+            {%- when 'search' -%}
+            <li class="side-wrap search-wrap">
+              {%- include 'search-bar' -%}
+            </li>
+            {%- when 'account' -%}
+            <li class="side-wrap user-wrap">
+              {%- include 'store-account' -%}
+            </li>
+            {%- when 'wishlist' -%}
+            <li class="side-wrap wishlist-wrap">
+              {%- include 'wishlist-4' -%}
+            </li>
+            {%- when 'cart' -%}
+            <li class="side-wrap cart-wrap">
+              {% include 'mini-cart' %}
+            </li>
+            {%- endcase -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- if section.settings.header_transparent -%}
+</div>
+{%- endif -%}
+<!-- header mobile -->
+<div class="header-bottom-area">
+  <div class="megamenu-content">
+    <div class="main-menu-area">
+      <nav class="main-navigation navbar-expand-xl">
+        <div class="box-header">
+          <button class="close-box" type="button"><i class="ti-close"></i></button>
+        </div>
+        {% include 'main-menu' %}
+      </nav>
+    </div>
+  </div>
+</div>
+{% include 'search-modal' %}
+<!-- header-area end -->
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+  {
+    "type": "checkbox",
+    "id": "header_transparent",
+    "label": "Header Transparent",
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "header_sticky",
+    "label": "Header Sticky",
+    "default": true
+  },
+  {
+    "type": "header",
+    "content": "Logo Notice"
+  },
+  {
+    "type": "paragraph",
+    "content": "For logo go to 'Theme Settings' click on 'Company Logo' & set both Header-Footer Logo"
+  },
+  {
+    "type": "header",
+    "content": "Section Background Color"
+  },
+  {
+    "type": "header",
+    "content": "Main Menu"
+  },
+  {
+    "type": "link_list",
+    "id": "header_main_menu",
+    "label": "Select Main Menu"
+  },
+  {
+    "type": "color",
+    "id": "header_txt_color",
+    "label": "Header Text Color",
+    "default": "#fff"
+  },
+  {
+    "type": "color",
+    "id": "header_bg_color",
+    "label": "Header background Color",
+    "default": "#f4f1ed"
+  },
+  {
+    "type": "text",
+    "id": "shipping_text",
+    "label": "shipping text",
+    "default": "Free shipping for all orders over $399.00"
+  },
+  {
+    "type": "text",
+    "id": "search_title",
+    "label": "Search title",
+    "default": "Search"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "currency",
+    "limit": 1,
+    "name": "Icon currency",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Edit Theme Settings"
+    }
+    ]
+  },
+  {
+    "type": "search",
+    "limit": 1,
+    "name": "Icon search",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Edit Theme Settings"
+    }
+    ]
+  },
+  {
+    "type": "account",
+    "limit": 1,
+    "name": "Icon account",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Edit Theme Settings"
+    }
+    ]
+  },
+  {
+    "type": "wishlist",
+    "limit": 1,
+    "name": "Icon wishlist",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Edit Theme Settings"
+    }
+    ]
+  },
+  {
+    "type": "cart",
+    "limit": 1,
+    "name": "Icon cart",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Edit Theme Settings"
+    }
+    ]
+  },
+  {
+    "type": "customlink",
+    "name": "Custom link",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link"
+    },
+    {
+      "type": "text",
+      "id": "menu_flag",
+      "label": "Menu label"
+    }
+    ]
+  },
+  {
+    "type": "megamenu1",
+    "name": "Megamenu with banner",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Select megamenu"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link"
+    },
+    {
+      "type": "link_list",
+      "id": "select_menu",
+      "label": "Select menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_flag",
+      "label": "Menu label"
+    },
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "checkbox",
+      "id": "banner_img_enable",
+      "label": "Banner image enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img",
+      "label": "Banner Image",
+      "info": "Recommended Size: 900x600px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url",
+      "label": "Banner link"
+    }
+    ]
+  },
+  {
+    "type": "megamenu2",
+    "name": "Megamenu with category",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Select collection link"
+    },
+    {
+      "type": "link_list",
+      "id": "collection_menu",
+      "label": "Select collection link"
+    },
+    {
+      "type": "header",
+      "content": "Select megamenu"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link"
+    },
+    {
+      "type": "link_list",
+      "id": "select_menu",
+      "label": "Select menu"
+    },
+    {
+      "type": "text",
+      "id": "menu_flag",
+      "label": "Menu label"
+    },
+    {
+      "type": "header",
+      "content": "Category image"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_img1",
+      "label": "Category Image",
+      "info": "Recommended Size: 550x500px"
+    },
+    {
+      "type": "url",
+      "id": "cat_url1",
+      "label": "Category url"
+    },
+    {
+      "type": "text",
+      "id": "cat_title1",
+      "label": "Category title"
+    },
+    {
+      "type": "image_picker",
+      "id": "cat_img2",
+      "label": "Category Image",
+      "info": "Recommended Size: 550x500px"
+    },
+    {
+      "type": "url",
+      "id": "cat_url2",
+      "label": "Category url"
+    },
+    {
+      "type": "text",
+      "id": "cat_title2",
+      "label": "Category title"
+    }
+    ]
+  },
+  {
+    "type": "banner_megamenu",
+    "name": "Megamenu banner only",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link"
+    },
+    {
+      "type": "text",
+      "id": "menu_flag",
+      "label": "Menu label"
+    },
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img1",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url1",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title1",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img2",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url2",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title2",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img3",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url3",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title3",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img4",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url4",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title4",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img5",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url5",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title5",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img6",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url6",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title6",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img7",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url7",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title7",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img8",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url8",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title8",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img9",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url9",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title9",
+      "label": "Banner title"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_img10",
+      "label": "Banner Image",
+      "info": "Recommended Size: 500x500px"
+    },
+    {
+      "type": "url",
+      "id": "banner_url10",
+      "label": "Banner link"
+    },
+    {
+      "type": "text",
+      "id": "banner_title10",
+      "label": "Banner title"
+    },
+    {
+      "type": "url",
+      "id": "view_more_url",
+      "label": "View more url"
+    },
+    {
+      "type": "text",
+      "id": "view_more_btn",
+      "label": "View more button",
+      "default": "View more"
+    }
+    ]
+  },
+  {
+    "type": "submenu",
+    "name": "Submenu",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Select submenu"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "custom_link",
+      "label": "Custom link"
+    },
+    {
+      "type": "link_list",
+      "id": "select_menu",
+      "label": "Select submenu"
+    },
+    {
+      "type": "text",
+      "id": "menu_flag",
+      "label": "Menu label"
+    }
+    ]
+  }
+  ]
+}
+{% endschema %}
+<script>
+  {%- if section.settings.header_sticky -%}
+  $(window).scroll(function() {
+    var sticky = $('.header-area'),
+    scroll = $(window).scrollTop();
+    if (scroll >= 150) {
+      sticky.addClass('is-sticky');
+    }
+    else {
+      sticky.removeClass('is-sticky');
+    }
+  });
+  var position = $(window).scrollTop();
+  $(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if(scroll > position) {
+      $("#shopify-section-header").addClass('stuck');
+      $("#shopify-section-header").addClass('scroll-down');
+      $("#shopify-section-header").removeClass('scroll-up');
+    } else {
+      if (position <= 100) {
+        $("#shopify-section-header").removeClass('stuck');
+        $("#shopify-section-header").removeClass('scroll-down');
+        $("#shopify-section-header").removeClass('scroll-up');
+      }else{
+        $("#shopify-section-header").addClass('stuck');
+        $("#shopify-section-header").removeClass('scroll-down');
+        $("#shopify-section-header").addClass('scroll-up');
+      }
+    }
+    position = scroll;
+  });
+  {%- endif -%}
+</script>
+<style>
+  .header-bottom-area {
+    background-color: {{ section.settings.header_bg_color }};
+  }
+  {%- if section.settings.header_transparent -%}
+  #shopify-section-header .header-transparent{
+    {%- if template == 'index' -%}
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+    background-color: transparent;
+    {%- else -%}
+    background-color: #fff;
+    {%- endif -%}
+  }
+  {%- endif -%}
+  .header-col{
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  @media (max-width: 1599px) {
+    .header-col{
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+  }
+  @media (max-width: 767px) {
+    .header-col{
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+  }
+/* sticky menu css */
+#shopify-section-header .header-bottom-area{
+  width: 100%;
+  transition: transform .4s,background-color .2s;
+}
+#shopify-section-header.stuck .header-bottom-area{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 4%);
+}
+#shopify-section-header.stuck.scroll-up .header-bottom-area{
+  transform: none;
+}
+#shopify-section-header.stuck.scroll-down .header-bottom-area{
+  transform: translate3d(0,-100%,0);
+}
+/* logo */
+.header-area.is-sticky .header-main .header-element.logo .theme-logo{
+  display: none;
+}
+.header-area.is-sticky .header-main .header-element.logo .sticky-logo{
+  display: block;
+}
+{%- if template == 'index' -%}
+.header-area .header-main .header-element.logo .sticky-logo{
+  display: none;
+}
+{%- endif -%}
+.header-main button.navbar-toggler svg{
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+}
+.is-sticky .header-main button.navbar-toggler svg{
+  color: var(--color-secondary);
+}
+/*currency */
+.right-block-box ul.shop-element li.side-wrap.currency-wrapper {
+  position: relative;
+  {%- if settings.enable_rtl -%}
+  padding-left: 30px;
+  {%- else -%}
+  padding-right: 30px;
+  {%- endif -%}
+  display: flex;
+  align-items: center;
+}
+.right-block-box ul.shop-element li.side-wrap.currency-wrapper::after{
+  color: {{ section.settings.header_txt_color }};
+  position: absolute;
+  {%- if settings.enable_rtl -%}
+  padding-right: 30px;
+  margin-right: 30px;
+  {%- else -%}
+  right: 0;
+  {%- endif -%}
+  content: "/";
+  font-size: 12px;
+  line-height: 1;
+}
+.right-block-box ul.shop-element li.side-wrap.currency-wrapper select{
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+  padding: 0;
+  border: none;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  background: none;
+}
+.is-sticky .right-block-box ul.shop-element li.side-wrap.currency-wrapper select{
+  color: var(--color-secondary);
+}
+@media(max-width: 1199px){
+  .right-block-box ul.shop-element li.side-wrap.currency-wrapper select{
+    color: var(--color-secondary);
+  }
+  .right-block-box ul.shop-element li.side-wrap.currency-wrapper {
+    position: relative;
+    {%- if settings.enable_rtl -%}
+    padding-left: 15px;
+    {%- else -%}
+    padding-right: 15px;
+    {%- endif -%}
+  }
+  .right-block-box ul.shop-element li.side-wrap.currency-wrapper{
+    display: none;
+  }
+}
+</style>

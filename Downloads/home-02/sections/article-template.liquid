@@ -1,0 +1,489 @@
+<section class="article-area section-ptb">
+    <div class="container">
+        <div class="row {% if section.settings.sidebar_handle == 'left_sidebar_handle' %}left-wrap{% elsif section.settings.sidebar_handle == 'right_sidebar_handle' %}right-wrap{% endif %}">
+            <div class="{% if section.settings.sidebar_handle == 'without_sidebar' %}col{% else %}col-xl-8 col-lg-8 col-md-7 col-12 blog-article-wrap{% endif %}">
+                <div class="single-blog-area">
+                    <div class="blog-image">
+                        <a href="{{ article.url }}" class="banner-hover">
+                            <img src="{{ article.image | img_url: '1140x600', crop: 'center' }}" alt="{{ article.title | escape }}" class="img-fluid" />
+                        </a>
+                        {% if article.content contains '[blog_video]' %}
+                        {% assign blog_video_first = article.content | split:'[/blog_video]' | first %}
+                        {% assign blog_video_final = blog_video_first | split:'[blog_video]' | last %}
+                        {{blog_video_final}}
+                        {% endif %}
+                    </div>
+                    <div class="blog-revert">
+                        <h2 class="post-title">{{ article.title }}</h2>
+                    </div>
+                    <div class="blog-content">
+                        {{ article.content }}
+                    </div>
+                    <div class="post-info">
+                        <blockquote>
+                            <i class="ti-quote-left"></i>
+                            <h2 class="post-title">
+                                <span>{{ section.settings.article_through }} {{ article.author | truncatewords: 2 | remove: "." }}</span>
+                            </h2>
+                            <ul>
+                                <li class="date-time">
+                                    <i class="fa fa-calendar"></i>
+                                    <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+                                </li>
+                                <li class="blog-comment">
+                                    <i class="fa fa-comment"></i>
+                                    <span class="comment-count">{{ article.comments_count }}</span>
+                                    <span>{{ section.settings.article_cmt }}</span>
+                                </li>
+                            </ul>
+                        </blockquote>
+                    </div>
+                    {% if article.tags.size > 0 %}
+                    <div class="post-info-tag">
+                        <ul class="post-tag">
+                            {% for tag in article.tags %}
+                            <li>{{ tag | link_to_tag: tag }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                    <div class="blog-share">
+                        {% include 'social-share-blog' %}
+                    </div>
+                    {% if article.comments_enabled? %}
+                    {% assign comment_post_limit = section.settings.comment_post_limit_handle %}
+                    {% paginate article.comments by comment_post_limit %}
+                    <div id="comments" class="blog-comments">
+                        {% if article.comments.size > 0 %}
+                        {% include 'blog-comments' %}
+                        {% endif %}
+                        {% if paginate.pages > 1 %}
+                        <div class="comment-pagination">
+                            {% include 'pagination' %}
+                        </div>
+                        {% endif %}
+                        {% endpaginate %}
+                        <div class="blog-comment-form">
+                            {% include 'blog-comment-form' %}
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% unless section.settings.sidebar_handle == 'without_sidebar' %}
+            <div class="col-xl-4 col-lg-4 col-md-5 col-12 blog-content-side">
+                {% include 'blog-sidebar' %}
+            </div>
+            {% endunless %}
+        </div>
+    </div>
+</section>
+{% schema %}
+{
+    "name": "Article Page",
+    "settings": [
+    {
+        "type" : "header",
+        "content" : "Background Color"
+    },
+    {
+        "type" : "checkbox",
+        "id" : "article_check",
+        "label" : "With Backgorund",
+        "default" : true
+    },
+    {
+        "type" : "color",
+        "id" : "article_bgcolor",
+        "label" : "Background Color",
+        "default" : "#fff"
+    },
+    {
+        "type" : "header",
+        "content" : "Blog Post By"
+    },
+    {
+        "type": "text",
+        "id": "article_through",
+        "label": "Blog Post Through Text",
+        "default": "By"
+    },
+    {
+        "type" : "header",
+        "content" : "Blog Comment Title"
+    },
+    {
+        "type": "text",
+        "id": "article_cmt",
+        "label": "Comment Title",
+        "default": "Comment"
+    },
+    {
+        "type": "text",
+        "id": "comment_post_limit_handle",
+        "label": "How Many Comment Post Show",
+        "default": "5"
+    },
+    {
+        "type" : "header",
+        "content" : "Avtar option"
+    },
+    {
+        "type": "checkbox",
+        "id": "article_avtar_enable",
+        "label": "Show Avtar",
+        "default": false
+    },
+    {
+        "type": "header",
+        "content": "Article Sidebar"
+    },
+    {
+        "type": "radio",
+        "id": "sidebar_handle",
+        "label": "Sidebar Position",
+        "options": [
+        {
+            "label": "Left Sidebar",
+            "value": "left_sidebar_handle"
+        },
+        {
+            "label": "Right Sidebar",
+            "value": "right_sidebar_handle"
+        },
+        {
+            "label": "Without Sidebar",
+            "value": "without_sidebar"
+        }
+        ],
+        "default": "left_sidebar_handle"
+    },
+    {
+        "type": "paragraph",
+        "content": "Sidebar List"
+    },
+    {
+        "type": "checkbox",
+        "id": "blog_search_bar_enable",
+        "label": "Show Searchbar",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "blog_author_enable",
+        "label": "Show Author",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "recent_post_enable",
+        "label": "Show Recent Posts",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "blog_instagram_enable",
+        "label": "Show Instagram",
+        "default": true
+    },
+    {
+        "type": "checkbox",
+        "id": "archive_enable",
+        "label": "Show Archive",
+        "default": false
+    },
+    {
+        "type": "checkbox",
+        "id": "tags_enable",
+        "label": "Show Tags",
+        "default": true
+    },
+    {
+        "type": "header",
+        "content": "Recent Post"
+    },
+    {
+        "type": "text",
+        "id": "recent_post_limit_handle",
+        "label": "How Many Recent Post Show",
+        "default": "4"
+    }
+    ]
+}
+{% endschema %}
+<style>
+.article-area {
+    {% if section.settings.article_check %}
+    background-color: {{ section.settings.article_bgcolor }};
+    {% endif %}
+}
+.article-area .left-wrap {
+    flex-direction: row-reverse;
+}
+.article-area .blog-image {
+    position: relative;
+}
+.article-area .blog-image a.blog-video-button{
+    font-size: 16px;
+    color: var(--color-primary);
+    background-color: #fff;
+    position: absolute;
+    bottom: 50%;
+    right: 50%;
+    transform: translate(50%, 50%);
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+@media (max-width : 767px){
+    .article-area .left-wrap,
+    .article-area .right-wrap {
+        flex-direction: column-reverse;
+    }
+    .article-area .blog-article-wrap{
+        margin-top: 40px;
+    }
+    .article-area .blog-article-wrap:last-child{
+        margin-top: 0px;
+    }
+}
+/* blog title */
+.article-area .right-wrap .blog-content-side{
+    {% if settings.enable_rtl %}
+    padding-right: 28px;
+    {% else %}
+    padding-left: 28px;
+    {% endif %}
+}
+.article-area .left-wrap .blog-content-side{
+    {% if settings.enable_rtl %}
+    padding-left: 28px;
+    {% else %}
+    padding-right: 28px;
+    {% endif %}
+}
+
+.single-blog-area .blog-revert{
+    margin-top: 28px;
+}
+.single-blog-area .blog-revert h2.post-title{
+    font-size: 22px;
+}
+@media (max-width: 767px){
+    .single-blog-area .blog-revert{
+        margin-top: 18px;
+    }
+    .single-blog-area .post-info{
+        margin-top: 15px;
+    }
+    .article-area .right-wrap .blog-content-side{
+        {% if settings.enable_rtl %}
+        padding-right: 12px;
+        {% else %}
+        padding-left: 12px;
+        {% endif %}
+    }
+    .article-area .left-wrap .blog-content-side{
+        {% if settings.enable_rtl %}
+        padding-left: 12px;
+        {% else %}
+        padding-right: 12px;
+        {% endif %}
+    }
+    .single-blog-area .blog-revert h2.post-title{
+        font-size: 16px;
+    }
+}
+
+
+/* blog content */
+.single-blog-area .blog-content{
+    margin-top: 20px;
+}
+.single-blog-area .blog-content .blog-wrap-desc blockquote{
+    font-size: 16px;
+    font-style: normal;
+    margin: 22px 0 23px;
+    padding: 15px;
+    {% if settings.enable_rtl %}
+    border-right: 1px solid #e2e2e2;
+    border-left: none;
+    {% else %}
+    border-left: 1px solid #e2e2e2;
+    {% endif %}
+    line-height: 25px;
+}
+.single-blog-area .blog-content .blog-wrap-desc p.blog-desc{
+    position: relative;
+    {% if settings.enable_rtl %}
+    padding-right: 15px;
+    {% else %}
+    padding-left: 15px;
+    {% endif %}
+}
+.single-blog-area .blog-content .blog-wrap-desc p.blog-desc::before{
+    content: "";
+    position: absolute;
+    top: 10px;
+    {% if settings.enable_rtl %}
+    right: 0;
+    {% else %}
+    left: 0;
+    {% endif %}
+    width: 5px;
+    height: 5px;
+    background-color: #666;
+    border-radius: 100%;
+}
+@media (max-width: 767px){
+    .single-blog-area .blog-content{
+        margin-top: 10px;
+    }
+    .single-blog-area .blog-content .blog-wrap-desc blockquote{
+        font-size: 14px;
+        margin: 12px 0 13px;
+    }
+}
+/* blog info */
+.single-blog-area .post-info{
+    margin-top: 22px;
+}
+.single-blog-area .post-info blockquote {
+    padding: 15px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    {% if settings.enable_rtl %}
+    border-right: 1px solid #e2e2e2;
+    border-left: none;
+    {% else %}
+    border-left: 1px solid #e2e2e2;
+    {% endif %}
+}
+.single-blog-area .post-info blockquote i {
+    color: var(--color-primary);
+    font-size: 30px;
+}
+.single-blog-area .post-info blockquote h2 {
+    font-size: 16px;
+    font-style: normal;
+    display: flex;
+    margin-top: 25px;
+    text-transform: capitalize;
+    line-height: 1;
+}
+.single-blog-area .post-info blockquote ul{
+    display: flex;
+    margin-top: 24px;
+}
+.single-blog-area .post-info blockquote ul li{
+    display: flex;
+    align-items: center;
+    {% if settings.enable_rtl %}
+    margin-left: 15px;
+    {% else %}
+    margin-right: 15px;
+    {% endif %}
+    font-style: normal;
+}
+.single-blog-area .post-info blockquote ul li:last-child{
+    {% if settings.enable_rtl %}
+    margin-left: 0px;
+    {% else %}
+    margin-right: 0px;
+    {% endif %}
+}
+.single-blog-area .post-info blockquote ul li i,
+.single-blog-area .post-info blockquote ul li span{
+    font-size: 14px;
+}
+.single-blog-area .post-info blockquote ul li span{
+    {% if settings.enable_rtl %}
+    margin-right: 5px;
+    {% else %}
+    margin-left: 5px;
+    {% endif %}
+}
+.single-blog-area .post-info blockquote ul li span.comment-count{
+    {% if settings.enable_rtl %}
+    margin-right: 5px;
+    {% else %}
+    margin-left: 5px;
+    {% endif %}
+}
+@media (max-width: 767px){
+    .single-blog-area .post-info{
+        margin-top: 12px;
+    }
+    .single-blog-area .post-info blockquote h2 {
+        margin-top: 15px;
+    }
+    .single-blog-area .post-info blockquote ul{
+        margin-top: 14px;
+    }
+}
+/* blog tag */
+.single-blog-area .post-info-tag{
+    margin-top: 25px;
+}
+.single-blog-area .post-info-tag ul{
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.single-blog-area .post-info-tag ul li{
+    {% if settings.enable_rtl %}
+    margin: 5px 0px 0 5px;
+    {% else %}
+    margin: 5px 5px 0 0px;
+    {% endif %}
+}
+.single-blog-area .post-info-tag ul li a{
+    color: #666;
+    padding: 5px 15px;
+    background-color: #fff;
+    text-transform: capitalize;
+    border: 1px solid #e2e2e2;
+}
+.single-blog-area .post-info-tag ul li:hover a{
+    color: #fff;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+@media (max-width: 767px){
+    .single-blog-area .post-info-tag{
+        margin-top: 15px
+    }
+}
+/* blog social */
+.single-blog-area .blog-share {
+    margin-top: 25px;
+}
+@media (max-width: 767px){
+    .single-blog-area .blog-share{
+        margin-top: 15px;
+    }
+}
+/* blog comment form */
+.single-blog-area .blog-comment-form {
+    margin-top: 29px;
+}
+@media (max-width: 767px){
+    .single-blog-area .blog-comment-form{
+        margin-top: 20px;
+    }
+}
+/* blog comments */
+.single-blog-area .blog-comments{
+    margin-top: 28px;
+}
+@media (max-width: 767px){
+    .single-blog-area .blog-comments{
+        margin-top: 18px;
+    }
+}
+</style>

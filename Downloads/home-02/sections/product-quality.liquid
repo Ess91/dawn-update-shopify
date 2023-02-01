@@ -1,0 +1,334 @@
+<section class="product-quality">
+    <div class="container">
+        <ul class="banner-wrap">
+            <li class="banner-wrapper">
+                <ul class="product-quality-cont">
+                    <div class="section-title">
+                        <h2>{{ section.settings.section_main_title }}</h2>
+                    </div>  
+                    <li class="desc-wrap">
+                        <span class="counter">01</span>
+                        <div class="quality-des">
+                            {% if section.settings.section_title != '' %}
+                            <h6>{{ section.settings.section_title }}</h6>
+                            {% endif %}
+
+                            {% if section.settings.description != '' %}
+                            <p class="sub-title">{{ section.settings.description }}</p>
+                            {% endif %}
+
+                        </div>
+                    </li>
+                    <li class="desc-wrap">
+                        <span class="counter">02</span>
+                        <div class="quality-des">
+                            {% if section.settings.section_title2 != '' %}
+                            <h6>{{ section.settings.section_title2 }}</h6>
+                            {% endif %}
+
+                            {% if section.settings.description2 != '' %}
+                            <p class="sub-title">{{ section.settings.description2 }}</p>
+                            {% endif %}
+
+                        </div>
+                    </li>
+                    {%if section.settings.banner_bg_button_url != '' %}
+                <a href="{{ section.settings.banner_bg_button_url }}" class="btn btn-style8">
+                    {{ section.settings.banner_bg_button }}
+                </a>
+                {% endif %}
+                </ul>
+                
+            </li>
+            <li class="banner-wrapper">
+                <a href="{{ section.settings.banner_bg_button_url }}">
+                    <img class="lazyload img-fluid" src="{% if section.settings.section_img %}{{ section.settings.section_img | img_url: 'master' }}{% else %}https://dummyimage.com/960x705/f7f7f7/999999{% endif %}">
+                </a>
+            </li>
+        </ul>
+    </div>
+</section>
+{% schema %}
+{
+    "name": "Product Quality",
+    "settings": [
+    {
+        "type" : "header",
+        "content" : "Section Padding"
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Desktop / Laptop / tablet"
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 60
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 60
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Ipad pro / Ipad"
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top_ipad",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 30
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom_ipad",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 30
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Mobile"
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top_xs",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom_xs",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 20
+    },
+    {
+        "type": "text",
+        "id": "section_main_title",
+        "label": "Section title",
+        "default": "custom design"
+    },
+    {
+      "type": "header",
+      "content": "Banner content"
+    },
+    {
+      "type": "url",
+      "id": "banner_bg_button_url",
+      "label": "Button URL"
+    },
+    {
+        "type": "image_picker",
+        "id": "section_img",
+        "label": "Banner Image",
+        "info": "Recommended Size: 960px x 705px"
+    },
+    {
+      "type": "header",
+      "content": "Description content"
+    },
+    {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title",
+        "default": "100% TR Suiting fabric Material : 90% polyester"
+    },
+    {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Having the right jewellery and attitude can literally change your look."
+    },
+    {
+        "type": "text",
+        "id": "section_title2",
+        "label": "Title",
+        "default": "Cuts, colors and material are customizable parts production"
+    },
+    {
+        "type": "textarea",
+        "id": "description2",
+        "label": "Description",
+        "default": "Jewelry is like the perfect spice - it always complements what’s already there."
+    },
+    {
+      "type": "text",
+      "id": "banner_bg_button",
+      "label": "Button",
+      "default": "Custom creation"
+    }
+    ],
+    "presets":[
+    {
+        "name": "Product Quality"
+    }
+    ]
+}
+{% endschema %}
+<style>
+.product-quality {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+}
+@media (max-width: 1199px) {
+    .product-quality {
+        padding-top: {{ section.settings.section_padding_top_ipad }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+}
+@media (max-width: 767px) {
+    .product-quality {
+        padding-top: {{ section.settings.section_padding_top_xs }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+}
+
+.product-quality .container-fluid {
+    padding-right: 270px;
+    padding-left: 270px;
+}
+
+@media (max-width: 1599px) {
+    .product-quality .container-fluid {
+        padding-right: 60px;
+        padding-left: 60px;
+    }
+}
+@media (max-width: 1199px) {
+    .product-quality .container-fluid {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+}
+@media (max-width: 767px) {
+    .product-quality .container-fluid {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+.product-quality .section-title h2{
+    margin-top: 0px;
+}
+
+.product-quality ul.banner-wrap{
+    display: flex;
+    flex-wrap: wrap;
+}
+.product-quality ul.banner-wrap li.banner-wrapper:nth-child(1){
+    flex: 0 0 auto;
+    width: 45%;
+}
+.product-quality ul.banner-wrap li.banner-wrapper:nth-child(2){
+    flex: 0 0 auto;
+    width: 55%;
+    padding-left: 30px;
+}
+
+.product-quality .product-quality-cont{
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+}
+.product-quality li.desc-wrap{
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.product-quality li.desc-wrap .counter{
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    border: 1px solid #e2e2e2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+.product-quality .quality-des {
+    {%- if settings.enable_rtl -%}
+    padding-right: 30px;
+    {%- else -%}
+    padding-left: 30px;
+    {%- endif -%}
+    width: calc(100% - 60px);
+}
+.product-quality .quality-des h6{
+    color: var(--color-primary);
+    font-size: 18px;
+    font-weight: 500;
+}
+.product-quality .quality-des a{
+    margin-top: 30px;
+}
+.product-quality .quality-des p{
+    font-size: 18px;
+    color: #7a7a7a;
+    max-width: 70%;
+    margin-top: 15px;
+}
+.product-quality .product-quality-cont a{
+    margin-top: 60px;
+}
+
+@media(max-width: 1599px){
+    .product-quality li.desc-wrap{
+        margin-top: 30px;
+    }
+    .product-quality .quality-des h6{
+        font-size: 16px;
+    }
+    .product-quality .quality-des p{
+        font-size: 14px;
+        margin-top: 10px;
+        max-width: 100%;
+    }
+    .product-quality .product-quality-cont a{
+        margin-top: 30px;
+    }
+}
+
+@media(max-width: 991px){
+    .product-quality ul.banner-wrap li.banner-wrapper:nth-child(1),
+    .product-quality ul.banner-wrap li.banner-wrapper:nth-child(2){
+      1 ,idth: 100%;
+        width: 100%;
+    }
+    .product-quality ul.banner-wrap li.banner-wrapper:nth-child(2){
+        margin-top: 30px;.
+        padding-left: 0px;
+    }
+}
+
+
+</style>

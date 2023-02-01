@@ -1,0 +1,416 @@
+<section class="our-store">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-center">
+        <div class="section-capture">
+          <div class="main-title">
+            <h6>
+              <span>{{ section.settings.section_title }}</span>
+            </h6>
+          </div>
+        </div>
+        <div class="our-store-slider owl-carousel owl-theme" id="our-store-slider">
+          {% for block in section.blocks %}
+          <div class="item wow animate__fadeInUp">
+              <div class="store-img-cont">
+                <img class="img-fluid" src="{% if block.settings.store_img %}{{ block.settings.store_img | img_url: 'master' }}{% else %}https://dummyimage.com/498x366/f7f7f7/999999{% endif %}">
+                <div class="store-text">
+                  <h6 class="store-title"><span>{{ block.settings.store_title }}</span></h6>
+                  <div class="store-address">
+                    <p>{{ block.settings.store_address }}</p>
+                    <a class="tel-link" href="{{ block.settings.tel_url }}" target="black">{{ block.settings.tel_number }}</a>
+                    <a class="map-url" href="{{ block.settings.view_map_url }}" target="black">{{ block.settings.view_map }}</a>
+                  </div>
+                </div>
+              </div>                 
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="text/javascript">
+  $('#our-store-slider').owlCarousel({
+    loop: false,
+    rewind: true,
+    margin: 30,
+    items: 3,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
+    responsive:{
+      0:{
+        margin: 15,
+        items: 1
+      },
+      479:{
+        margin: 15,
+        items: 1
+      },
+      768:{
+        items: 2
+      },
+      979:{
+        items: 2
+      },
+      1199:{
+        items: 2
+      },
+      1599:{
+        items: 3
+      }
+    }
+  });
+</script>
+{% schema %}
+{
+  "name": "Our Store",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Main Title",
+      "default": "Stay touch with us"
+    },
+    {
+      "type": "text",
+      "id": "section_big_title",
+      "label": "Section Big Title",
+      "default": "Our store"
+    }
+  ],
+  "blocks" : [
+    {
+      "type" : "store_location",
+      "name" : "Our store",
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "Store Location"
+        },
+        {
+          "type": "image_picker",
+          "id": "store_img",
+          "label": "Store Images",
+          "info": "Recommended Size: 498px x 366px"
+        },
+        {
+          "type": "text",
+          "id": "store_title",
+          "label": "Store Title",
+          "default": "London"
+        },
+        {
+          "type": "text",
+          "id": "store_address",
+          "label": "Store Address",
+          "default": "401 Broadway, 24th Floor, Orchard View, London, UK"
+        },
+        {
+          "type": "text",
+          "id": "tel_number",
+          "label": "Teliphone",
+          "default": "Tel: 123 456 7890"
+        },
+        {
+            "type": "url",
+            "id": "tel_url",
+            "label": "tel:to123 456 789"
+        },
+        {
+          "type": "text",
+          "id": "view_map",
+          "label": "View Map",
+          "default": "View on google map"
+        },
+        {
+            "type": "url",
+            "id": "view_map_url",
+            "label": "Map Url"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Our store",
+      "category": "contact us"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .our-store {
+    margin-top: {{ section.settings.section_padding_top }}px;
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    margin-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .our-store {
+      margin-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .our-store {
+      margin-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+      margin-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*section title*/
+  .our-store .section-capture{
+    margin-bottom: 150px;
+  }
+  .our-store .main-title{
+    text-align: right;
+    position: relative;
+  }
+  .our-store .main-title h6{
+    position: relative;
+    font-size: 18px;
+    color: #6f6f6f;
+    font-weight: 400;
+  }
+  .our-store .main-title h6 span{
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-left: 30px;
+  }
+  .our-store .main-title h6:before{
+    content: "{{ section.settings.section_big_title }}";
+    font-size: 228px;
+    font-weight: 600;
+    line-height: 1;
+    text-transform: lowercase;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px;
+    opacity: .3;
+    position: absolute;
+    left: 0;
+    bottom: 50%;
+    transform: translate(-25%, 50%);
+  }
+  .our-store .main-title h6 span:after{
+    content: '';
+    position: absolute;
+    right: 100%;
+    height: 2px;
+    width: 210px;
+    background-color: var(--color-primary);
+    opacity: .5;
+  }
+
+  @media(max-width: 1599px){
+    .our-store .main-title h6:before{
+      font-size: 168px;
+    }
+  }
+
+  @media(max-width: 1199px){
+    .our-store .section-capture {
+      margin-bottom: 100px;
+    }
+    .our-store .main-title h6:before{
+      font-size: 118px;
+      transform: translate(-15%, 50%);
+    }
+    .our-store .main-title h6 span{
+      padding-left: 15px;
+    }
+    .our-store .main-title h6 span:after{
+      width: 110px;
+    }
+  }
+
+  @media(max-width: 991px){
+    .our-store .main-title h6:before {
+        font-size: 88px;
+    }
+  }
+  
+  @media(max-width: 767px){
+    .our-store .section-capture {
+      margin-bottom: 30px;
+    }
+    .our-store .main-title h6{
+      text-align: center;
+    }
+    .our-store .main-title h6:before{
+      position: unset;
+          transform: none;
+          font-size: 50px;
+    }
+  }
+
+  /*section content*/
+  .our-store-slider .owl-item:nth-child(1) .item{
+    animation-delay: 0.1s;
+  }
+  .our-store-slider .owl-item:nth-child(2) .item{
+    animation-delay: 0.2s;
+  }
+  .our-store-slider .owl-item:nth-child(3) .item{
+    animation-delay: 0.3s;
+  }
+  .our-store-slider .store-img-cont {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .our-store-slider .store-img-cont img{
+    border-radius: 5px;
+  }
+  .our-store-slider .store-img-cont .store-text{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 60%;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    padding: 40px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  }
+  .our-store-slider .store-img-cont:hover .store-text{
+    background-color: #232323;
+  }
+
+  .our-store-slider .store-img-cont .store-text h6.store-title{
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .our-store-slider .store-img-cont .store-text .store-address{
+    margin-top: 15px;
+    height: 50px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .our-store-slider .store-img-cont .store-text .store-address a.tel-link{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 300;
+  }
+  .our-store-slider .store-img-cont .store-text .store-address a.map-url{
+    font-size: 16px;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+  .our-store-slider .store-img-cont .store-text .store-address p{
+    font-size: 16px;
+  }
+  .our-store-slider .store-img-cont:hover .store-text h6.store-title{
+    color: #fff;
+  }
+
+  .our-store-slider .store-img-cont .store-text .store-address a,
+  .our-store-slider .store-img-cont:hover .store-text .store-address p{
+    opacity: 0;
+    visibility: hidden;  
+    display: none;
+  }
+  .our-store-slider .store-img-cont:hover .store-text .store-address a{
+    opacity: 1;
+    visibility: visible;  
+    display: inline-block;
+  }
+  @media(max-width: 991px){
+    .our-store-slider .store-img-cont .store-text{
+      width: 80%;
+      padding: 30px;
+    }
+  }
+</style>

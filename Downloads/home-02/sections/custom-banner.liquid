@@ -1,0 +1,286 @@
+<!-- banner-area start -->
+<section class="custom-banner">
+    <div class="banner-block">
+        <img src="{% if section.settings.banner_bg_img %}{{ section.settings.banner_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x700/f7f7f7/999999{% endif %}">
+        <div class="text-content">
+            <a class="play-button popup-youtube" href="{{ section.settings.banner_bg_button_url }}">
+                <i class="feather-play"></i>
+                <span class="video-icon-sonar">
+                    <span class="video-icon-sonar-bfr"></span>
+                </span>
+            </a>
+            {% if section.settings.main_title != '' %}
+            <div class="section-title">
+                <h2>
+                    {{ section.settings.main_title }}
+                </h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Custom Banner",
+    "settings": [
+    {
+        "type": "header",
+        "content": "Section Padding"
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Desktop / Laptop "
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 100
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Ipad"
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top_lg",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 60
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom_lg",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+    },
+    {
+        "type" : "paragraph",
+        "content" : "Mobile"
+    },
+    {
+        "type": "range",
+        "id": "section_padding_top_xs",
+        "label": "Section Padding Top",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 40
+    },
+    {
+        "type": "range",
+        "id": "section_padding_bottom_xs",
+        "label": "Section Padding Bottom",
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "unit": "px",
+        "default": 0
+    },
+    {
+        "type": "header",
+        "content": "Custom Banner1"
+    },
+    {
+        "type": "image_picker",
+        "id": "banner_bg_img",
+        "label": "Banner Image",
+        "info": "Recommended Size: 1920px x 700px"
+    },
+    {
+        "type": "url",
+        "id": "banner_bg_button_url",
+        "label": "Video URL"
+    },
+    {
+        "type": "text",
+        "id": "main_title",
+        "label": "Main Title",
+        "default": "Premium quality"
+    }
+    ],
+    "presets":[
+    {
+        "name": "Custom Banner",
+        "category": "Banner Grid"
+    }
+    ]
+}
+{% endschema %}
+<style>
+.custom-banner{
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+}
+@media(max-width: 1199px){
+    .custom-banner{
+        padding-top: {{ section.settings.section_padding_top_lg }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+}
+@media(max-width: 767px){
+    .custom-banner{
+        padding-top: {{ section.settings.section_padding_top_xs }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+}
+/*banner area*/
+.custom-banner .banner-block{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.custom-banner .text-content{
+    position: absolute;
+    z-index: 0;
+}
+.custom-banner .text-content .section-title{
+    max-width: 60%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.custom-banner .text-content .section-title h2{
+    color: #ffff;
+    margin: 0;
+}
+.custom-banner .text-content a.play-button{
+    position: relative;
+    font-size: 22px;
+    color: var(--color-secondary);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 100%;
+}
+.custom-banner .text-content a.play-button span.video-icon-sonar{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    -webkit-animation: video-icon-sonar 2s linear infinite;
+    animation: video-icon-sonar 2s linear infinite;
+}
+.custom-banner .text-content a.play-button span.video-icon-sonar-bfr{
+    width: 130px;
+    height: 130px;
+    top: -20px;
+    left: -20px;
+    opacity: 1;
+    position: absolute;
+    border-radius: 100%;
+    z-index: -1;
+    background-color: #232323;
+}
+
+.mfp-container.mfp-iframe-holder{
+    width: auto;
+    left: 15px;
+    right: 15px;
+}
+.mfp-iframe-holder .mfp-close {
+    display: block!important;
+    font-size: 30px;
+    padding: 0;
+    height: auto;
+    width: auto;
+    position: absolute;
+    top: -30px;
+    {% if settings.enable_rtl %}
+    left: 0px;
+    {% else %}
+    right: 0px;
+    {% endif %}
+    opacity: 1;
+    background-color: transparent!important;
+    line-height: 1;
+}
+.mfp-iframe-scaler iframe{
+    border: none;
+}
+@media(max-width: 1199px) {
+    .custom-banner .text-content a.play-button{
+        height: 60px;
+        width: 60px;
+        font-size: 18px;
+    }
+    .custom-banner .text-content a.play-button span.video-icon-sonar-bfr{
+        width: 80px;
+        height: 80px;
+        top: -10px;
+        left: -10px;
+    }
+    .custom-banner .text-content .section-title{
+        margin-top: 30px;
+    }
+}
+@media(max-width: 767px) {
+    .custom-banner .text-content .section-title{
+        max-width: 100%;
+        margin-top: 15px;
+    }
+    .custom-banner .banner-block img{
+        height: 250px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .custom-banner .text-content a.play-button{
+        height: 60px;
+        width: 60px;
+        font-size: 16px;
+    }
+    .custom-banner .text-content a.play-button span.video-icon-sonar-bfr{
+        width: 80px;
+        height: 80px;
+    }
+    .mfp-iframe-holder .mfp-content{
+        max-width: 100%;
+    }
+}
+@-webkit-keyframes video-icon-sonar{0%{opacity:1;-webkit-transform:scale(.1);transform:scale(.1)}100%{opacity:0;-webkit-transform:scale(1.1);transform:scale(1.1)}}@keyframes video-icon-sonar{0%{opacity:1;-webkit-transform:scale(.1);transform:scale(.1)}100%{opacity:0;-webkit-transform:scale(1.1);transform:scale(1.1)}}
+</style>
+<script>
+    $(document).ready(function() {
+        $('.play-button, .popup-vimeo, .popup-gmaps').magnificPopup({
+            tClose: 'Close (Esc)',
+            type: 'iframe',
+            mainClass: 'mfp-fade',
+            removalDelay: 160,
+            preloader: false,
+            fixedContentPos: false
+        });
+    });
+</script>

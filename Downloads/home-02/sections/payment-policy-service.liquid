@@ -1,0 +1,312 @@
+<section class="payment-service">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <div class="section-capture">
+          <div class="main-title">
+            <span>{{ section.settings.section_sub_title }}</span>
+            <h2>{{ section.settings.section_title }}</h2>
+          </div>
+        </div>
+        <ul class="payment-service-wrap">
+          {% for block in section.blocks %}
+          <li class="payment-service-wrapper wow animate__fadeInUp">
+            <div class="service-block">
+              <a href="javascript:void(0)">    
+                {% if block.settings.service_svg_icon %}
+                {{ block.settings.service_svg_icon }}
+                {% else %}
+                <i class="{{ block.settings.service_icon }}"></i>
+                {% endif %}
+              </a>
+              <div class="service-text">
+                {%if block.settings.service_title != '' %}
+                <h6>{{ block.settings.service_title }}</h6>
+                {% endif %}
+                {%if block.settings.service_desc != '' %}
+                <p>{{ block.settings.service_desc }}</p>
+                {% endif %} 
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Payment Service",
+  "settings": [
+      {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Desktop / Laptop"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_lg",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_lg",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+  {
+    "type" : "paragraph",
+    "content" : "For icon "
+  },
+  {
+    "type": "text",
+    "id": "section_sub_title",
+    "label": "Section Sub Title",
+    "default": "BUSINESS PROCESS"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Pricing for everyone"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "payment_service",
+    "name": "Payment Services",
+    "settings": [
+    {
+      "type" : "paragraph",
+      "content" : "For svg icon "
+    },
+    {
+      "type": "textarea",
+      "id": "service_svg_icon",
+      "label": "Svg Icon",
+      "info": "Whatever you want like 'icon' or 'svg-icon' code just copy paste here feathericons.com"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "For icon "
+    },
+    {
+      "type": "text",
+      "id": "service_icon",
+      "label": "Icon Class"
+    },
+    {
+      "type": "text",
+      "id": "service_title",
+      "label": "Service Title",
+      "default": "Choose products"
+    },
+    {
+      "type": "text",
+      "id": "service_desc",
+      "label": "Service Description",
+      "default": "Lorem Ipsum is simply dummy text printing and typesetting"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Payment Service 2",
+    "category": "Our Service"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .payment-service {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .payment-service {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .payment-service {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*section title*/
+  .payment-service .main-title {
+    text-align: center; 
+  }
+  .payment-service .main-title span{
+    font-size: 18px;
+    line-height: 1;
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+  .payment-service .main-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 1;
+    margin-top: 30px;
+  }
+  @media(max-width: 1199px){
+    .payment-service .main-title span{
+      font-size: 16px;
+    }
+    .payment-service .main-title h2{
+      font-size: 26px;
+      margin-top: 15px;
+    }
+  }
+  @media(max-width: 767px){
+    .payment-service .main-title h2{
+      font-size: 22px;
+    }
+  }
+  /*secrvice content*/
+  ul.payment-service-wrap{
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  ul.payment-service-wrap li{
+    width: 25%;
+  }
+  ul.payment-service-wrap li:nth-child(1){
+    animation-delay: 0.1s;
+  }
+  ul.payment-service-wrap li:nth-child(2){
+    animation-delay: 0.2s;
+  }
+  ul.payment-service-wrap li:nth-child(3){
+    animation-delay: 0.3s;
+  }
+  ul.payment-service-wrap li:nth-child(4){
+    animation-delay: 0.4s;
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block { 
+    width: 85%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block a{
+    display: block;
+    color: #2f2f2f;
+    font-size: 45px;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block a svg{
+    width: 50px;
+    height: 50px;
+    stroke: var(--color-primary);
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block .service-text{
+    margin-top: 30px;
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block h6{
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 500;
+  }
+  ul.payment-service-wrap li.payment-service-wrapper .service-block p{
+    font-size: 16px;
+    margin-top: 21px;
+    line-height: 30px;
+  }
+  @media (max-width: 1199px) {
+    ul.payment-service-wrap{
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: thin;
+      -webkit-scrollbar-width: thin;
+    }
+    ul.payment-service-wrap::-webkit-scrollbar {
+      height: 1px;
+    }
+    ul.payment-service-wrap li.payment-service-wrapper{
+      min-width: 320px;
+    }
+    ul.payment-service-wrap li.payment-service-wrapper .service-block h6{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 767px) {
+    ul.payment-service-wrap li.payment-service-wrapper{
+      min-width: 260px;
+    }
+    ul.payment-service-wrap li.payment-service-wrapper .service-block h2{
+      font-size: 40px;
+    }
+    ul.payment-service-wrap li.payment-service-wrapper .service-block .service-text p{
+      font-size: 14px;
+      margin-top: 11px;
+    }
+  }
+</style>

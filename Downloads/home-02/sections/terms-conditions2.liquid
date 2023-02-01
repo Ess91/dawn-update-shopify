@@ -1,0 +1,258 @@
+<section class="terms-condition2">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 col-lg-5 col-md-12 col-12">
+          <div class="title-content">
+              <h2>
+                <span>{{ section.settings.section_title1 }}</span>
+                <span>{{ section.settings.section_title2 }}</span>
+              </h2>
+              <p class="block-quote">{{ section.settings.block_quot }}</p>
+              <p class="block-description">{{ section.settings.block_desc }}</p>
+              <a href="{{ section.settings.content_button_url1 }}">{{ section.settings.content_button1 }}</a>
+          </div>
+        </div>
+        <div class="col-xl-7 col-lg-7 col-md-12 col-12">
+          <div class="term-condition-img wow animate__fadeIn">
+            <img src="{% if section.settings.term_condition_img %}{{ section.settings.term_condition_img | img_url: 'master' }}{% else %}https://dummyimage.com/503x338/f7f7f7/999999{% endif %}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Terms & Condition2",
+  "settings": [
+       {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "paragraph",
+    "content": "Background Color"
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Background Color",
+    "default": "#f6f6f6"
+  },
+  {
+    "type": "text",
+    "id": "section_title1",
+    "label": "Section Title",
+    "default": "The company"
+  },
+  {
+    "type": "text",
+    "id": "section_title2",
+    "label": "Section Title",
+    "default": "private limited policy"
+  },
+  {
+    "type": "textarea",
+    "id": "block_quot",
+    "label": "Block Quots",
+    "default": "We work to ensure that your business prospers and brings you sufficient profit"
+  },
+  {
+    "type": "textarea",
+    "id": "block_desc",
+    "label": "Description",
+    "default": "Lorem ipsum is simply dummy text of the printing and typeing industry. Lorem ipsum has been the industry's standard dummy text ever since text."
+  },
+  {
+      "type": "url",
+      "id": "content_button_url1",
+      "label": "Button URL"
+  },
+  {
+      "type": "text",
+      "id": "content_button1",
+      "label": "Button Text",
+      "default": "Read more"
+  },
+  {
+      "type": "image_picker",
+      "id": "term_condition_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 503px x 338px"
+  }
+  ],
+  "presets":[
+  {
+    "name": "Terms & Condition 2",
+    "category": "Terms & Condition"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .terms-condition2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+  @media(max-width: 1199px){
+    .terms-condition2 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .terms-condition2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  .terms-condition2 .title-content {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .terms-condition2 .title-content h2{
+    font-size: 40px;
+    font-weight: 500;
+  }
+  .terms-condition2 .title-content h2 span{
+    display: block;
+  }
+
+  .terms-condition2 .title-content p.block-quote{
+    font-size: 20px;
+    margin-top: 30px;
+    font-weight: 500;
+    position: relative;
+    padding-left: 30px;
+  }
+  .terms-condition2 .title-content p.block-quote:after{
+    content: '';
+    position: absolute;
+    transform: translateY(50%);
+    bottom: 50%;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--color-primary);
+  }
+  .terms-condition2 .title-content p{
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  .terms-condition2 .title-content a{
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1;
+    padding: 15px 40px;
+    text-transform: uppercase;
+    border: 1px solid #232323;
+  }
+  .terms-condition2 .title-content a:hover{
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+  @media(max-width: 1199px){
+    .terms-condition2 .title-content h2{
+      font-size: 26px;
+    }
+    .terms-condition2 .title-content h2 span{
+      display: inline-block;
+    }
+    .terms-condition2 .title-content p.block-quote{
+          font-size: 16px;
+              margin-top: 15px;
+    }
+    .terms-condition2 .title-content p{
+          font-size: 14px;
+    margin-top: 15px;
+    }
+    .terms-condition2 .title-content a{
+          margin-top: 15px;
+    }
+  }
+  @media(max-width: 991px){
+    .terms-condition2 .term-condition-img{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .terms-condition2 .title-content h2{
+      font-size: 20px;
+    }
+  } 
+</style>

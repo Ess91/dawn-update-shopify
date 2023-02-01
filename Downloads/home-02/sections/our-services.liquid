@@ -1,0 +1,281 @@
+<section class="our-service-area">
+  <div class="container-fluid container-col">
+    <ul>
+      {% for block in section.blocks %}
+      <li class="wow animate__fadeInUp">
+        <div class="ser-block">
+            {%if block.settings.service_icon != '' %}
+            {{ block.settings.service_icon }}
+            {% endif %}
+
+            {%if block.settings.service_title != '' %}
+            <h6>{{ block.settings.service_title }}</h6>
+            {% endif %}
+            {%if block.settings.service_desc != '' %}
+            <p>{{ block.settings.service_desc }}</p>
+            {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Service",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_bottom_ipad",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "our_ser_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Section background color",
+    "default": "#F7F3F0"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "our_services",
+    "name": "Our Services",
+    "limit": 4,
+    "settings": [
+    {
+      "type": "textarea",
+      "id": "service_icon",
+      "label": "Service icon",
+      "info": "https://feathericons.com"
+    },
+    {
+      "type": "text",
+      "id": "service_title",
+      "label": "Service Title",
+      "default": "Choose products"
+    },
+    {
+      "type": "textarea",
+      "id": "service_desc",
+      "label": "Service Title",
+      "default": "On all orders over $1000.00"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Service",
+    "category": "Our Service"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.our-service-area {
+  padding-top: {{ section.settings.our_ser_padding_top }}px;
+  padding-bottom: {{ section.settings.our_ser_padding_bottom }}px;
+  background-color: {{ section.settings.section_bg_color }};
+}
+@media (max-width: 1199px) {
+  .our-service-area {
+    padding-top: {{ section.settings.our_ser_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.our_ser_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px) {
+  .our-service-area {
+    padding-top: {{ section.settings.our_ser_padding_top_xs }}px;
+    padding-bottom: {{ section.settings.our_ser_padding_bottom_xs }}px;
+  }
+}
+.our-service-area .container-col {
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .our-service-area .container-col {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .our-service-area .container-col {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .our-service-area .container-col {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+
+.our-service-area .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .our-service-area .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .our-service-area .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .our-service-area .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.our-service-area ul{
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.our-service-area ul li{
+  width: 25%;
+}
+.our-service-area ul li .ser-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.our-service-area ul li:nth-child(1){
+  animation-delay: 0.1s;
+}
+.our-service-area ul li:nth-child(2){
+  animation-delay: 0.2s;
+}
+.our-service-area ul li:nth-child(3){
+  animation-delay: 0.3s;
+}
+.our-service-area ul li:nth-child(4){
+  animation-delay: 0.4s;
+}
+
+.our-service-area .ser-block {
+  text-align: center;
+}
+.our-service-area .ser-block svg{
+  height: 48px;
+  width: 48px;
+  color: var(--color-primary);
+}
+
+.our-service-area .ser-block h6{
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 30px;
+  text-transform: uppercase;
+}
+.our-service-area .ser-block p{
+    color: var(--color-body-text);
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 15px;
+    max-width: 50%;
+}
+
+@media (max-width: 1199px) {
+  .our-service-area ul{
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    -webkit-scrollbar-width: thin;
+    justify-content: flex-start;
+  }
+  .our-service-area ul::-webkit-scrollbar {
+    height: 1px;
+  }
+  .our-service-area ul li{
+    min-width: 300px;
+  }
+  .our-service-area .ser-block p{
+    max-width: 80%;
+  }
+}
+</style>

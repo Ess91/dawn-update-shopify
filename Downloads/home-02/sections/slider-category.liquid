@@ -1,0 +1,241 @@
+<!-- Browuse categoryies -->
+<section class="slider-category1">
+  <div class="container">
+  <div class="cat-slider owl-carousel owl-theme" id="cat-{{ section.id }}">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'slider_cat' %}
+    {% assign category_product = collections[block.settings.slider_category_handle] %}
+    <div class="item wow animate__fadeIn">
+      <div class="category-wrap">
+        <div class="text-content">
+          <a href="{{ category_product.url }}">
+            <span>{{ category_product.title }}</span>
+               - 
+            <span class="cat-item">{{ category_product.products_count }} {{ block.settings.item_title }}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+  </div>
+</section>
+<script type="text/javascript">
+  $( document ).ready(function() {
+    $('#cat-{{ section.id }}').owlCarousel({
+      loop: false,
+      rewind: false,
+      items: 3,
+      margin: 30,
+      nav: false,
+      navText: ['<i class="feather-arrow-left"></i>','<i class="feather-arrow-right"></i>'],
+      dots: false,
+      {%- if settings.enable_rtl -%}
+      rtl: true,
+      {%- endif -%}
+      autoplay: false,
+      responsive:{
+        0:{
+          items: 1
+        },
+        479:{
+          items: 1
+        },
+        540:{
+          items: 2
+        },
+        768:{
+          items: 2
+        },
+        979:{
+          items: 3
+        }
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Category 1",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 50
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 50
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default":  40
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "color",
+    "id" : "section_bg_color",
+    "label" : "Background Color",
+    "default" : "#fff"
+  },
+  {
+    "type": "image_picker",
+    "id": "section_bg_img",
+    "label": "section background image",
+    "info": "Recommended Size: 1920px x 1008px"
+  }
+  ],
+  "blocks" : [
+  {
+    "type" : "slider_cat",
+    "name" : "Slider category",
+    "settings" : [
+    {
+      "type" : "header",
+      "content" : "Slider Category"
+    },
+    {
+      "type": "collection",
+      "id": "slider_category_handle",
+      "label": "Select Your Collection"
+    },
+    {
+      "type": "text", 
+      "id": "item_title",
+      "label": "Items Title",
+      "default": "Item"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Category 1"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.slider-category1 {
+  padding-top: {{ section.settings.section_padding_top }}px;
+  padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.section_bg_color }};
+  border-bottom: 1px solid #e2e2e2;
+  text-align: center;
+}
+@media (max-width: 1199px) {
+  .slider-category1 {
+    padding-top: {{ section.settings.section_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px) {
+  .slider-category1 {
+    padding-top: {{ section.settings.section_padding_top_xs }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+.slider-category1 .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .slider-category1 .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .slider-category1 .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .slider-category1 .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.slider-category1 .cat-slider .text-content a{
+  color: var(--color-secondary);
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.slider-category1 .cat-slider .text-content a span.cat-item{
+  color: var(--color-primary);
+}
+
+@media(max-width: 1199px){
+  .slider-category1 .cat-slider .text-content a{
+    font-size: 14px;
+  }
+}
+
+</style>

@@ -1,0 +1,403 @@
+<!-- banner-area start -->
+<section class="banner-grid3">
+    <div class="container-fluid container-col">
+        <div class="section-capture">
+            <div class="section-title">
+                {% if section.settings.section_title1 != '' %}
+                <h2>
+                    <span>{{ section.settings.section_title1 }}</span>
+                    <span>{{ section.settings.section_title2 }}</span>
+                </h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            {% for block in section.blocks %}
+            <div class="col-xl-6 col-lg-6 col-md-12 col-12 banner-block wow animate__fadeIn">
+                    <a href="{{ block.settings.banner_url }}">
+                        <img class="img-fluid" src="{% if block.settings.banner_img %}{{ block.settings.banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/650x392/f7f7f7/999999{% endif %}">
+                    </a>
+                    <div class="text-content">
+                        {% if block.settings.banner_title != '' %}
+                        <h6>{{ block.settings.banner_title }}</h6>
+                        {% endif %}
+                        {% if block.settings.banner_desc != '' %}
+                        <p>{{ block.settings.banner_desc }}</p>
+                        {% endif %}
+                        {% if block.settings.banner_button != '' %}
+                        <a class="btn btn-style3" href="{{ block.settings.banner_url }}">{{ block.settings.banner_button }}</a>
+                        {% endif %}
+                    </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% if section.settings.section_heading != '' %}
+        <div class="section-heading wow animate__fadeIn">
+            <h2>{{ section.settings.section_heading }}
+                <span>{{ section.settings.section_heading_underline }}</span></h2>
+        </div>
+        {% endif %}
+    </div>
+</section>
+<!-- banner-area end -->
+{% schema %}
+{
+    "name": "Banner Grid2",
+    "settings": [
+        {
+            "type" : "header",
+            "content" : "Section Padding"
+        },
+        {
+            "type" : "paragraph",
+            "content" : "Desktop / Laptop / tablet"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 100
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 100
+        },
+        {
+            "type" : "paragraph",
+            "content" : "Ipad pro / Ipad"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top_ipad",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom_ipad",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 60
+        },
+        {
+            "type" : "paragraph",
+            "content" : "Mobile"
+        },
+        {
+            "type": "range",
+            "id": "section_padding_top_xs",
+            "label": "Section Padding Top",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "section_padding_bottom_xs",
+            "label": "Section Padding Bottom",
+            "min": 0,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "default": 40
+        },
+        {
+            "type": "checkbox",
+            "id": "section_bgcolor_enable",
+            "label": "section background color enable",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "section_bgcolor",
+            "label": "section background color",
+            "default": "#f7f7f7"
+        },
+        {
+            "type": "checkbox",
+            "id": "section_bgimg_enable",
+            "label": "section background image enable",
+            "default": true
+        },
+        {
+            "type": "image_picker",
+            "id": "section_bg_img",
+            "label": "section background image",
+            "info": "Recommended Size: 1920px x 1008px"
+        },
+        {
+            "type": "text",
+            "id": "section_title1",
+            "label": "section title",
+            "default": "Organic plants"
+        },
+        {
+            "type": "text",
+            "id": "section_title2",
+            "label": "section title",
+            "default": "farmed with love"
+        },
+        {
+            "type": "text",
+            "id": "section_heading",
+            "label": "Delivery heading",
+            "default": "Home delivery on all"
+        },
+        {
+            "type": "text",
+            "id": "section_heading_underline",
+            "label": "Delivery heading underline",
+            "default": "orders over $29"
+        }
+    ],
+    "name": "banner grid",
+    "blocks":[
+        {
+            "type": "banner",
+            "name": "banner",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "banner_img",
+                    "label": "Banner Image",
+                    "info": "Recommended Size: 650px x 392px"
+                },
+                {
+                    "type": "url",
+                    "id": "banner_url",
+                    "label": "Banner URL"
+                },
+                {
+                    "type": "text",
+                    "id": "banner_title",
+                    "label": "Banner title",
+                    "default": "Study stool table"
+                },
+                {
+                    "type": "textarea",
+                    "id": "banner_desc",
+                    "label": "Banner description",
+                    "default": "We are following modern tendencies make planting"
+                },
+                {
+                    "type": "text",
+                    "id": "banner_button",
+                    "label": "Banner button",
+                    "default": "Shop collection"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name": "Banner Grid2",
+            "category": "Banner Grid"
+        }
+    ]
+}
+{% endschema %}
+<style>
+    .banner-grid3 {
+        padding-top: {{ section.settings.section_padding_top }}px;
+        padding-bottom: {{ section.settings.section_padding_bottom }}px;
+        {% if section.settings.section_bgcolor_enable %}
+        background-color: {{ section.settings.section_bgcolor }};
+        {% endif %}
+        {% if section.settings.section_bgimg_enable %}
+        background-image: url({% if section.settings.section_bg_img %}{{ section.settings.section_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x1008/f7f7f7/999999{% endif %});
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        {% endif %}
+    }
+    .banner-grid3 .section-heading{
+        padding-top: {{ section.settings.section_padding_top }}px;
+    }
+    @media (max-width: 1199px) {
+        .banner-grid3 {
+            padding-top: {{ section.settings.section_padding_top_ipad }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+        }
+        .banner-grid3 .section-heading{
+            padding-top: {{ section.settings.section_padding_top_ipad }}px;
+        }
+    }
+    @media (max-width: 767px) {
+        .banner-grid3 {
+            padding-top: {{ section.settings.section_padding_top_xs }}px;
+            padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+        }
+        .banner-grid3 .section-heading{
+            padding-top: {{ section.settings.section_padding_top_xs }}px;
+        }
+    }
+    .banner-grid3 .container-col{
+        padding-left: 285px;
+        padding-right: 285px;
+    }
+    @media(max-width: 1599px){
+        .banner-grid3 .container-col{
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+    @media(max-width: 767px){
+        .banner-grid3 .container-col{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+    /*section title*/
+    .banner-grid3 .section-title{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .banner-grid3 .section-title:before,
+    .banner-grid3 .section-title:after{
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 30%;
+        background-color: #e2e2e2;
+    }
+    .banner-grid3 .section-title:before{
+        right: 0;
+    }
+    .banner-grid3 .section-title:after{
+        left: 0;
+    }
+    .banner-grid3 .section-title h2{
+        margin-top: 0;
+    }
+    /*banner area*/
+    .banner-grid3 .banner-block {
+        position: relative;
+        overflow: hidden;
+        -webkit-transition-duration: .4s;
+        -moz-transition-duration: .4s;
+        -ms-transition-duration: .4s;
+        transition-duration: .4s;
+    }
+    .banner-grid3 .banner-block:hover{
+        -moz-transform: translate3d(0,-5px,0);
+        -o-transform: translate3d(0,-5px,0);
+        -ms-transform: translate3d(0,-5px,0);
+        -webkit-transform: translate3d(0,-5px,0);
+        transform: translate3d(0,-5px,0);
+    }
+    .banner-grid3 .banner-block > a {
+        display: block;
+    }
+    .banner-grid3 .banner-block > a img{
+        width: 100%;
+    }
+    .banner-grid3 .banner-block .text-content{
+        position: absolute;
+        {% if settings.enable_rtl %}
+        left: 30px;
+        {% else %}
+        right: 30px;
+        {% endif %}
+        bottom: 50%;
+        transform: translateY(65%);
+        width: 40%;
+    }
+    .banner-grid3 .banner-block .text-content > span{
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 1;
+        text-transform: capitalize;
+    }
+    .banner-grid3 .banner-block .text-content h6{
+        font-size: 28px;
+        display: block;
+        font-weight: 700;
+        line-height: 1;
+    }
+    .banner-grid3 .banner-block .text-content p{
+        font-size: 18px;
+        margin-top: 25px;
+        display: block;
+    }
+    .banner-grid3 .banner-block .text-content a{
+        margin-top: 40px;
+    }
+
+    @media(max-width: 1599px){
+        .banner-grid3 .banner-block .text-content h6{
+            font-size: 22px;
+        }
+        .banner-grid3 .banner-block .text-content p{
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        .banner-grid3 .banner-block .text-content a{
+            margin-top: 20px;
+        }
+    }
+    @media(max-width: 991px){
+        .banner-grid3 .banner-block{
+            margin-top: 30px;
+        }
+        .banner-grid3 .banner-block:nth-child(odd){
+            margin-top: 0;
+        }
+    }
+    @media(max-width: 767px){
+        .banner-grid3 .section-title:before,
+        .banner-grid3 .section-title:after{
+            display: none;
+        }
+        .banner-grid3 .banner-block .text-content p{
+            font-size: 14px;
+        }
+        .banner-grid3 .banner-block > a img{
+            height: 300px;
+            object-fit: cover;
+        }
+        .banner-grid3 .banner-block .text-content{
+            width: 50%;
+        }
+        .banner-grid3 .banner-block .text-content h6{
+            font-size: 20px;
+        }
+    }
+
+    .banner-grid3 .section-heading{
+        text-align: center;
+    }
+    .banner-grid3 .section-heading h2{
+        color: var(--color-primary);
+        font-size: 28px;
+    }
+    .banner-grid3 .section-heading h2 > span{
+        border-bottom: 2px solid var(--color-primary);
+    }
+    @media(max-width: 1199px){
+        .banner-grid3 .section-heading h2{
+            font-size: 20px;
+        }
+    }
+
+</style>

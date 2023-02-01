@@ -1,0 +1,108 @@
+<div class="crap-search fade modal" id="search-crap">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form action="/search" method="get" class="search-bar" role="search">
+          <div class="form-search">
+            <input type="hidden" name="type" value="product">
+            <input type="hidden" name="options[unavailable_products]" value="show">
+            <input type="hidden" name="options[prefix]" value="last">
+            <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" id="search" class="input-text" aria-label="{{ 'general.search.placeholder' | t }}" required>
+            <button class="search-btn" type="submit">
+              {% if settings.search_icon != "" %}{{ settings.search_icon }}{% else %}<i class="ti-search"></i>{% endif %}
+            </button>
+          </div>
+        </form>
+        <button type="button" class="btn close" data-bs-dismiss="modal"><i class="ti-close"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .crap-search{
+    width: 100%;
+    padding: 0px!important;
+  }
+  .crap-search .modal-content{
+    border: none;
+    border-radius: 0px;
+  }
+  .crap-search .modal-dialog{
+    max-width: 100%;
+    margin: 0px;
+  }
+  .crap-search .modal-content .search-bar{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .crap-search .modal-dialog .modal-body{
+    padding: 120px 15px;
+  }
+  .crap-search .form-search{
+    position: relative;
+  }
+  .crap-search .form-search input.input-text{
+    font-size: 16px;
+    color: #232323;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #e2e2e2;
+    padding: 0;
+    padding-bottom: 10px;
+  }
+  .crap-search .form-search input.input-text::placeholder{
+    color: #232323;
+  }
+  .crap-search .form-search button{
+    font-size: 14px;
+    position: absolute;
+    top: 0px;
+    {% if settings.enable_rtl %}
+    left: 0;
+    {% else %}
+    right: 0;
+    {% endif %}
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .crap-search .form-search button svg{
+    width: 18px;
+    height: 18px;
+  }
+  .crap-search .modal-dialog .modal-body button.close{
+    font-size: 16px;
+    line-height: 0;
+    opacity: 1;
+    padding: 0;
+    position: absolute;
+    top: 30px;
+    {% if settings.enable_rtl %}
+    left: 30px;
+    {% else %}
+    right: 30px;
+    {% endif %}
+  }
+  .crap-search .modal-dialog .modal-body button.close:hover{
+    color: var(--color-primary);
+  }
+  @media (max-width: 767px) {
+    .crap-search .modal-dialog .modal-body{
+      padding: 60px 15px;
+    }
+    .crap-search .modal-content .search-bar{
+      width: 100%;
+    }
+    .crap-search .modal-dialog .modal-body button.close{
+      font-size: 12px;
+      position: absolute;
+      top: 15px;
+      {% if settings.enable_rtl %}
+      left: 15px;
+      {% else %}
+      right: 15px;
+      {% endif %}
+    }
+  }
+</style>

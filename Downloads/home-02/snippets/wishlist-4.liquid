@@ -1,0 +1,82 @@
+<div class="wishlist">
+    <a class="header-wishlist" href="/pages/wishlist">
+        <span class="wishlist-icon">
+            {{ settings.heart_cart_icon }}
+        </span>
+        <span class="wishlist-title">{{ settings.wishlist_title }}</span>
+        <span class="wishlist-counter">{% if wishlist.count %}{{ wishlist.count }}{% else %}0{% endif %}</span>
+    </a>
+</div>
+<style>
+.wishlist{
+    position: relative;
+}
+.wishlist a.header-wishlist span.wishlist-icon svg{
+    height: 18px;
+    width: 18px;
+}
+.wishlist a.header-wishlist{
+    {%- if template == 'index' -%}
+    color: {{ section.settings.header_txt_color }};
+    {%- else -%}
+    color: var(--color-secondary);
+    {%- endif -%}
+    display: flex;
+    position: relative;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+}
+.is-sticky .wishlist a.header-wishlist{
+    color: var(--color-secondary);
+}
+.wishlist a.header-wishlist span.wishlist-title{
+    display: none;
+}
+.wishlist a.header-wishlist span.wishlist-counter{
+    position: relative;
+    {% if settings.enable_rtl %}
+    margin-right: 8px;
+    {% else %}
+    margin-left: 8px;
+    {% endif %}
+}
+
+@media(max-width: 1199px){
+    .wishlist a.header-wishlist span.wishlist-title{
+        display: none;
+    }   
+    .wishlist a.header-wishlist span.wishlist-icon  {
+        display: block;
+    }
+    .wishlist a.header-wishlist span.wishlist-counter{
+        color: #fff;
+        font-size: 10px;
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        width: 17px;
+        height: 17px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        line-height: 1px;
+        border: none;
+        {% if settings.enable_rtl %}
+        margin-right: 15px;
+        {% else %}
+        margin-left: 15px;
+        {% endif %}
+        background-color: var(--color-primary);
+    }
+}
+@media(max-width: 767px){
+    .wishlist a.header-wishlist span.wishlist-title{
+        display: none;
+    }
+    .wishlist a.header-wishlist span.wishlist-icon svg{
+        display: block;
+    }
+}
+</style>

@@ -1,0 +1,303 @@
+<section class="terms-condition3">
+  <div class="section-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 col-lg-5 col-md-5 col-12">
+          <div class="term-condition-img  wow animate__fadeIn">
+            <img src="{% if section.settings.term_condition_img %}{{ section.settings.term_condition_img | img_url: 'master' }}{% else %}https://dummyimage.com/716x505/f7f7f7/999999{% endif %}">
+          </div>
+          <div class="term-condition-img-text">
+            <h6>{{ section.settings.term_condition_img_title }}</h6>
+            <p class="block-quote">{{ section.settings.term_condition_img_desc }}</p>
+          </div>
+        </div>
+        <div class="col-xl-7 col-lg-7 col-md-7 col-12">
+          <div class="title-content">
+              <h2>{{ section.settings.section_title }}</h2>
+              <h6>{{ section.settings.section_title_label }}</h6>
+              <ul>
+                {% for block in section.blocks %}
+                <li>
+                  <div class="rule-wrapper">
+                    <p>{{ block.settings.list_desc }}</p>
+                </li>
+                {% endfor %}
+              </ul>
+              <p class="block-description">{{ section.settings.section_description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Terms & Condition3",
+  "settings": [
+      {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "paragraph",
+    "content": "Section Image"
+  },
+    {
+      "type": "image_picker",
+      "id": "term_condition_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 716px x 505px"
+  },
+  {
+    "type": "text",
+    "id": "term_condition_img_title",
+    "label": "Image Title",
+    "default": "Limitation of liability"
+  },
+  {
+    "type": "text",
+    "id": "term_condition_img_desc",
+    "label": "Image Title",
+    "default": "n no event shall staffy wordpress theme, nor any of its officers, directors and employees, shall be held liable for anything arising out of or in any way connected with your use of this website whether such liability is under contract"
+  },
+  {
+    "type": "paragraph",
+    "content": "Background Color"
+  },
+  {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Background Color",
+    "default": "#f6f6f6"
+  },
+  {
+    "type": "text",
+    "id": "section_title",
+    "label": "Section Title",
+    "default": "Restrictions"
+  },
+  {
+    "type": "textarea",
+    "id": "section_title_label",
+    "label": "Section Lable",
+    "default": "You are specifically restricted from all of the following:"
+  },
+  {
+    "type": "textarea",
+    "id": "section_description",
+    "label": "Description",
+    "default": "Certain areas of this website are restricted from being access by you and staffy wordpress theme may further restrict access by you to any areas of this website, at any time, in absolute discretion. any user id and password you may have for this website are confidential and you must maintain confidentiality as well"
+  }
+  ],
+  "blocks":[
+  {
+    "type": "terms-condition",
+    "name": "Terms & Condition",
+    "settings": [
+    {
+      "type": "textarea",
+      "id": "list_desc",
+      "label": "List Description",
+      "default": "Publishing any website material in any other media;"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Terms & Condition 3",
+    "category": "Terms & Condition"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .terms-condition3 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+  @media(max-width: 1199px){
+    .terms-condition3 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .terms-condition3 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .terms-condition3 .term-condition-img img{
+    width: 100%;
+  }
+  .terms-condition3 .term-condition-img-text{
+    background-color: #fff;
+    padding: 60px;
+  }
+  .terms-condition3 .term-condition-img-text h6{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .terms-condition3 .term-condition-img-text p{
+    font-size: 16px;
+    padding-top: 10px;
+  }
+  .terms-condition3 .title-content {
+    width: 85%;
+    margin-left: auto;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .terms-condition3 .title-content h2{
+    font-size: 40px;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .terms-condition3 .title-content h6{
+    font-size: 18px;
+    margin-top: 40px;
+    font-weight: 500;
+    position: relative;
+  }
+  .terms-condition3 .title-content ul{
+    margin-top: 30px;
+  }
+  .terms-condition3 .title-content ul li{
+    margin-top: 5px;
+  }
+  .terms-condition3 .title-content ul li .rule-wrapper p{
+    position: relative;
+    font-size: 16px;
+    letter-spacing: -.5px;
+    {% if settings.enable_rtl %}
+    padding-right: 15px;
+    {% else %}
+    padding-left: 15px;
+    {% endif %}
+    
+  }
+  .terms-condition3 .title-content ul li .rule-wrapper p:after{
+    content: '';
+    position: absolute;
+    top: 12px;
+    {% if settings.enable_rtl %}
+    right: 0px;
+    {% else %}
+    left: 0px;
+    {% endif %}
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    background-color: #6f6f6f;
+  }
+  .terms-condition3 .title-content p.block-description{
+    font-size: 16px;
+    margin-top: 30px;
+  }
+  @media(max-width: 1199px){
+    .terms-condition3 .term-condition-img-text{
+      padding: 30px;
+    }
+    .terms-condition3 .title-content{
+      width: 95%;
+    }
+    .terms-condition3 .title-content h2{
+      font-size: 26px;
+    }
+    .terms-condition3 .title-content ul{
+      margin-top: 20px;
+    }
+    .terms-condition3 .title-content h6{
+      margin-top: 20px;
+    }
+    .terms-condition3 .title-content p.block-description{
+      margin-top: 20px;
+    }
+  }
+  @media(max-width: 767px){
+     .terms-condition3 .title-content h6{
+      font-size: 16px;
+    }
+    .terms-condition3 .title-content h2{
+      font-size: 20px;
+    }
+    .terms-condition3 .title-content{
+      width: 100%;
+      margin-top: 30px;
+      height: auto;
+    }
+  } 
+</style>

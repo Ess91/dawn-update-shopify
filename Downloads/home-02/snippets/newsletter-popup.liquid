@@ -1,0 +1,189 @@
+<div class="popup-newsletter">
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" class="close" data-bs-dismiss="modal"><i class="ti-close"></i></button>
+          <div class="newsletter-wrap">
+            <div class="newsletter-wrpaper newsletter-bg" style="background-image: url('{% if settings.newsletter_img %}{{ settings.newsletter_img | img_url: 'master' }}{% else %}https://dummyimage.com/440x480/f7f7f7/999999{% endif %}');">
+            </div>
+            <div class="newsletter-wrpaper">
+              <div class="text-content">
+                <div class="subscribe-heading">
+                  <h2>{{ settings.newletter_title }}</h2>
+                  <h6>{{ settings.newsletter_des }}</h6>
+                </div>
+                <div class="news-content">
+                  {% form 'customer' %}
+                  {{ form.errors | default_errors }}
+                  {% if form.posted_successfully? %}
+                  <p class="text-success">
+                    <span>{{ 'general.newsletter_form.confirmation' | t }}</span>
+                  </p>
+                  {% endif %}
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="subscribe-block">
+                    <input type="email" name="contact[email]" class="email mail" id="E-mail" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_email' | t }}" autocapitalize="off" required>
+                    <div class="email-submit">
+                      <button type="submit" name="commit" id="Subscribe"><i class="feather-arrow-right"></i></button>
+                    </div>
+                  </div>
+                  {% endform %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(window).on('load',function(){
+    $('#myModal').modal('show');
+  });
+</script>
+
+<style>
+  .popup-newsletter .modal-dialog{
+    max-width: 880px;
+  }
+  .popup-newsletter .modal-content{
+    border: none;
+    border-radius: 0;
+  }
+  .popup-newsletter .modal-body{
+    padding: 0px;
+  }
+  .popup-newsletter .modal-body button.close{
+    font-size: 12px;
+    line-height: 1;
+    position: absolute;
+    top: 15px;
+    {% if settings.enable_rtl %}
+    left: 15px;
+    {% else %}
+    right: 15px;
+    {% endif %}
+  }
+  .popup-newsletter .modal-body button.close:hover{
+    color: var(--color-primary);;
+  }
+  .popup-newsletter .newsletter-wrap{
+    display: flex;
+    align-items: center;
+    background-color: {{ settings.newsletter_bg_color }};
+  }
+  .popup-newsletter .newsletter-wrap .newsletter-wrpaper{
+    width: 50%;
+  }
+  .popup-newsletter .newsletter-wrap .newsletter-bg{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 480px;
+  }
+  .popup-newsletter .newsletter-wrap .text-content{
+    padding: 0 90px;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h2{
+    font-size: 30px;
+    color: var(--color-primary);;
+    font-weight: 500;
+    max-width: 70%;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h6{
+    margin-top: 80px;
+    font-size: 20px;
+    font-weight: 500;
+    max-width: 80%;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin-top: 30px;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block input{
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #e2e2e2;
+    width: 100%;
+    color: #666;
+    padding-bottom: 4px;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block .email-submit{
+    position: absolute;
+    {%- if settings.enable_rtl -%}
+    left: 0;
+    {%- else -%}
+    right: 0;
+    {%- endif -%}    
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block input::placeholder{
+    color: #999;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block input:focus{
+    border-color: var(--color-primary);;
+  }
+
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block .email-submit button{
+    color: #999;
+    font-size: 16px;
+    line-height: 1;
+  }
+  .popup-newsletter .newsletter-wrap .text-content .subscribe-block .email-submit button:hover{
+    color: var(--color-primary);;
+  }
+  @media(max-width: 1199px){
+    .popup-newsletter .modal-dialog{
+      max-width: 500px;
+    }
+    .popup-newsletter .newsletter-wrap .newsletter-bg{
+      height: 300px;
+    }
+    .popup-newsletter .newsletter-wrap .text-content{
+      padding: 0 30px;
+    }
+    .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h2{
+      font-size: 20px;
+      max-width: 100%;
+    }
+    .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h6{
+      font-size: 14px;
+      margin-top: 30px;
+      max-width: 100%;
+    }
+    .popup-newsletter .newsletter-wrap .text-content .subscribe-block{
+      margin-top: 15px;
+    }
+  }
+  @media(max-width: 767px){
+    .popup-newsletter .newsletter-wrap .newsletter-wrpaper{
+      width: 100%;
+    }
+    .popup-newsletter .modal-dialog{
+      max-width: 100%;
+      margin: 15px;
+    }
+    .popup-newsletter .newsletter-wrap{
+      flex-direction: column;
+    }
+    .popup-newsletter .newsletter-wrap .newsletter-bg{
+      height: 250px;
+    }
+    .popup-newsletter .newsletter-wrap .text-content{
+      padding: 15px;
+    }
+    .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h2{
+      font-size: 16px;
+    }
+    .popup-newsletter .newsletter-wrap .text-content .subscribe-heading h6{
+      font-size: 14px;
+      margin-top: 15px;
+    }
+  }
+</style>
+

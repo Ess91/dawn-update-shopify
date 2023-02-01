@@ -1,0 +1,630 @@
+<section class="return-policy2">
+  <div class="returm-wrap">
+    <div class="return-refund">
+      <div class="info-list">
+        <div class="section-capture">
+          <div class="return-title">
+            {% if section.settings.return_refund_title != '' %}
+            <h2>{{ section.settings.return_refund_title }}</h2>
+            {% endif %}
+          </div>
+        </div>
+        <div id="accordion">
+            <ul class="return-list-wrap">
+              {%  if section.settings.return_list1_title != "" %}
+              <li class="return-list-wrapper wow animate__fadeInUp">
+                <div id="headingOne">
+                  <a href="#collapseOne" class="return-list-title" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {{ section.settings.return_list1_title }}
+                  </a>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion">
+                  <div class="return-list-des">
+                    <p>{{ section.settings.return_list1_des1 }}</p>
+                    <p>{{ section.settings.return_list1_des2 }}</p>
+                  </div>
+                </div>
+              </li>
+              {%  endif %}
+              {%  if section.settings.return_list2_title != "" %}
+              <li class="return-list-wrapper wow animate__fadeInUp">
+                <div id="headingTwo">
+                  <a href="#collapseTwo" class="return-list-title" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    {{ section.settings.return_list2_title }}
+                  </a>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+                  <div class="return-list-des">
+                    <p>{{ section.settings.return_list2_des1 }}</p>
+                    <p>{{ section.settings.return_list2_des2 }}</p>
+                  </div>
+                </div>
+              </li>
+              {%  endif %}
+              {%  if section.settings.return_list3_title != "" %}
+              <li class="return-list-wrapper wow animate__fadeInUp">
+                <div id="headingThree">
+                  <a href="#collapseThree" class="return-list-title" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    {{ section.settings.return_list3_title }}
+                  </a>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
+                  <div class="return-list-des">
+                    <p>{{ section.settings.return_list3_des1 }}</p>
+                    <p>{{ section.settings.return_list3_des2 }}</p>
+                  </div>
+                </div>
+              </li>
+              {%  endif %}
+              {%  if section.settings.return_list4_title != "" %}
+              <li class="return-list-wrapper wow animate__fadeInUp">
+                <div id="headingFour">
+                  <a href="#collapseFour" class="return-list-title" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    {{ section.settings.return_list4_title }}
+                  </a>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordion">
+                  <div class="return-list-des">
+                    <p>{{ section.settings.return_list4_des1 }}</p>
+                    <p>{{ section.settings.return_list4_des2 }}</p>
+                  </div>
+                </div>
+              </li>
+              {%  endif %}
+            </ul>
+        </div>
+      </div>
+    </div>
+    <div class="need-more-help">
+      <div class="info-list">
+        <div class="section-capture">
+          <div class="need-more-title">
+            {% if section.settings.need_more_title != '' %}
+            <h2>{{ section.settings.need_more_title }}</h2>
+            {% endif %}
+          </div>
+        </div>
+        <ul class="info_wrap">
+          <li class="info_wrapper wow animate__fadeInUp">
+            <div class="info-block">
+              <div class="icon">
+                {{ section.settings.info_icon1 }}
+              </div>
+              <div class="text-block">
+                <h6>{{ section.settings.info_title1 }}</h6>
+                <p>{{ section.settings.info_link1 }}</p>
+              </div>
+            </div>
+          </li>
+          <li class="info_wrapper wow animate__fadeInUp">
+            <div class="info-block">
+              <div class="icon">
+                {{ section.settings.info_icon2 }}
+              </div>
+              <div class="text-block">
+                <h6>{{ section.settings.info_title2 }}</h6>
+                <p>{{ section.settings.info_link2 }}</p>
+              </div>
+            </div>
+          </li>
+          <li class="info_wrapper wow animate__fadeInUp">
+            <div class="info-block">
+              <div class="icon">
+                {{ section.settings.info_icon3 }}
+              </div>
+              <div class="text-block">
+                <h6>{{ section.settings.info_title3 }}</h6>
+                <p>{{ section.settings.info_link3 }}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Return Policy section 2",
+  "settings": [
+        {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Return Refund Section"
+    },
+    {
+      "type": "text",
+      "id": "return_refund_title",
+      "label": "Return Refunds Title",
+      "default": "Refunds & Return"
+    },
+    {
+      "type": "header",
+      "content": "Accordion List"
+    },
+    {
+      "type": "text",
+      "id": "return_list1_title",
+      "label": "Return Refunds List Title",
+      "default": "Returns Policy"
+    },
+    {
+      "type": "text",
+      "id": "return_list1_des1",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "text",
+      "id": "return_list1_des2",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "header",
+      "content": "Accordion List"
+    },
+    {
+      "type": "text",
+      "id": "return_list2_title",
+      "label": "Return Refunds List Title",
+      "default": "Returns Policy"
+    },
+    {
+      "type": "text",
+      "id": "return_list2_des1",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "text",
+      "id": "return_list2_des2",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "header",
+      "content": "Accordion List"
+    },
+    {
+      "type": "text",
+      "id": "return_list3_title",
+      "label": "Return Refunds List Title",
+      "default": "Returns Policy"
+    },
+    {
+      "type": "text",
+      "id": "return_list3_des1",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "text",
+      "id": "return_list3_des2",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "header",
+      "content": "Accordion List"
+    },
+    {
+      "type": "text",
+      "id": "return_list4_title",
+      "label": "Return Refunds List Title",
+      "default": "Returns Policy"
+    },
+    {
+      "type": "text",
+      "id": "return_list4_des1",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+    {
+      "type": "text",
+      "id": "return_list4_des2",
+      "label": "Return Refunds Description",
+      "default": "Lorem ipsum is simply dummy text of the printing and typesetting industry ipsum has been the industry's standard dummy text ever an unknown printer"
+    },
+
+
+
+
+    {
+      "type": "header",
+      "content": "Need More Section"
+    },
+    {
+      "type": "text",
+      "id": "need_more_title",
+      "label": "Need More Title",
+      "default": "Need more help?"
+    },
+    {
+      "type": "header",
+      "content": "Information Content"
+    },
+    {
+      "type": "textarea",
+      "id": "info_icon1",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "info_title1",
+      "label": "Title1",
+      "default": "How can help you?"
+    },
+    {
+      "type": "text",
+      "id": "info_link1",
+      "label": "Link Title",
+      "default": "Give us a call toady"
+    },
+    {
+      "type": "textarea",
+      "id": "info_icon2",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "info_title2",
+      "label": "Title2",
+      "default": "Free to get in touch?"
+    },
+    {
+      "type": "text",
+      "id": "info_link2",
+      "label": "Link Title2",
+      "default": "Give us a call toady"
+    },
+    {
+      "type": "textarea",
+      "id": "info_icon3",
+      "label": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "info_title3",
+      "label": "Title3",
+      "default": "To request a quote?"
+    },
+    {
+      "type": "text",
+      "id": "info_link3",
+      "label": "Link Title3",
+      "default": "Describe your project"
+    }
+
+  ],
+  "presets":[
+    {
+      "name": "Return Policy section 2",
+      "category": "Return Policy"
+    }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .return-policy2 .need-more-help,
+  .return-policy2 .return-refund {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px){
+    .return-policy2 .need-more-help,
+    .return-policy2 .return-refund {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px){
+    .return-policy2 .need-more-help,
+    .return-policy2 .return-refund{
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .return-policy2 .returm-wrap {
+    display: flex;
+    background-color: #f6f6f6;
+  }
+  .return-policy2 .need-more-help,
+  .return-policy2 .return-refund {
+    width: 50%;
+  }
+  @media(max-width: 767px){
+    .return-policy2 .returm-wrap{
+      flex-direction: column;
+    }
+    .return-policy2 .need-more-help,
+    .return-policy2 .return-refund{
+      width: 100%;
+    }
+  }
+  /*return & Refunds block*/
+  .return-policy2 .return-refund{
+
+  }
+  .return-policy2 .return-refund .info-list{
+    width: 65%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .return-policy2 .return-title h2{
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  @media(max-width: 1599px){
+    .return-policy2 .return-refund .info-list{
+      width: 80%;
+    }
+  }
+  @media(max-width: 1199px){
+    .return-policy2 .return-title h2{
+      font-size: 26px;
+    }
+    .return-policy2 .return-refund .info-list{
+      width: 80%;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy2 .return-refund .info-list{
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    .return-policy2 .return-title{
+      text-align: center;
+    }
+    .return-policy2 .return-title h2{
+      font-size: 20px;
+    }
+  }
+
+  .return-policy2 .return-refund #accordion{
+    width: 100%;
+  }
+  .return-policy2 .return-refund ul li:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+  .return-policy2 .return-refund ul li:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+  .return-policy2 .return-refund ul li:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .return-policy2 .return-refund ul li:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .return-policy2 .return-refund ul li {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .return-policy2 .return-refund ul li:last-child{
+    margin-bottom: 0; 
+  }
+  .return-policy2 .return-refund ul li a.return-list-title{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  .return-policy2 .return-refund ul li .return-list-des p{
+    font-size: 16px;
+    padding-top: 20px;
+    line-height: 30px;
+  }
+  @media(max-width: 1199px){
+    .return-policy2 .return-refund ul li{
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+    }
+    .return-policy2 .return-refund ul li a.return-list-title{
+      font-size: 16px;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy2 .return-refund ul li .return-list-des p{
+      font-size: 14px;
+      padding-top: 10px;
+    }
+  }
+
+  /*need more help block*/
+  .return-policy2 .need-more-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    color: #fff;
+    line-height: 1;
+  }
+  @media(max-width: 1199px){
+    .return-policy2 .need-more-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy2 .need-more-title{
+      text-align: center;
+    }
+    .return-policy2 .need-more-title h2{
+      font-size: 20px;
+      text-align: left;
+    }
+  }
+
+  .return-policy2 .need-more-help{
+    background-color: #3c3c3c;
+  }
+  .return-policy2 .need-more-help {
+
+  }
+  .return-policy2 .need-more-help .info-list{
+    width: 65%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .return-policy2 .need-more-help .info-list ul li:nth-child(1){
+    animation-delay: 0.5s;
+  }
+  .return-policy2 .need-more-help .info-list ul li:nth-child(2){
+    animation-delay: 0.6s;
+  }
+  .return-policy2 .need-more-help .info-list ul li:nth-child(3){
+    animation-delay: 0.7s;
+  }
+  .return-policy2 .need-more-help .info-list ul li{
+    margin-top: 100px;
+  }
+  .return-policy2 .need-more-help .info-list ul li:first-child{
+    margin-top: 0px;
+  }
+  .return-policy2 .need-more-help .info-list ul li .info-block{
+    display: flex;
+    align-items: center;
+  }
+  .return-policy2 .need-more-help .info-list ul li .info-block .text-block {
+    {% if settings.enable_rtl %}
+    margin-right: 30px;
+    {% else %}
+    margin-left: 30px;
+    {% endif %}
+    
+  }
+  .return-policy2 .need-more-help .info-list ul li .info-block .icon svg{
+    width: 38px;
+    height: 38px;
+    stroke: var(--color-primary);
+  }
+  .return-policy2 .need-more-help .info-list ul li .info-block .text-block h6{
+    font-size: 20px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .return-policy2 .need-more-help .info-list ul li .info-block .text-block p{
+    color: #fff;
+    font-size: 16px;
+    padding-top: 9px;
+    display: inline-block;
+  }
+  @media(max-width: 1599px){
+    .return-policy2 .need-more-help .info-list{
+      width: 80%;
+    }
+  }
+  @media(max-width: 1199px){
+    .return-policy2 .need-more-help{
+      min-height: auto;
+    }
+    .return-policy2 .need-more-help .info-list ul li{
+      margin-top: 60px;
+    }
+    .return-policy2 .need-more-help .info-list ul li .info-block .text-block h6{
+      font-size: 16px;
+    }
+    .return-policy2 .need-more-help .info-list {
+        width: 80%;
+    }
+  }
+  @media(max-width: 767px){
+    .return-policy2 .need-more-help .need-more-help{
+      padding-top: 30px;
+    }
+    .return-policy2 .need-more-help .info-list{
+      width: 100%;
+      padding-left: 15px; 
+      padding-right: 15px; 
+    }
+    .return-policy2 .need-more-help .info-list ul li{
+      margin-top: 40px;
+    }
+    .return-policy2 .need-more-help .info-list ul li .info-block .icon svg{
+        width: 28px;
+        height: 28px;
+    }
+    .return-policy2 .need-more-help .info-list ul li .info-block .text-block h6{
+      font-size: 16px;
+    }
+    .return-policy2 .need-more-help .info-list ul li .info-block .text-block p{
+      font-size: 14px;
+    }
+  }
+</style>

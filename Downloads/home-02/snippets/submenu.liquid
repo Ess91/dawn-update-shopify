@@ -1,0 +1,66 @@
+{% assign menu = block.settings.select_menu %}
+  <li class="menu-link submenu parant">
+    <a {% if link.current %}aria-current="page"{% endif %} class="link-title {% if link.current %}active{% endif %}" href="{{ link.url }}">
+      
+      <span class="sp-link-title">{{ linklists[menu].title }}</span>
+      {% if block.settings.menu_flag != '' %}
+      <span class="sale">{{ block.settings.menu_flag }}</span>
+      {% endif %}
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <a data-bs-toggle="collapse" href="#collapse-{{ linklists[menu].title | handleize }}" class="link-title link-title-lg">
+      <span class="sp-link-title">{{ linklists[menu].title }}</span>
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="sub-menu-level1 collapse" id="collapse-{{ linklists[menu].title | handleize }}">
+
+        {% for link in linklists[menu].links %}
+        {% assign child_list_handle = link.title | handleize %}
+        {% if linklists[child_list_handle].links != '' %}
+        <li class="level1-li parent">
+          <h6 class="sublink-title">
+            <a href="{{ link.url }}">
+              {{ link.title }}
+              <i class="fa fa-angle-down"></i>
+            </a>
+          </h6>
+          
+          <ul class="sub-menu-level2">
+            
+            {%- for child_link in link.links -%}
+            {% assign grand_childlink = child_link.title | handle %}
+            {% if linklists[grand_childlink] and linklists[grand_childlink].links.size > 0 %}
+            <li class="level2-li parent">
+              <h6 class="sublink-title">
+                <a href="{{ child_link.url }}">
+                  {{ child_link.title }}
+                  <i class="fa fa-angle-down"></i>
+                </a>
+              </h6>
+              
+              <ul class="sub-menu-level3">
+                {%- for grand_childlink in child_link.links -%}
+                <li class="level2-li">
+                  <a href="{{ grand_childlink.url }}" class="suplink-title">{{ grand_childlink.title }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </li>
+            {% else %}
+            <li class="level2-li">
+              <a href="{{ child_link.url }}" class="suplink-title">{{ child_link.title }}</a>
+            </li>
+            {% endif %}
+
+            {% endfor %}
+          </ul>
+        </li>
+        {% else %}
+        <li class="level1-li {% if childlink.active %} active{% endif %}">
+          <a class="sublink-title" href="{{ link.url }}" class="suplink-title">{{ link.title }}</a>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+    </ul>
+  </li>

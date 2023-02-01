@@ -1,0 +1,91 @@
+{%- assign link_active = canonical_url | split: shop.url | last -%}
+
+<li class="menu-link megamenu megamenu-banner parant">
+  
+  {%-assign menu_link = block.settings.custom_link-%}
+    <a href="{{ block.settings.custom_link }}" {% if link_active == menu_link %}aria-current="page"{% endif %} class="link-title {% if link_active == menu_link %}active{% endif %}">
+      <span class="sp-link-title">{{ block.settings.title }}</span>
+      {% if block.settings.menu_flag != '' %}
+      <span class="sale">{{ block.settings.menu_flag }}</span>
+      {% endif %}
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <a data-bs-toggle="collapse" href="#collapse-{{ block.settings.title | handleize }}" class="link-title link-title-lg">
+      <span class="sp-link-title">{{ block.settings.title }}</span>
+      <i class="fa fa-angle-down"></i>
+    </a>
+  
+  <div class="dropdown-submenu mega-menu collapse" id="collapse-{{ block.settings.title | handleize }}">
+    <div class="container">
+      <div class="banner-linklist">
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url1 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img1 %}{{ block.settings.banner_img1 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title1 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url2 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img2 %}{{ block.settings.banner_img2 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title2 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url3 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img3 %}{{ block.settings.banner_img3 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title3 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url4 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img4 %}{{ block.settings.banner_img4 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title4 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url5 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img5 %}{{ block.settings.banner_img5 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title5 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url6 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img6 %}{{ block.settings.banner_img6 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title6 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url7 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img7 %}{{ block.settings.banner_img7 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title7 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url8 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img8 %}{{ block.settings.banner_img8 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title8 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url9 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img9 %}{{ block.settings.banner_img9 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title9 }}</span>
+              </a>
+            </div>
+            <div class="megamenu-li menu-banner">
+              <a href="{{ block.settings.banner_url10 }}">
+                <img class="img-fluid mobile-img" src="{% if block.settings.banner_img10 %}{{ block.settings.banner_img10 | img_url: '500x500', crop: 'center' }}{% else %}https://dummyimage.com/500x500/f7f7f7/999999{% endif %}">
+                <span>{{ block.settings.banner_title10 }}</span>
+              </a>
+            </div>
+            {% if block.settings.view_more_btn != '' %}
+            <div class="view-more">
+              <a href="{{ block.settings.view_more_url }}" class="btn btn-style2 style2-diff">
+                {{ block.settings.view_more_btn }}
+              </a>
+            </div>
+            {% endif %}
+      </div>
+    </div>
+  </div>
+</li>

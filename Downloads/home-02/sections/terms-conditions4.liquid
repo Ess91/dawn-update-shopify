@@ -1,0 +1,222 @@
+<section class="terms-condition4">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12 col-center">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+            <div class="main-title wow animate__fadeInLeft">
+              {% if section.settings.section_title != '' %}
+              <h3>{{ section.settings.section_title }}</h3>
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+            <div class="list-content  wow animate__fadeInRight">
+              <ul>
+                {% for block in section.blocks %}
+                <li>
+                  <div class="list-block">
+                    <h6>{{ block.settings.list_title }}</h6>
+                    <p>{{ block.settings.list_desc }}</p>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Terms & Condition3",
+  "settings": [
+        {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Page Title"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Indemnificationyou hereby indemnify to the fullest extent staffy wordpress Theme from and against any and/or all liabilities, costs, demands, causes of Action, damages and expenses arising in any way related to your breach of Any of the provisions of these terms."
+    }
+  ],
+  "blocks":[
+    {
+      "type": "terms_condition",
+      "name": "terms condition list",
+      "settings": [
+        {
+          "type": "text",
+          "id": "list_title",
+          "label": "List Title",
+          "default": "Governing Law & Jurisdiction"
+        },
+        {
+          "type": "textarea",
+          "id": "list_desc",
+          "label": "List Description",
+          "default": "These terms will be governed by and interpreted in accordance with the Laws of the state of country, and you submit to the non-exclusive jurisdiction Of the state and federal courts located in country for the resolution of any disputes."
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Terms & Condition 4",
+      "category": "Terms & Condition"
+    }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .terms-condition4 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .terms-condition4 {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .terms-condition4 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /*section title*/
+  .terms-condition4 .main-title {
+    width: 94%;
+  }
+  .terms-condition4 .main-title h3{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 2;
+  }
+  @media(max-width: 1599px){
+    .terms-condition4 .main-title {
+      width: 100%;
+    }
+  }
+  /*section content*/
+  .terms-condition4 .list-content ul li {
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+  .terms-condition4 .list-content ul li:first-child {
+    margin-top: 0px;
+    padding-top: 0px;
+  }
+  .terms-condition4 .list-content ul li .list-block{
+    width: 85%;
+  }
+  .terms-condition4 .list-content ul li h6{
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+  .terms-condition4 .list-content ul li p {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  @media (max-width: 1599px) {
+    .terms-condition4 .list-content ul li .list-block{
+      width: 100%;
+    }
+  }
+  @media (max-width: 991px) {
+    .terms-condition4 .list-content {
+      margin-top: 30px;
+    }
+    .terms-condition4 .list-content ul li {
+      margin-top: 15px;
+      padding-top: 0;
+    }
+    .terms-condition4 .list-content ul li p{
+      margin-top: 5px;
+    }
+  }
+  @media (max-width: 767px) {
+    .terms-condition4 .list-content ul li {
+      margin-top: 20px;
+    }
+  }
+</style>

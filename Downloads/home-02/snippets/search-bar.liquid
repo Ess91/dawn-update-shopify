@@ -1,0 +1,117 @@
+<div class="search-rap">
+  <a class="search-crap" data-bs-toggle="modal" href="#search-crap">
+    {% if settings.search_icon != "" %}{{ settings.search_icon }}{% else %}<i class="fa fa-search" aria-hidden="true"></i>{% endif %}
+    <span class="search-title">{{ section.settings.search_title}}</span>
+  </a>
+</div>
+
+<div class="search-rap-desktop">
+  <form action="/search" method="get" class="input-group search-bar" role="search">
+    <input type="hidden" name="type" value="product">
+    <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}" required>
+    
+    <button type="submit" class="icon-fallback-text">
+      <span class="icon icon-search" aria-hidden="true"></span>
+      <span class="fallback-text">{% if settings.search_icon != "" %}{{ settings.search_icon }}{% else %}<i class="fa fa-search" aria-hidden="true"></i>{% endif %}</span>
+    </button>
+  </form>
+</div>
+<style>
+/*search desktop*/
+.search-rap-desktop {
+  display: none;
+}
+.search-rap-desktop form input{
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+  font-size: 14px;
+  border-radius: 0px;
+  border: none;
+  padding: 0;
+  padding-bottom: 3px;
+  text-transform: uppercase;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.search-rap-desktop form input::placeholder{
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+}
+
+.search-rap-desktop form button{
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+  position: absolute;
+  {% if settings.enable_rtl %}
+  left: 0px;
+  {% else %}
+  right: 0px;
+  {% endif %}
+  top: 1px;
+  line-height: 0;
+}
+.search-rap-desktop form button svg{
+  height: 14px;
+  width: 14px;
+}
+
+.is-sticky .search-rap-desktop form button,
+.is-sticky .search-rap-desktop form input::placeholder,
+.is-sticky .search-rap-desktop form input{
+  color: var(--color-secondary);
+}
+.is-sticky .search-rap-desktop form input{
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}
+
+/*search modal*/
+.search-rap a.search-crap {
+  {%- if template == 'index' -%}
+  color: {{ section.settings.header_txt_color }};
+  {%- else -%}
+  color: var(--color-secondary);
+  {%- endif -%}
+  font-size: 16px;
+  display: flex;
+  align-content: center;
+}
+.is-sticky .search-rap a.search-crap{
+  color: var(--color-secondary);
+}
+.search-rap a.search-crap svg{
+  height: 18px;
+  width: 18px;
+}
+.search-rap a.search-crap span{
+  {% if settings.enable_rtl %}
+  margin-right: 8px;
+  {% else %}
+  margin-left: 8px;
+  {% endif %}
+  display: flex;
+  align-items: center;
+}
+@media(max-width: 1199px){
+  .search-rap-desktop form button svg{
+    stroke: var(--color-secondary);
+  }
+  .search-rap-desktop form input::placeholder{
+    color: var(--color-secondary);
+  }
+  .search-rap-desktop form input{
+    color: var(--color-secondary);
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
+  .search-rap a.search-crap span{
+    display: none;
+  }
+</style>

@@ -1,0 +1,158 @@
+<div class="blog-post">
+  <div class="blog-img-post">
+    {% assign article_has_image = false %}
+    {% assign content = article.excerpt_or_content %}
+    {% if article.image %}
+    <a href="{{ article.url }}" class="blog-img">
+      <img class="img-fluid" src="{{ article.image | img_url: '800x813', crop: "center" }}" alt="{{ article.title | escape }}" />
+    </a>
+  </div>
+  <div class="blog-post-content">
+    <span class="date-time">
+      <span class="date">{{ article.published_at | date: '%d' }}</span>
+      <span class="time">{{ article.published_at | date: '%b' }}</span>
+      <span class="year">{{ article.published_at | date: '%Y' }}</span>
+    </span>
+    <h2 class="blog-title">{{ article.title }}</h2>
+    <a href="{{ article.url }}" class="btn btn-style11" aria-label="Read more: {{ article.title }}">
+      <span>{{ settings.blog_read_btn }}</span>
+    </a>
+      {% comment %}
+      <p class="blog-desc">{{ article.content | strip_html | strip | truncate: 70 }}</p>
+      <span>{{ section.settings.article_through }} {{ article.author }}</span>
+      <ul class="post-tag">
+        {% for tag in article.tags %}
+          <li><a href="{{ tag | handleize | prepend:'/blogs/news/tagged/'}}">{{ tag }}</a></li>
+        {% endfor %}
+      </ul>
+      {% endcomment %}
+    </div>
+    {% endif %}
+  </div>
+  <style type="text/css">
+  .blog-post .blog-img{
+    width: 100%;
+    overflow: hidden;
+  }
+  .blog-post .blog-img-post{
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blog-post a.blog-img img{
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+  }
+  .blog-post a.blog-img::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    {%- if settings.enable_rtl -%}
+    right: 0;
+    {%- else -%}
+    left: 0;
+    {%- endif -%}
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0 0 0 / 12%);
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .blog-post:hover a.blog-img::after{
+    opacity: 1;
+    visibility: visible;
+  }
+  .blog-post a.blog-img:after,
+  .blog-post:hover a.blog-img:after,{
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .blog-post .date-time{
+    color: var(--color-primary);
+    font-size: 28px;
+    font-family: 'Hallenger Serif Font';
+  }
+  .blog-post .blog-post-content{
+    padding-top: 40px;
+    text-align: center;
+  }
+  .blog-post .blog-post-content h2{
+    color: var(--color-secondary);
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 85%;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 25px;
+    line-height: 32px;
+  }
+  .blog-post .blog-post-content p{
+    display: none;
+    font-size: 18px;
+    margin-top: 25px;
+    width: 80%;
+  }
+  .blog-post .blog-post-content a.btn{
+    margin-top: 35px;
+  }
+  .blog-post .blog-post-content ul.post-tag{
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    margin-top: 25px;
+  }
+  .blog-post .blog-post-content ul.post-tag li:first-child{
+    {%- if settings.enable_rtl -%}
+    margin-right: 0px;
+    {%- else -%}
+    margin-left: 0px;
+    {%- endif -%}
+  }
+  .blog-post .blog-post-content ul.post-tag li {
+    {%- if settings.enable_rtl -%}
+    margin-right: 10px;
+    {%- else -%}
+    margin-left: 10px;
+    {%- endif -%}
+  }
+  .blog-post .blog-post-content ul.post-tag li a{
+    color: #888;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 1599px){
+    .blog-post .blog-post-content{
+      padding-top: 30px;
+    }
+    .blog-post .blog-post-content h2{
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 1199px){
+    .blog-post .date-time{
+      font-size: 20px;
+    }
+    .blog-post .blog-post-content h2{
+      font-size: 16px;
+      max-width: 100%;
+      margin-top: 10px;
+    }
+    .blog-post .blog-post-content p{
+      font-size: 14px;
+      margin-top: 15px;
+      width: 100%;
+    }
+    .blog-post .blog-post-content a.btn{
+      margin-top: 15px;
+    }
+  }
+</style>

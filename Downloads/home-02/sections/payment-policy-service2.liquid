@@ -1,0 +1,320 @@
+<section class="payment-service2">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-10 col-lg-12 col-md-12 col-12 col-center">
+        <ul class="service-wrap">
+          {% for block in section.blocks %}
+          <li class="service-wrapper wow animate__fadeIn">
+            <div class="service-block">
+              <div class="service-img" style="background-image: url({% if block.settings.service_img %}{{ block.settings.service_img | img_url: 'master' }}{% else %}https://dummyimage.com/390x422/f7f7f7/999999{% endif %});">
+              </div>
+              <div class="service-text">
+                {%if block.settings.service_title != '' %}
+                <h6>{{ block.settings.service_title }}</h6>
+                {% endif %}
+                {%if block.settings.service_desc != '' %}
+                <p>{{ block.settings.service_desc }}</p>
+                {% endif %}
+                <ul class="list-wrap">
+                  {% if block.settings.service_list1 != "" %}
+                  <li class="list-wrapper">
+                    <p>{{ block.settings.service_list1 }}</p>
+                  </li>
+                  {% endif %}
+                  {% if block.settings.service_list2 != "" %}
+                  <li class="list-wrapper">
+                    <p>{{ block.settings.service_list2 }}</p>
+                  </li>
+                  {% endif %}
+                  {% if block.settings.service_list3 != "" %}
+                  <li class="list-wrapper">
+                    <p>{{ block.settings.service_list3 }}</p>
+                  </li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Payment Service2",
+  "settings": [
+      {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Desktop / Laptop"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_lg",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_lg",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    }
+  ],
+  "blocks":[
+  {
+    "type": "payment_service2",
+    "name": "Payment Services2",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Service Image"
+    },
+    {
+        "type": "image_picker",
+        "id": "service_img",
+        "label": "Service Image",
+        "info": "Recommended Size: 390px x 422px"
+    },
+    {
+      "type": "text",
+      "id": "service_title",
+      "label": "Service Title",
+      "default": "Choose products"
+    },
+    {
+      "type": "text",
+      "id": "service_desc",
+      "label": "Service Description",
+      "default": "Lorem Ipsum is simply dummy text printing and typesetting"
+    },
+    {
+      "type": "text",
+      "id": "service_list1",
+      "label": "Service List",
+      "default": "Enable/Disable – Enable to use."
+    },
+    {
+      "type": "text",
+      "id": "service_list2",
+      "label": "Service List",
+      "default": "Title – Choose the title shown to customers during checkout"
+    },
+    {
+      "type": "text",
+      "id": "service_list3",
+      "label": "Service List",
+      "default": "Saved methods with Subscriptions"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Payment Service2",
+    "category": "Our Service"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .payment-service2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .payment-service2{
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .payment-service2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*secrvice content*/
+  .payment-service2 ul.service-wrap{
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -30px;
+    margin-top: -30px;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper:nth-child(2){
+    animation-delay: 0.4s;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper:nth-child(1){
+    animation-delay: 0.2s;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper{
+    width: calc(50% - 30px);
+    margin-left: 30px;
+    margin-top: 30px;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block {
+    display: flex;
+    align-items: center;
+    background-color: #f6f6f6;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-img{
+    width: 50%;
+    height: 422px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block a{
+    display: block;
+    color: #2f2f2f;
+    font-size: 45px;
+    position: relative;
+    overflow: hidden;
+    line-height: 0;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block a svg{
+    width: 50px;
+    height: 50px;
+    stroke: var(--color-primary);
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text{
+    padding: 0 60px;
+    width: 50%;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text h6{
+    font-size: 18px;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text > p{
+    font-size: 16px;
+    margin-top: 15px;
+    line-height: 30px;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text ul.list-wrap {
+    margin-top: 25px;
+  }
+
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text ul.list-wrap li.list-wrapper{
+    position: relative;
+    margin-top: 10px;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text ul.list-wrap li.list-wrapper:first-child{
+    margin-top: 0;
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text ul.list-wrap li.list-wrapper:after{
+    content: '';
+    position: absolute;
+    top: 13px;
+    left: 0;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+  .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text ul.list-wrap li.list-wrapper p{
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  @media (max-width: 1599px) {
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text{
+      padding: 0 30px;
+    }
+  }
+  @media (max-width: 1199px) {
+    .payment-service2 ul.service-wrap li.service-wrapper{
+      width: calc(100% - 30px);
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block h6{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 767px) {
+    .payment-service2 ul.service-wrap{
+        margin-left: -15px;
+        margin-top: -15px;
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper {
+      width: calc(100% - 15px);
+      margin-left: 15px;
+      margin-top: 15px;
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block h2{
+      font-size: 40px;
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block{
+      flex-direction: column; 
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-img{
+      width: 100%;
+      height: 300px;
+    }
+    .payment-service2 ul.service-wrap li.service-wrapper .service-block .service-text{
+      width: 100%;
+      padding: 30px 15px
+    }
+  }
+</style>

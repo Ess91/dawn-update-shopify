@@ -1,0 +1,12 @@
+<a class="action-wishlist tile-actions--btn wishlist-btn wishlist" data-page="product" href="javascript:void(0)" data-product-handle="{{ product.handle }}">
+  <span class="add-wishlist">
+    {% if settings.heart_cart_icon %}{{ settings.heart_cart_icon }}{% else %}<i class="ti-heart"></i>{% endif %}
+  </span>
+  <span class="loading-wishlist animated infinite rotateOut"><i class="feather-loader"></i>
+  </span>
+  <span class="remove-wishlist">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="wishlist-add-title">{{ settings.add_wishlit_title }}</span>
+  <span class="wishlist-remove-title">{{ settings.remove_wishlit_title }}</span>
+</a>

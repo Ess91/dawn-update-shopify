@@ -1,0 +1,294 @@
+<section class="our-store2">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <div class="row">
+          <div class="col-xl-4 col-lg-12 col-md-12 col-12">
+          <div class="main-title wow animate__fadeIn">
+            <h2>
+              <span>{{ section.settings.section_title }}</span>
+            </h2>
+          </div>
+          </div>
+          <div class="col-xl-8 col-lg-12 col-md-12 col-12">
+            <div class="our-store-content">
+              {% for block in section.blocks %}
+              <div class="item wow animate__fadeIn">
+                <div class="store-text">
+                  <div class="title-block">
+                    <img class="img-fluid" src="{% if block.settings.store_img %}{{ block.settings.store_img | img_url: 'master' }}{% else %}https://dummyimage.com/44x26/f7f7f7/999999{% endif %}">
+                    <h6 class="store-title"><span>{{ block.settings.store_title }}</span></h6>
+                  </div>
+                  <div class="store-address">
+                    <p>{{ block.settings.store_address }}</p>
+                    <a class="mail-link" href="{{ block.settings.store_mail_url }}" target="black">{{ block.settings.store_mail }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Our Store",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Main Title",
+      "default": "How can we help you today?"
+    }
+  ],
+  "blocks" : [
+    {
+      "type" : "store_location",
+      "name" : "Our store",
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "Store Location"
+        },
+        {
+          "type": "image_picker",
+          "id": "store_img",
+          "label": "Store Images",
+          "info": "Recommended Size: 498px x 366px"
+        },
+        {
+          "type": "text",
+          "id": "store_title",
+          "label": "Store Title",
+          "default": "London"
+        },
+        {
+          "type": "text",
+          "id": "store_address",
+          "label": "Store Address",
+          "default": "401 Broadway, 24th Floor, Orchard View, London, UK"
+        },
+        {
+          "type": "text",
+          "id": "store_mail",
+          "label": "Store Mail",
+          "default": "info@yourdomain.com"
+        },
+        {
+            "type": "url",
+            "id": "store_mail_url",
+            "label": "mail:info@yourdomain.com"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "Our store",
+      "category": "contact us"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .our-store2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .our-store2 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .our-store2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+
+
+  /*section title*/
+  .our-store2 .main-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .our-store2 .main-title h2{
+    font-size: 40px;
+    font-weight: 600;
+  }
+  @media(max-width: 1199px){
+    .our-store2 .main-title{
+      justify-content: center;
+      padding-bottom: 60px;
+    }
+    .our-store2 .main-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 767px){
+    .our-store2 .main-title{
+      padding-bottom: 30px;
+    }
+    .our-store2 .main-title h2{
+      font-size: 20px;
+    }
+  }
+
+  /*section content*/
+
+  .our-store-content {
+    display: flex;
+    align-items: center;
+  }
+  .our-store-content .item:nth-child(2){
+    animation-delay: 0.2s;
+  }
+  .our-store-content .item:nth-child(1){
+    animation-delay: 0.1s;
+  }
+  .our-store-content .item{
+    width: 100%;
+  }
+  .our-store-content .store-text {
+    width: 70%;
+    margin: auto;
+  } 
+  .our-store-content .store-text .title-block{
+    display: flex;
+    align-items: center;
+  }
+  .our-store-content .store-text .title-block img{
+    width: auto;
+  }
+  .our-store-content .store-text .title-block h6.store-title{
+    font-size: 20px;
+    font-weight: 500;
+    {% if settings.enable_rtl %}
+    padding-right: 30px;
+    {% else %}
+    padding-left: 30px;
+    {% endif %}
+    
+  }
+  
+  .our-store-content .store-text .store-address{
+    margin-top: 30px;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 30px;
+  }
+  .our-store-content .store-text .store-address a.mail-link{
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 15px;
+  }
+  .our-store-content .store-text .store-address p{
+    font-size: 16px;
+  }
+
+  @media(max-width: 991px){
+    .our-store-content .store-text{
+      width: 100%;
+      padding: 0 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .our-store-content{
+      flex-direction: column;
+    }
+    .our-store-content .item{
+      margin-top: 30px;
+    }
+    .our-store-content .item:first-child{
+      margin-top: 0px;
+    }
+    .our-store-content .store-text{
+      padding: 0; 
+    }
+    .our-store-content .store-text .title-block h6.store-title{
+      font-size: 18px;
+    }
+    .our-store-content .store-text .store-address{
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+  }
+</style>

@@ -1,0 +1,404 @@
+<!-- Browuse categoryies -->
+<section class="slider-category2">
+  <div class="container-fluid container-col">
+    <div class="section-capture">
+      <div class="section-title">
+        {% if section.settings.section_sub_title != '' %}
+        <span>{{ section.settings.section_sub_title }}</span>
+        {% endif %}
+        {% if section.settings.section_title != '' %}
+        <h2>{{ section.settings.section_title }}</h2>
+        {% endif %}
+      </div>
+    </div>
+    <div class="cat-slider swiper-container" id="cat-{{ section.id }}">
+      <div class="swiper-wrapper">
+    {% for block in section.blocks %}
+    {% case block.type %}
+    {% when 'slider_cat' %}
+    {% assign category_product = collections[block.settings.slider_category_handle] %}
+    <div class="swiper-slide wow animate__fadeIn">
+      <div class="category-wrap">
+          <div class="img-content">
+            <a href="{{ category_product.url }}">
+              <img class="img-fluid" src="{% if block.settings.category_img %}{{ block.settings.category_img | img_url: 'master' }}{% else %}https://dummyimage.com/800x994/f7f7f7/999999{% endif %}">
+            </a>
+          </div>
+          <div class="text-content">
+            <span class="cat-item">{{ category_product.products_count }}+ {{ category_product.title }} {{ block.settings.item_title }}</span>
+              <h4>{{ block.settings.description }}</h4>
+              <a class="btn btn-style8" href="{{ category_product.url }}">
+                {{ block.settings.collection_button }}
+              </a>
+          </div>
+      </div>
+    </div>
+    {% endcase %}
+    {% endfor %}
+    </div>
+    <div class="swiper-scrollbar"></div>
+    </div>
+  </div>
+</section>
+
+<script type="text/javascript">
+  $( document ).ready(function() {
+  var swiper = new Swiper('#cat-{{ section.id }}', {
+    slidesPerView: 2,
+    spaceBetween: 60,
+    loop: false,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      hide: true,
+    },
+    breakpoints: {
+      0: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      590: {
+        slidesPerView: 1,
+        spaceBetween: 15
+      },
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 15
+      },
+      768: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      },
+      979: {
+        slidesPerView: 1,
+        spaceBetween: 30
+      },
+      1199: {
+        slidesPerView: 2,
+        spaceBetween: 30
+      }
+    }
+  });
+  });
+</script>
+{% schema %}
+{
+  "name": "Category 2",
+  "settings": [
+  {
+    "type" : "header",
+    "content" : "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop / tablet"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_ipad",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_ipad",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 30
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 20
+  },
+  {
+    "type" : "color",
+    "id" : "section_bg_color",
+    "label" : "Background Color",
+    "default" : "#fff"
+  },
+  {
+    "type" : "text",
+    "id" : "section_sub_title",
+    "label" : "section sub title",
+    "default" : "jewelry category"
+  },
+  {
+    "type" : "textarea",
+    "id" : "section_title",
+    "label" : "section title",
+    "default" : "Our shining jewelry that will stand you out among the crowd"
+  }
+  ],
+  "blocks" : [
+  {
+    "type" : "slider_cat",
+    "name" : "Slider category",
+    "settings" : [
+    {
+      "type" : "header",
+      "content" : "Slider Category"
+    },
+    {
+      "type": "collection",
+      "id": "slider_category_handle",
+      "label": "Select Your Collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "category_img",
+      "label": "category image",
+      "info": "Recommended Size: 800x994px"
+    },
+    {
+      "type": "textarea", 
+      "id": "description",
+      "label": "Collectoin description",
+      "default": "Elegance is not standing out but being remembered"
+    },
+    {
+      "type": "text", 
+      "id": "item_title",
+      "label": "Items Title",
+      "default": "Items"
+    },
+    {
+      "type": "text", 
+      "id": "collection_button",
+      "label": "collection button",
+      "default": "collection"
+    }
+    ]
+  }
+  ],
+  "presets":[
+  {
+    "name": "Category 2",
+    "category": "Shop By Category"
+  }
+  ]
+}
+{% endschema %}
+<style>
+.slider-category2 {
+  padding-top: {{ section.settings.section_padding_top }}px;
+  padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  background-color: {{ section.settings.section_bg_color }};
+  overflow: hidden;
+}
+@media (max-width: 1199px) {
+  .slider-category2 {
+    padding-top: {{ section.settings.section_padding_top_ipad }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+  }
+}
+@media (max-width: 767px) {
+  .slider-category2 {
+    padding-top: {{ section.settings.section_padding_top_xs }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+  }
+}
+.slider-category2 .container-col{
+  padding-left: 160px;
+  padding-right: 160px;
+}
+@media(max-width: 1599px){
+  .slider-category2 .container-col{
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+@media(max-width: 1199px){
+  .slider-category2 .container-col{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media(max-width: 767px){
+  .slider-category2 .container-col{
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+{% if section.settings.section_sub_title == empty %}
+.slider-category2 .section-title h2{
+  margin-top: 0;
+}
+{% endif %}
+
+.slider-category2 .category-wrap {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+}
+.slider-category2 .category-wrap .img-content{
+  width: 60%;
+  margin-bottom: 50px;
+}
+.slider-category2 .category-wrap .text-content{
+  position: absolute;
+  {%- if settings.enable_rtl -%}
+  left: 0;
+  {%- else -%}
+  right: 0;
+  {%- endif -%}
+  bottom: 0;
+  top: 0;
+  padding: 80px;
+  width: 55%;
+  margin-top: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f7f4ef;
+  text-align: center;
+}
+
+.slider-category2 .category-wrap .text-content span{
+  color: var(--color-primary);
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.slider-category2 .category-wrap .text-content h4{
+  font-size: 32px;
+  margin-top: 30px;
+  font-weight: 500;
+  line-height: 45px;
+  font-family: 'Hallenger Serif Font';
+}
+.slider-category2 .category-wrap .text-content a{
+  margin-top: 50px;
+}
+@media(max-width: 1599px){
+  .slider-category2 .category-wrap .text-content{
+    padding: 35px;
+  }
+  .slider-category2 .category-wrap .text-content span{
+    font-size: 14px;
+  }
+  .slider-category2 .category-wrap .text-content h4{
+    font-size: 24px;
+    margin-top: 15px;
+    line-height: 35px;
+  }
+  .slider-category2 .category-wrap .text-content a{
+    margin-top: 30px;
+  }
+}
+@media(max-width: 1199px){
+  .slider-category2 .category-wrap .text-content{
+    padding: 30px;
+    margin-top: 80px;
+  }
+  .slider-category2 .category-wrap .text-content h4{
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .slider-category2 .category-wrap .text-content a{
+    margin-top: 20px;
+  }
+}
+@media(max-width: 991px){
+  .slider-category2 .category-wrap .text-content,
+  .slider-category2 .category-wrap .img-content{
+    width: 100%;
+  }
+  .slider-category2 .category-wrap .img-content{
+    margin-bottom: 0px;
+  }
+  .slider-category2 .category-wrap .text-content{
+    position: unset;
+    margin-top: 0px;
+    padding: 15px;
+  }
+}
+
+/*sldier dotts*/
+.slider-category2 .swiper-scrollbar{
+  width: 31%;
+  height: 2px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  opacity: 1 !important;
+  position: relative !important;
+  margin-top: 80px;
+  overflow: hidden;
+}
+.slider-category2 .swiper-scrollbar .swiper-scrollbar-drag{
+  position: absolute !important;
+  background-color: var(--color-body-text);
+  {%- if settings.enable_rtl -%}
+  right: 0px !important;
+  {%- else -%}
+  left: 0px !important;
+  {%- endif -%}
+}
+ @media (max-width: 1199px) {
+  .slider-category2 .swiper-scrollbar{
+    margin-top: 50px;
+  }
+}
+@media (max-width: 767px) {
+  .slider-category2 .swiper-scrollbar{
+    width: 100%;
+  }
+  .populer-dishes-slider .swiper-scrollbar{
+      margin-top: 30px;
+  }
+}
+
+</style>

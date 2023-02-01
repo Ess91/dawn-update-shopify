@@ -1,0 +1,169 @@
+<footer class="footer-bottom-area">
+  <div class="container-fluid container-col">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <ul class="footer-bottom">
+          <li class="ftlink-li">
+            <div class="copy-right">
+              <p>
+                <span>{{ section.settings.copy_right_text1 }}</span>
+              </p>
+            </div>
+          </li>
+          <li class="ftlink-li">
+            <div class="payment-img">
+              <img src="{% if section.settings.payment_img %}{{ section.settings.payment_img | img_url: 'master' }}{% else %}https://dummyimage.com/197x35/f7f7f7/999999{% endif %}">
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Copyright",
+  "settings": [
+    {
+      "type" : "header",
+      "content" : "Section padding"
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Desktop / Laptop / tablet"
+    },
+    {
+      "type": "range",
+      "id": "foot_bt_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "foot_bt_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "foot_bt_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "foot_bt_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type" : "header",
+      "content" : "Background Color"
+    },
+    {
+      "type": "color",
+      "id": "foot_bt_bg_color",
+      "label": "Background Color",
+      "default": "#000"
+    },
+    {
+      "type" : "header",
+      "content" : "Copyright Text"
+    },
+    {
+      "type": "text",
+      "id": "copy_right_text1",
+      "label": "CopyRight Text1",
+      "default": "© 2020 theme powered by staffy All right reserved."
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_img",
+      "label": "Payment Image",
+      "info": "Recommended Size: 197px x 35px"
+    }
+  ],
+  "presets":[
+    {
+      "name": "Copyright",
+      "category": "copyright"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .footer-bottom-area {
+    background-color: {{ section.settings.foot_bt_bg_color }};
+    padding-top: {{ section.settings.foot_bt_padding_top }}px;
+    padding-bottom: {{ section.settings.foot_bt_padding_bottom }}px;
+  }
+  @media(max-width: 767px){
+    .footer-bottom-area {
+      padding-top: {{ section.settings.foot_bt_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.foot_bt_padding_bottom_xs }}px;
+    }
+  }
+  .footer-bottom-area .container-col{
+    padding-left: 285px;
+    padding-right: 285px;
+  }
+  @media(max-width: 1599px){
+    .footer-bottom-area .container-col{
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .footer-bottom-area .container-col{
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  /*footer bottom*/
+  ul.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  ul.footer-bottom li.ftlink-li .copy-right p{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  ul.footer-bottom li.ftlink-li .payment-img{
+    mix-blend-mode: darken;
+  }
+  @media(max-width: 767px){
+    ul.footer-bottom{
+      flex-direction: column;
+    }
+    ul.footer-bottom li:first-child{
+      margin-top: 0;
+    }
+    ul.footer-bottom li{
+      margin-top: 5px;
+    }
+    ul.footer-bottom li.ftlink-li .copy-right p{
+      font-size: 14px;
+    }
+  }
+</style>

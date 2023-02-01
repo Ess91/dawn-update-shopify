@@ -1,0 +1,138 @@
+{{ 'timber.js' | asset_url | script_tag }}
+{{ 'cart.api.js' | asset_url | script_tag }}
+<script>Shopify.money_format = "{{ shop.money_format }}";</script>
+
+{% comment %}
+Template-specific js
+{% endcomment %}
+<script>
+  {% if resetPassword %}
+  $(function() {
+    timber.resetPasswordSuccess();
+  });
+  {% endif %}
+</script>
+{% include 'ajax-search-bar' %}
+{% include 'product-quickview' %}
+
+<script>
+  $(".cart-plus-minus").prepend('<div class="dec qtybutton">-</div>');
+  $(".cart-plus-minus").append('<div class="inc qtybutton">+</div>');
+  $(".qtybutton").on("click", function() {
+    var $button = $(this);
+    var oldValue = $button.parent().find("input").val();
+    if ($button.text() == "+") {
+      var newVal = parseFloat(oldValue) + 1;
+    } else {
+      // Don't allow decrementing below zero
+      if (oldValue > 1) {
+        var newVal = parseFloat(oldValue) - 1;
+      } else {
+        newVal = 1;
+      }
+    }
+    $button.parent().find("input").val(newVal);
+    
+    var formatMoney = "<span class='money'>{{amount}}</span>";
+    if($('.cart-item-wrap').length == 1){
+      
+        
+        var vId = $(this).parent().closest('.product-quantity').attr('data-variant');
+        console.log(vId);
+        $.ajax({
+            type: 'POST',
+            url: '/cart/change.js',
+            dataType: 'json',
+            data: {
+                quantity: newVal,
+                id: vId
+            },
+            success: function (data){
+                //console.log(data);
+                $.ajax({
+                    type: 'GET',
+                    dataType: 'jsonp',
+                    url: '/cart.json',
+                    success: function(cart){
+                        var item_count = cart['item_count'];
+                        var total_price = cart['total_price'];
+            console.log(cart.total_price);
+                        if ( item_count > 0 ) {
+                          for(let item of cart.items) {
+                            //console.log(item);
+                            //console.log(item.variant_id);
+                            //console.log(vId);
+                                if(item.variant_id == vId){
+                                $('.full-price-'+item.variant_id).html(Shopify.formatMoney(item.original_line_price, "{{ shop.money_format }}"));
+                              }
+                           }
+
+                            // mini cart data
+                            $('.subtotal').html(Shopify.formatMoney(total_price, "{{ shop.money_format }}"));
+                            $(".bigcounter").html(item_count);
+                            $('.total-price').html(Shopify.formatMoney(total_price, "{{ shop.money_format }}"));
+                        }
+                    }
+                });
+            }
+        });
+    }
+  });
+</script>
+
+
+
+<script>
+  $('.ajax-spin-cart').on('click', function() {
+    $(this).addClass('loading add-item');
+    setTimeout(function () {
+      $('.ajax-spin-cart').removeClass('loading');
+    },1000);
+    setTimeout(function () {
+      $('.ajax-spin-cart').removeClass("add-item");
+    },2000);
+  });
+</script>
+
+
+{%- if settings.wishlist_enable -%}
+{{ 'wishlist.js' | asset_url | script_tag }}
+<script>  
+  /* Ajax Wishlist */
+  $(".action-wishlist").on('click', function(){
+    $(this).addClass("loading-wishlist adding-wishlist");
+    setTimeout(function () {
+      $(".action-wishlist").removeClass("loading-wishlist");
+    },1000);
+    setTimeout(function () {
+      $(".adding-wishlist").removeClass("adding-wishlist");
+    },2000);
+
+  });
+
+  (function() {
+    Wishlist.init();
+  }());
+</script>
+{%- endif -%}
+
+<!-- Recently Viewed Products -->
+{%- if template contains 'product' and settings.recent_view_product_enable -%}
+<script>
+  Shopify.Products.recordRecentlyViewed();
+</script>
+{%- endif -%}
+
+{%- if settings.google_analytic_enable -%}
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                          })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '{{ settings.google_tracking_id }}', 'auto');
+     ga('send', 'pageview');
+
+</script>
+{%- endif -%}
+

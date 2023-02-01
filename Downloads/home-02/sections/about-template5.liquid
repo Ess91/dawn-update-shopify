@@ -1,0 +1,330 @@
+<section class="about-section5">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-12">
+        <div class="main-title">
+          <span>{{ section.settings.section_sub_title }}</span>
+          <h2>{{ section.settings.section_title }}</h2>
+          <a class="btn btn-style8" href="{{ section.settings.title_button_url }}">{{ section.settings.title_button }}</a>
+        </div>
+      </div>
+      <div class="col-xl-8 col-lg-8 col-md-12 col-12">
+        <div class="list-content">
+          <ul>
+            {% for block in section.blocks %}
+            <li class="wow animate__fadeIn">
+              <div class="list-block">
+                <h6>{{ block.settings.list_title }}</h6>
+                <p>{{ block.settings.list_des }}</p>
+                <h2>{{ block.settings.list_counter }}</h2>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "About Section 5",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Main Title",
+      "default": "New fashable is arround the world "
+    },
+    {
+      "type": "text",
+      "id": "section_sub_title",
+      "label": "Section Sub Title",
+      "default": "Our expertise"
+    },
+    {
+      "type": "text",
+      "id": "title_button",
+      "label": "Title Button",
+      "default": "Discover staffy"
+    },
+    {
+      "type": "url",
+      "id": "title_button_url",
+      "label": "Title URL"
+    }
+  ],
+  "blocks" : [
+    {
+      "type" : "store_location",
+      "name" : "Our store",
+      "limit" : 2,
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "Store Location"
+        },
+        {
+          "type": "text",
+          "id": "list_title",
+          "label": "List Title",
+          "default": "Innovative solutions"
+        },
+        {
+          "type": "text",
+          "id": "list_des",
+          "label": "List Description",
+          "default": "Lorem ipsum consectetur tempor incididunt ut labore."
+        },
+        {
+          "type": "text",
+          "id": "list_counter",
+          "label": "List Counter",
+          "default": "95%"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "About Section4",
+      "category": "About us"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .about-section5 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .about-section5 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-section5 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /*section title*/
+  .about-section5 .main-title span{
+    font-size: 20px;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+  .about-section5 .main-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+  .about-section5 .main-title a{
+    margin-top: 35px;
+  }
+  @media(max-width: 1199px){
+    .about-section5 .main-title{
+      justify-content: center;
+    }
+    .about-section5 .main-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 991px){
+    .about-section5 .list-content{
+      margin-top: 30px;
+    }
+    .about-section5 .main-title span{
+      font-size: 16px;
+    }
+    .about-section5 .main-title h2{
+      margin-top: 15px;
+    }
+    .about-section5 .main-title a{
+      margin-top: 20px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-section5 .main-title h2{
+      font-size: 20px;
+    }
+  }
+  /*list content*/
+  .about-section5 .list-content {
+    background-color: #faf9f9;
+  }
+  .about-section5 .list-content ul{
+    display: flex;
+  }
+  .about-section5 .list-content ul li{
+    width: 50%;
+    padding: 80px 30px;
+    height: 100%;
+    position: relative;
+  }
+  .about-section5 .list-content ul li:first-child:after{
+    display: none;
+  }
+  .about-section5 .list-content ul li:after{
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    transform: translateY(50%);
+    height: 50%;
+    width: 1px;
+    background-color: #222;
+    opacity: 0.1;
+  }
+  .about-section5 .list-content ul li .list-block {
+    width: 70%;
+    margin: 0 auto;
+  }
+  .about-section5 .list-content ul li .list-block h6{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1;
+  }
+  .about-section5 .list-content ul li .list-block h2{
+    font-size: 60px;
+    line-height: 1;
+    opacity: 0.4;
+    position: absolute;
+    {% if settings.enable_rtl %}
+    right: 15px;
+    transform: translateX(-50%);
+    {% else %}
+    left: 15px;
+    transform: translateX(50%);
+    {% endif %}
+    top: calc(100% - 30px);
+  }
+  .about-section5 .list-content ul li .list-block p{
+    font-size: 16px;
+    margin-top: 15px;
+  }
+  @media(max-width: 1199px){
+    .about-section5 .list-content ul li .list-block {
+      width: 100%;
+    }
+    .about-section5 .list-content ul li .list-block h6{
+      font-size: 18px;
+    }
+    .about-section5 .list-content ul li .list-block p{
+      font-size: 14px;
+    }
+    .about-section5 .list-content ul li .list-block h2{
+      font-size: 40px;
+      top: calc(100% - 25px);
+      left: 30px;
+      transform: none;
+    }
+  }
+  @media(max-width: 767px){
+    .about-section5 .list-content ul{
+      display: flex;
+      flex-direction: column;
+    }
+    .about-section5 .list-content ul li{
+      width: 100%;
+      padding: 30px
+    }
+    .about-section5 .list-content ul li:after{
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+      height: 1px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    .about-section5 .list-content ul li .list-block h2{
+      position: unset;
+      transform: none;
+      font-size: 30px;
+      margin-top: 15px;
+    }
+  }
+</style>

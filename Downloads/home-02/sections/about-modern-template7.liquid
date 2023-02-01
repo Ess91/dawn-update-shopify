@@ -1,0 +1,367 @@
+<section class="about-modern-section7">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-5 col-lg-5 col-md-6 col-12">
+        <div class="section-capture">
+          <div class="main-title">
+            <h2>
+              <span>{{ section.settings.section_title1 }}</span>
+              <span>{{ section.settings.section_title2 }}</span>
+            </h2>
+          </div>
+        </div>
+        <div class="list-content">
+          <ul>
+            {% for block in section.blocks %}
+              <li class="about2-service-wrapper">
+                <div class="service-block">
+                  <a href="javascript:void(0)">    
+                    {{ block.settings.service_svg_icon }}
+                  </a>
+                  <div class="service-text">
+                    {%if block.settings.service_title != '' %}
+                    <h6>{{ block.settings.service_title }}</h6>
+                    {% endif %}
+                    {%if block.settings.service_desc != '' %}
+                    <p>{{ block.settings.service_desc }}</p>
+                    {% endif %} 
+                  </div>
+                </div>
+              </li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <div class="col-xl-7 col-lg-7 col-md-6 col-12">
+        <div class="about-banner-img-cont wow animate__fadeIn">
+            <div class="single-banner">
+              <img src="{% if section.settings.about_banner_img %}{{ section.settings.about_banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/505x553/f7f7f7/999999{% endif %}">
+            </div>
+            <div class="single-banner-title">
+              <h1>{{ section.settings.banner_title }}</h1>
+              <span>{{ section.settings.banner_sub_title }}</span>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "About Modern Section 7",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "text",
+      "id": "section_title1",
+      "label": "Section Main Title",
+      "default": "Our store"
+    },
+    {
+      "type": "text",
+      "id": "section_title2",
+      "label": "Section Main Title",
+      "default": "Information"
+    },
+    {
+      "type": "header",
+      "content": "Banner Content"
+    },
+    {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Banner Image Title",
+        "default": "185+"
+    },
+    {
+        "type": "text",
+        "id": "banner_sub_title",
+        "label": "Banner Image Sub Title",
+        "default": "Worldwide store"
+    },
+    {
+        "type": "image_picker",
+        "id": "about_banner_img",
+        "label": "Image",
+        "info": "Recommended Size: 505 x 553px"
+    }
+  ],
+    "blocks":[
+    {
+      "type": "contact_block",
+      "name": "Contact Service",
+      "settings": [
+        {
+          "type" : "paragraph",
+          "content" : "For svg icon "
+        },
+        {
+          "type": "textarea",
+          "id": "service_svg_icon",
+          "label": "Svg Icon",
+          "info": "Whatever you want like 'icon' or 'svg-icon' code just copy paste here feathericons.com"
+        },
+        {
+          "type": "text",
+          "id": "service_title",
+          "label": "Service Title",
+          "default": "Address"
+        },
+        {
+          "type": "text",
+          "id": "service_desc",
+          "label": "Service Description",
+          "default": "70 Washington square south new york, NY 10012"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "About Modern Section 7",
+      "category": "About Modern"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .about-modern-section7 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .about-modern-section7 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-modern-section7 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*section title*/
+
+  .about-modern-section7 .main-title h2 span{
+    display: block;
+  }
+  .about-modern-section7 .main-title h2{
+    font-size: 40px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section7 .main-title h2{
+      font-size: 26px;
+    }
+    .about-modern-section7 .main-title h2 span{
+      display: inline-block;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section7 .main-title h2{
+      font-size: 20px;
+    }
+  }
+
+  /*list content*/
+  .about-modern-section7 .list-content ul li {
+    margin-top: 60px;
+  } 
+  .about-modern-section7 .list-content ul li .service-block a {
+    border: 1px solid #e2e2e2;
+    width: 65px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+  }
+  .about-modern-section7 .list-content ul li .service-block a svg{
+    color: var(--color-primary);
+    width: 25px;
+    height: 25px;
+  }
+  .about-modern-section7 .list-content ul li .service-block{
+    display: flex;
+    align-items: center;
+  }
+  .about-modern-section7 .list-content ul li .service-block .service-text {
+    width: calc(70% - 95px);
+    {% if settings.enable_rtl %}
+    margin-right: 30px;
+    {% else %}
+    margin-left: 30px;
+    {% endif %}
+    
+  }
+  .about-modern-section7 .list-content ul li .service-block .service-text h6{
+    font-size: 18px;
+    line-height: 1;
+  }
+  .about-modern-section7 .list-content ul li .service-block .service-text p{
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section7 .list-content ul li{
+        margin-top: 30px;
+    }
+
+    .about-modern-section7 .list-content ul li .service-block .service-text{
+      width: calc(100% - 95px);
+    }
+        .about-modern-section7 .list-content ul li .service-block .service-text p{
+      font-size: 16px;
+    }
+  }
+  @media(max-width: 1199px){
+      .about-modern-section7 .list-content ul li{
+          margin-top: 15px;
+      }
+    }
+  /*list content*/
+  .about-modern-section7 .about-banner-img-cont {
+    position: relative;
+  }
+  .about-modern-section7 .about-banner-img-cont .single-banner{
+    text-align: right;
+    margin-bottom: 60px;
+    width: 88%;
+  }
+  .about-modern-section7 .about-banner-img-cont .single-banner img{
+    border-radius: 5px;
+  }
+  .about-modern-section7 .about-banner-img-cont .single-banner-title{
+    background-color: var(--color-primary);
+    border-radius: 5px;
+    position: absolute;
+    bottom: -60px;
+    right: 0;
+    text-align: center;
+    padding: 40px 60px;
+  }
+  .about-modern-section7 .about-banner-img-cont .single-banner-title h1{
+    color: #fff;
+    font-size: 90px;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .about-modern-section7 .about-banner-img-cont .single-banner-title span{
+    color: #fff;
+    font-size: 20px;
+    line-height: 1;
+    margin-top: 5px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section7 .about-banner-img-cont .single-banner-title h1{
+      font-size: 40px;
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner-title span{
+      margin-top: 10px; 
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner-title span{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 991px) {
+    .about-modern-section7 .about-banner-img-cont .single-banner{
+      margin-bottom: 30px;
+      width: 100%;
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner-title{
+      padding: 20px 30px;
+      bottom: -30px;
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner-title h1{
+      font-size: 30px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-modern-section7 .about-banner-img-cont {
+      margin-top: 30px; 
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner-title{
+      bottom: 0px;
+    }
+    .about-modern-section7 .about-banner-img-cont .single-banner{
+      margin-bottom: 0px;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,195 @@
+<section class="introduction">
+  <div class="introduction-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-5 col-lg-5 col-md-12 col-12">
+          <div class="introduction-title wow animate__fadeIn">
+            <h2>
+              <span>{{ section.settings.introduction_title1 }}</span>
+              <span>{{ section.settings.introduction_title2 }}</span>
+            </h2>
+          </div>
+        </div>
+        <div class="col-xl-7 col-lg-7 col-md-12 col-12">
+          <div class="introduction-description wow animate__fadeIn">
+            <p>{{ section.settings.introduction_description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Privacy Policy",
+  "settings": [
+  {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "header",
+    "content": "Introduction Title"
+  },
+  {
+    "type": "text",
+    "id": "introduction_title1",
+    "label": "introduction title",
+    "default": "Our privacy policy"
+  },
+  {
+    "type": "text",
+    "id": "introduction_title2",
+    "label": "introduction title",
+    "default": "introduction"
+  },
+  {
+    "type": "textarea",
+    "id": "introduction_description",
+    "label": "introduction Description",
+    "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic"
+  }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .introduction {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media(max-width: 1199px){
+    .introduction {
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+    }
+  }
+  @media(max-width: 767px){
+    .introduction {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  .introduction-title h2{
+    position: relative;
+    font-size: 40px;
+    font-weight: 500;
+    padding-bottom: 60px;
+  }
+  .introduction-title h2:after{
+    content: "";
+    position: absolute;
+    {% if settings.enable_rtl %}
+    right: 0px;
+    {% else %}
+    left: 0px;
+    {% endif %}
+    bottom: 0;
+    height: 2px;
+    width: 120px;
+    margin-top: 60px;
+    background-color: var(--color-primary);
+  }
+  .introduction-title h2 span{
+    display: block;
+  }
+  .introduction-title h2 span:last-child{
+    font-weight: 600; 
+  }
+  .introduction-content p{
+    font-size: 16px;
+    line-height: 30px;
+  }
+  @media(max-width: 1199px){
+    .introduction-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 991px){
+    .introduction-title{
+      text-align: center;
+    }
+    .introduction-title h2{
+      padding-bottom: 0;
+    }
+    .introduction-title h2:after{
+      display: none;
+    }
+    .introduction-description{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 767px){
+    .introduction-title h2{
+      font-size: 20px;
+    }
+  }
+</style>

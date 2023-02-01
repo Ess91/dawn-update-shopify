@@ -1,0 +1,22 @@
+
+{% if product.metafields.my_fields.new_flag == true %}
+<span class="new-title">{{ 'products.product.new' | t }}</span>
+{% endif %}
+
+{%- if settings.sale_percent_enable and on_sale -%}
+
+{%- if settings.discount_mode == 'percentage' -%}
+  {%- assign savings = product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round | append: '%' -%}
+{%- else -%}
+  {%- capture savings -%} {{ product.compare_at_price | minus: product.price | money }} {%- endcapture -%}
+{%- endif -%}
+
+<span class="percent-count">
+{{ 'products.product.discount_html' | t: savings: savings }}
+</span>
+
+{% endif %}
+
+{% if sold_out %}
+<span class="soldout-title">{{ 'products.product.sold_out' | t }}</span>
+{% endif %}

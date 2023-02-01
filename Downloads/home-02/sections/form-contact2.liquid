@@ -1,0 +1,266 @@
+<section class="form-contact2">
+  <div class="contact-content2">
+    <div class="contact-form-bg wow animate__fadeIn">
+    </div>
+    <div class="form-warp2 contact-detail2 wow animate__fadeIn">
+      <div class="form-wrapper">
+        <div class="section-capture">
+          <div class="section-title">
+            {% if section.settings.section_title != '' %}
+            <h2>{{ section.settings.section_title }}</h2>
+            {% endif %}
+            {% if section.settings.section_title != '' %}
+            <p>{{ section.settings.section_des }}</p>
+            {% endif %}
+          </div>
+        </div>
+        <div class="contact-form-list2">
+          {% include 'contact-form2' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Contact form 2",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_ipad",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_ipad",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "paragraph",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_xs",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_xs",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Section Background"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Backgrond color",
+      "default": "#fff"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_bg_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 731px x 813px"
+    },
+    {
+      "type": "header",
+      "content": "Form Info"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Got any questions?"
+    },
+    {
+      "type": "text",
+      "id": "section_des",
+      "label": "Section Description",
+      "default": "Use the form below to get in touch with the sales team"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name Placeholder",
+      "default": "Your name"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone Placeholder",
+      "default": "Your mobile"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Message Placeholder",
+      "default": "Your message here..."
+    },
+    {
+      "type": "text",
+      "id": "form_button_name",
+      "label": "Button Name",
+      "default": "Send Message"
+    },
+    {
+      "type": "text",
+      "id": "read_agree_text",
+      "label": "Terms Text",
+      "default": "I accept the terms & conditions and I understand that my data will be hold securely in accordance with the privacy policy."
+    }
+  ],
+  "presets":[
+    {
+      "name": "Contact Form 2",
+      "category": "contact us"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .contact-content2 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+  .contact-form-bg{
+    background-image: url({% if section.settings.contact_bg_img %}{{ section.settings.contact_bg_img | img_url: 'master' }}{% else %}https://dummyimage.com/731x813/f7f7f7/999999{% endif %});
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  @media (max-width: 1199px){
+    .contact-content2 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px){
+    .contact-content2 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  /* contact form css */
+  .contact-content2 .section-title {
+    text-align: left;
+  }
+  .contact-content2 .section-title h2{
+    font-size: 40px;
+    text-transform: unset;
+    font-weight: 600;
+    margin-top: 0px;
+  }
+  /* contact form css */
+  .contact-content2 {
+    display: flex;
+    align-items: center;
+  }
+  .contact-content2 .contact-form-bg{
+    width: 38%;
+    height: 813px;
+  }
+  .contact-content2 .form-warp2{
+    width: 62%;
+    padding: 30px;
+  }
+  .contact-content2 .form-warp2 .form-wrapper{
+    width: 60%;
+    margin: auto;
+  }
+  @media(max-width: 1199px){
+    .contact-content2 .form-warp2,
+    .contact-content2 .contact-form-bg{
+      width: 50%;
+    }
+    .contact-content2 .contact-form-bg{
+      height: 620px;
+    }
+    .contact-content2 .form-warp2 .form-wrapper{
+      width: 100%;
+    }
+    .contact-content2 .section-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 991px){
+    .contact-content2 .contact-form-bg{
+      height: 520px;
+    }
+  }
+  @media(max-width: 767px){
+    .contact-content2{
+      flex-direction: column;
+    }
+    .contact-content2 .form-warp2,
+    .contact-content2 .contact-form-bg{
+      width: 100%;
+    }
+    .contact-content2 .form-warp2{
+      padding: 30px 15px 0 15px;
+    }
+    .contact-content2 .contact-form-bg {
+      height: 415px;
+    }
+    .contact-content2 .section-title h2{
+      font-size: 20px;
+    }
+  }
+</style>

@@ -1,0 +1,76 @@
+{%- assign on_sale = false -%}
+{%- if product.compare_at_price > product.price -%}
+{%- assign on_sale = true -%}
+{%- endif -%}
+{%- assign sold_out = true -%}
+{%- if product.available -%}
+{%- assign sold_out = false -%}
+{%- endif -%}
+{%- assign variant = product.selected_or_first_available_variant -%}
+{%- if product.available -%}
+{%- assign func = "Shopify.addItem(" | append: variant.id | append: ", 1)" -%}
+{%- endif -%}
+
+<div class="single-product-wrap">
+    <div class="{% if product.available %}product-image{% else %}product-image stock-out{% endif %}">
+        <a class="pro-img" href="{{ product.url | within: collection }}">
+            <img class="img-fluid img1" src="{{ product.featured_image.src | img_url : '350X400', crop: 'center' }}" alt="{{ image.alt | escape  }}">
+        </a>
+        <div class="product-label">
+            {%- include 'product-label' -%}
+        </div>
+        {% if product.available %}
+        <div class="product-action">
+            {% if product.available %}
+            <a href="javascript:void(0);" onclick="{{ func }}; return false;" class="add-to-cart ajax-spin-cart">
+                <span>
+                    <span class="cart-title"><i class="ti-shopping-cart"></i></span>
+                    <span class="cart-loading animated infinite rotateOut"><i class="feather-loader"></i></span>
+                    <span class="cart-added"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    <span class="cart-unavailable"><i class="ti-alert"></i></span>
+                </span>
+            </a>
+            {% else %}
+            <a class="disabled-add-to-cart add-to-cart disabled" disabled="disabled" href="#" title="Out of stock"><i class="ti-shopping-cart"></i></a>
+            {% endif %}
+            <a href="javascript:void(0);" onclick="quiqview('{{ product.handle | handleize }}')" class="quick-view">
+                <i class="ti-eye"></i>
+            </a>
+            {% include 'wishlist-button' %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="product-content">
+        <h6><a href="{{ product.url | within: collection }}" title="{{ product.title }}">{{ product.title | truncate: 30 }}</a></h6>
+
+        <div class="product-ratting">
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+        </div>
+
+        <div class="price-box">
+            <span class="new-price">{{ product.price | money }}</span>
+            {% if product.compare_at_price_max > product.price %}
+            <span class="old-price">{{ product.compare_at_price | money }}</span>
+            {% endif %}
+        </div>
+        <p class="product-description">
+            {%- if product.description contains '[short_description]' -%}
+            {%- assign short_description_first = product.description | split:'[/short_description]' | first -%}
+            {%- assign short_description_final = short_description_first | split:'[short_description]' | last -%}
+            {{ short_description_final | truncate: 80 }}
+            {%- else -%}
+            {{ product.description | strip_html | truncatewords: 35 | split: '[short_description]' | first | split: '[product_description]' | first | split: '[new_products]' | first | split: '[product_video]' | first | split: '[affiliate_link]' | first }}
+            {%- endif -%}
+        </p>
+        {% if product.description contains '[product_timer]' and product.available %}
+        {% assign product_timer_first = product.description | split:'[/product_timer]' | first %}
+        {% assign product_timer_final = product_timer_first | split:'[product_timer]' | last %}
+        <div class="timer-section counter-event-{{product.id}}" id="counter-event" data-enddate="{{product_timer_final}}"></div>
+        {% endif %}
+    </div>
+</div>
+<script>
+    $('.counter-event-{{product.id}}').countdown($('.counter-event-{{product.id}}').attr("data-enddate")).on('update.countdown', function (event) {
+    var $this = $(this).html(event.strftime('' + '<ul class="contdown_row"><li class="countdown_section"><span id="days" class="countdown_timer">%-D</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.day_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="hours" class="countdown_timer">%H</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.hour_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="minutes" class="countdown_timer">%M</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.minute_title }}</span>{% endif %}</li>' + '<li class="countdown_section"><span id="seconds" class="countdown_timer">%S</span>{% if settings.count_text_enable %}<span class="countdown_title">{{ settings.second_title }}</span>{% endif %}</li></ul>'))
+    });
+</script>

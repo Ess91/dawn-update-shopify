@@ -1,0 +1,320 @@
+<section class="about-section1">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="about-content">
+                    <div class="section-capture">
+                      <div class="main-title">
+                          {% if section.settings.section_sub_title != '' %}
+                          <span class="section-sub-title wow animate__flipInX">{{ section.settings.section_sub_title }}</span>
+                          {% endif %}
+                          {% if section.settings.section_title != '' %}
+                          <h2 class="wow animate__fadeIn">{{ section.settings.section_title }}</h2>
+                          {% endif %}
+                          {% if section.settings.section_arrow != '' %}
+                          <div  class="section-arrow">{{ section.settings.section_arrow }}</div>
+                          {% endif %}
+                      </div>
+                    </div>
+                    <div class="about-banner-area">
+                        {% for block in section.blocks %}
+                        <div class="about-banner-img-cont">
+                            <div class="single-banner wow animate__fadeIn" style="background-image: url('{% if block.settings.about_banner_img %}{{ block.settings.about_banner_img | img_url: 'master' }}{% else %}https://dummyimage.com/625x473/f7f7f7/999999{% endif %}');">
+                            </div>
+                            <div class="abt-banner-desc">
+                                {% if block.settings.about_title != '' %}
+                                <h6>{{ block.settings.about_title }}</h6>
+                                {% endif %}
+
+                                {% if block.settings.about_des1 != '' %}
+                                <p>{{ block.settings.about_des1}}</p>
+                                {% endif %}
+
+                                {% if block.settings.about_des2 != '' %}
+                                <p>{{ block.settings.about_des2 }}</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "About Section 1",
+    "settings": [
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "about_product_padding_top",  
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },           
+    {
+      "type": "range",
+      "id": "about_product_padding_bottom", 
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Ipad pro / Ipad"
+    },
+    {
+      "type": "range",
+      "id": "about_product_padding_top_ipad",  
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },           
+    {
+      "type": "range",
+      "id": "about_product_padding_bottom_ipad", 
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type" : "paragraph",
+      "content" : "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "about_product_padding_top_xs",  
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },           
+    {
+      "type": "range",
+      "id": "about_product_padding_bottom_xs", 
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+        "type": "header",
+        "content": "Content"
+    },
+    {
+        "type": "text",
+        "id": "section_sub_title",
+        "label": "Sub Title",
+        "default": "20+ Year"
+    },
+     {
+        "type": "text",
+        "id": "section_title",
+        "label": "Title",
+        "default": "of experience"
+    },
+    {
+        "type": "textarea",
+        "id": "section_arrow",
+        "label": "Section Arrow"
+    }
+    ],
+    "blocks":[
+    {
+        "type": "about_section1",
+        "name": "About Section 1",
+        "settings": [
+        {
+            "type": "image_picker",
+            "id": "about_banner_img",
+            "label": "Image",
+            "info": "Recommended Size: 625 x 473px"
+        },
+        {
+            "type": "text",
+            "id": "about_title",
+            "label": "Title",
+            "default": "Our company"
+        },
+        {
+            "type": "text",
+            "id": "about_des1",
+            "label": "Text",
+            "default": "Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur adipisicing elit."
+        },
+        {
+            "type": "text",
+            "id": "about_des2",
+            "label": "Text",
+            "default": "Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dolor sit amet conse ctetur adipisicing elit."
+        }
+        ]
+    }
+    ],
+    "presets":[
+    {
+        "name": "About Section 1",
+        "category": "About us"
+    }
+    ]
+}
+{% endschema %}
+<style>
+    .about-section1{
+      padding-top: {{ section.settings.about_product_padding_top }}px;
+      padding-bottom: {{ section.settings.about_product_padding_bottom }}px;
+    }
+    @media (max-width: 1199px){
+      .about-section1{
+        padding-top: {{ section.settings.about_product_padding_top_ipad }}px;
+        padding-bottom: {{ section.settings.about_product_padding_bottom_ipad }}px;
+      }
+    }
+    @media (max-width: 767px){
+      .about-section1{
+        padding-top: {{ section.settings.about_product_padding_top_xs }}px;
+        padding-bottom: {{ section.settings.about_product_padding_bottom_xs }}px;
+      }
+    }
+
+    /*section title*/
+    .about-section1 .main-title {
+      text-align: center;
+    }
+    .about-section1 .main-title span.section-sub-title{
+      font-size: 112px;
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke: 1px;
+      color: #999;
+    }
+    .about-section1 .main-title h2{
+      font-size: 50px;
+      line-height: 1;
+      font-weight: 500;
+      margin-top: 15px;
+    }
+    .about-section1 .main-title .section-arrow{
+      padding-top: {{ section.settings.about_product_padding_top_ipad }}px;
+    }
+    .about-section1 .main-title .section-arrow svg{
+      opacity: .2;
+    }
+    @media(max-width: 1199px){
+      .about-section1 .main-title span.section-sub-title{
+        font-size: 62px;
+      }
+      .about-section1 .main-title h2 {
+        font-size: 26px;
+      }
+      .about-section1 .main-title .section-arrow{
+        padding-top: {{ section.settings.about_product_padding_top_xs }}px;
+      }
+    }
+     @media(max-width: 767px){
+      .about-section1 .main-title span.section-sub-title{
+        font-size: 40px;
+      }
+      .about-section1 .main-title h2{
+        font-size: 20px;
+      }
+     }
+
+    .about-content .about-banner-area .about-banner-img-cont{
+        display: flex;
+        position: relative;
+        margin-top: 30px;
+    }
+    .about-content .about-banner-area .about-banner-img-cont:first-child{
+        margin-top: 0px;
+    }
+    .about-content .about-banner-area .about-banner-img-cont:nth-child(even){
+        flex-direction: row-reverse;
+    }
+    .about-content .about-banner-area .about-banner-img-cont .single-banner {
+        min-height: 400px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 50%;
+    }
+    .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        width: 50%;
+        padding: 60px;
+        background-color: var(--color-primary);
+    }
+    .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc h6{
+      font-size: 20px;
+      line-height: 1;
+      color: #fff;
+      font-weight: 500;
+    }
+    .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc p{
+      color: #fff;
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 300;
+    }
+    .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc a{
+      margin-top: 30px;
+    }
+    @media (max-width: 991px) {
+        .about-content .about-banner-area .about-banner-img-cont .single-banner {
+            min-height: 300px;
+        }
+        .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc{
+          padding: 60px 30px;
+        }
+    }
+    @media (max-width: 767px) {
+        .about-content .about-banner-area .about-banner-img-cont,
+        .about-content .about-banner-area .about-banner-img-cont:nth-child(even){
+            flex-direction: column;
+        }
+        .about-content .about-banner-area .about-banner-img-cont{
+            margin-top: 20px;
+        }
+        .about-content .about-banner-area .about-banner-img-cont .single-banner{
+            width: 100%;
+        }
+        .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc{
+            width: 100%;
+            padding: 30px;
+        }
+        .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc h6{
+
+        }
+        .about-content .about-banner-area .about-banner-img-cont .abt-banner-desc p{
+
+        }
+    }
+</style>

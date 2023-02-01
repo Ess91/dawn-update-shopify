@@ -1,0 +1,260 @@
+<section class="privacy-policy3">
+  <div class="background-img wow animate__fadeIn">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+        <div class="text-content">
+          <div class="main-title">
+            <h2>{{ section.settings.main_title }}</h2>
+          </div>
+          <div class="main-description">
+            <ul>
+              {% if section.settings.content_description1 != "" %}
+              <li class="wow animate__fadeInUp">
+                <p>{{ section.settings.content_description1 }}</p>
+              </li>
+              {% endif %}
+              {% if section.settings.content_description2 != "" %}
+              <li class="wow animate__fadeInUp">
+                <p>{{ section.settings.content_description2 }}</p>
+              </li>
+              {% endif %}
+              {% if section.settings.content_description3 != "" %}
+              <li class="wow animate__fadeInUp">
+                <p>{{ section.settings.content_description3 }}</p>
+              </li>
+              {% endif %}
+              {% if section.settings.content_description4 != "" %}
+              <li class="wow animate__fadeInUp">
+                <p>{{ section.settings.content_description4 }}</p>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Privacy Policy section 3",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "paragraph",
+    "content": "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "paragraph",
+    "content": "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding Bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "privacy_img",
+      "label": "Background Image",
+      "info": "Recommended Size: 1920px x 800px"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Images Title",
+      "default": "Watch information collected through technology and bt third-parties?"
+    },
+    {
+      "type": "text",
+      "id": "content_description1",
+      "label": "Content Description",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled."
+    },
+    {
+      "type": "text",
+      "id": "content_description2",
+      "label": "Content Description",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled."
+    },
+    {
+      "type": "text",
+      "id": "content_description3",
+      "label": "Content Description",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled."
+    },
+    {
+      "type": "text",
+      "id": "content_description4",
+      "label": "Content Description",
+      "default": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled."
+    }
+  ]
+}
+{% endschema %}
+<style type="text/css">
+  .privacy-policy3 .text-content{
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    padding-right: 100px;
+    padding-left: 100px;
+  }
+  @media(max-width: 1199px){
+    .privacy-policy3 .text-content{
+      padding-top: {{ section.settings.section_padding_top_lg }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_lg }}px;
+      padding-right: 60px;
+      padding-left: 60px;
+    }
+  }
+  @media(max-width: 767px){
+    .privacy-policy3 .text-content{
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+  }
+  .privacy-policy3 .background-img{
+    background-image: url({% if section.settings.privacy_img %}{{ section.settings.privacy_img | img_url: 'master' }}{% else %}https://dummyimage.com/1920x800/f7f7f7/999999{% endif %});
+    height: 800px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .privacy-policy3 .text-content{
+    background-color: #fff; margin-top: -275px;
+    -webkit-box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 10);
+    -ms-box-shadow: 0 0 10px rgba(0, 0, 0, 10); box-shadow: 0 0 10px rgb(0 0 0 / 10%);
+  }
+  .privacy-policy3 .text-content .main-title h2{
+    font-size: 40px;
+    font-weight: 500;
+    width: 80%;
+  }
+  .privacy-policy3 .text-content .main-description{
+    margin-top: 35px;
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(1) {
+    animation-delay: 0.2s;
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(4) {
+    animation-delay: 0.5s;
+  }
+  .privacy-policy3 .text-content .main-description ul li{
+    position: relative;
+    margin-top: 15px;
+    padding-left: 30px;
+  }
+  .privacy-policy3 .text-content .main-description ul li:first-child{
+    margin-top: 0;
+  }
+  .privacy-policy3 .text-content .main-description ul li p{
+    font-size: 16px;
+    line-height: 30px;
+  }
+  .privacy-policy3 .text-content .main-description ul li p:before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-weight: 500;
+    color: var(--color-primary);
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(1) p:before{
+    content: "01";
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(2) p:before{
+    content: "02";
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(3) p:before{
+    content: "03";
+  }
+  .privacy-policy3 .text-content .main-description ul li:nth-child(4) p:before{
+    content: "04";
+  }
+  @media(max-width: 1199px){
+    .privacy-policy3 .background-img{
+      height: 600px;
+    }
+    .privacy-policy3 .text-content .main-title h2{
+      font-size: 26px;
+    }
+  }
+  @media(max-width: 767px){
+    .privacy-policy3 .text-content .main-title h2{
+      font-size: 20px;
+      width: 100%;
+    }
+  }
+</style>

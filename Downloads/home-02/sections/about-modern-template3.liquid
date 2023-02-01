@@ -1,0 +1,288 @@
+<!-- Browuse categoryies -->
+<section class="about-modern-section3">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+        <div class="main-title">
+          <h2>
+            <span>{{ section.settings.section_title1 }}</span>
+            <span>{{ section.settings.section_title2 }}</span>
+          </h2>
+          <p>{{ section.settings.section_desc }}</p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-12">
+        <div class="progressbar-content">
+            {% for block in section.blocks %}
+              <div class="skills" id="skills">
+                <div class="skill-item">
+                  <h6 class="skill-name">{{ block.settings.progress_title }}</h6>
+                  <div class="skill-progress">
+                    <div class="progres" role="progressbar" data-value="{{ block.settings.progress_percent }}%" aria-valuenow="{{ block.settings.progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                      
+                    </div>
+                  </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+{
+  "name": "About Modern Section 3",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+    {
+      "type": "text",
+      "id": "section_title1",
+      "label": "section title",
+      "default": "We provided"
+    },
+    {
+      "type": "text",
+      "id": "section_title2",
+      "label": "section title",
+      "default": "good solutions"
+    },
+    {
+      "type": "text",
+      "id": "section_desc",
+      "label": "Section Description",
+      "default": "With years of experience in the website design and development industry ThemeZaa pride ourselves on creating unique, creative & quality designs that are developed upon the latest coding.+"
+    }
+],
+  "blocks" : [
+    {
+      "type" : "progress_bar",
+      "name" : "Progress Bar",
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "progress bar"
+        },
+        {
+          "type": "text",
+          "id": "progress_title",
+          "label": "progress title",
+          "default": "best selling"
+        },
+        {
+          "type": "text",
+          "id": "progress_percent",
+          "label": "progress percent",
+          "default": "96"
+        }
+      ]
+    }
+  ],
+  "presets":[
+  {
+    "name": "About Modern Section 3",
+    "category": "About Modern"
+  }
+  ]
+}
+{% endschema %}
+<style>
+  .about-modern-section3 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .about-modern-section3 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-modern-section3 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+
+  /*section title*/
+  .about-modern-section3 .main-title{
+    width: 70%;
+  }
+  .about-modern-section3 .main-title h2{
+    font-size: 40px;
+  }
+  .about-modern-section3 .main-title p{
+    font-size: 16px;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+  @media(max-width: 1199px){
+    .about-modern-section3 .main-title{
+      width: 100%;
+    }
+    .about-modern-section3 .main-title h2{
+      font-size: 26px;
+    }
+    .about-modern-section3 .main-title p{
+      margin-top: 15px;
+    }
+  }
+  @media(max-width: 767px){
+    .about-modern-section3 .main-title h2{
+      font-size: 20px;
+    }
+    .about-modern-section3 .main-title p{
+      font-size: 14px;
+    }
+  }
+  .about-modern-section3 .progressbar-content .skills{
+    margin-top: 50px;
+  }
+  .about-modern-section3 .progressbar-content .skills:first-child{
+    margin-top: 0;
+  }
+  .about-modern-section3 .progressbar-content .skills .skill-item h6{
+    font-size: 16px;
+    text-transform: uppercase;
+    line-height: 1
+  }
+  .about-modern-section3 .progressbar-content .skills .skill-progress{
+    background: #f6f6f6;
+    position: relative;
+    width: 100%;
+    height: 10px;
+    border-radius: 50px;
+    margin-top: 18px;
+  }
+  .about-modern-section3 .progressbar-content .skills .skill-progress .progres{
+    width: 96%;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: var(--color-secondary);
+    border-radius: 10px;
+    -webkit-transition: all 0.9s ease-in-out 0s;
+    -o-transition: all 0.9s ease-in-out 0s;
+    transition: all 0.9s ease-in-out 0s;
+  }
+  .about-modern-section3 .progressbar-content .skills .skill-progress .progres:after{
+    content:attr(data-value);
+    font-size: 16px;
+    font-weight: 600;
+    position: absolute;
+    z-index: 1;
+    top: -40px;
+    {% if settings.enable_rtl %}
+    left: 0px;
+    {% else %}
+    right: 0px;
+    {% endif %}
+    color: #232323;
+  }
+
+  @media(max-width: 1199px){
+    .about-modern-section3 .progressbar-content .skills{
+      margin-top: 30px;
+    }
+  }
+  @media(max-width: 991px){
+    .about-modern-section3 .progressbar-content {
+      margin-top: 30px;
+    }
+  }
+</style>
+<script type="text/javascript">
+  var skills = $(".skills");
+  var id = skills.attr("id");
+  function animateProgressBar() {
+    $(".progres").css("width", function () {
+        return $(this).attr("aria-valuenow") + "%";
+    });
+  }
+
+  var waypoint = new Waypoint({
+      element: document.getElementById(id),
+      handler: function (direction) {
+          animateProgressBar();
+      },
+      offset: "75%"
+  });
+</script>

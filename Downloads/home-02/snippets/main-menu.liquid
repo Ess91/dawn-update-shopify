@@ -1,0 +1,31 @@
+<ul class="main-menu">
+  {%- assign link_active = canonical_url | split: shop.url | last -%}
+  {% for block in section.blocks %}
+  {%- case block.type -%}
+
+  {%- when 'customlink' -%}
+  <li class="menu-link customlink">
+    {%-assign menu_link = block.settings.custom_link-%}
+    <a href="{{ block.settings.custom_link }}" {% if link_active == menu_link %}aria-current="page"{% endif %} class="link-title {% if link_active == menu_link %}active{% endif %}">
+      <span class="sp-link-title">{{ block.settings.title }}</span>
+      {% if block.settings.menu_flag != '' %}
+      <span class="sale">{{ block.settings.menu_flag }}</span>
+      {% endif %}
+    </a>
+  </li>
+
+  {%- when 'megamenu1' -%}
+  {% include 'megamenu1' %}
+
+  {%- when 'megamenu2' -%}
+  {% include 'megamenu2' %}
+
+  {%- when 'banner_megamenu' -%}
+  {% include 'megamenu-banner' %}
+
+  {%- when 'submenu' -%}
+  {% include 'submenu' %}
+
+  {%- endcase -%}
+  {%- endfor -%}
+</ul>

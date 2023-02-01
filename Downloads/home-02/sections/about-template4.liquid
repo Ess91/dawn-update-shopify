@@ -1,0 +1,257 @@
+<!-- Browuse categoryies -->
+<section class="about-section4">
+  <div class="about-cat-slider owl-carousel owl-theme" id="about-category-slider">
+    {% for block in section.blocks %}
+    {% assign category_product = collections[block.settings.slider_category_handle] %}
+    <div class="item wow animate__fadeIn">
+      <div class="category-wrap">
+        <div class="category-img-cont">
+          <a href="{{ category_product.url }}" class="banner-hover cat-img">
+            <img class="img-fluid" src="{% if block.settings.collection_img %}{{ block.settings.collection_img | img_url: 'master' }}{% else %}https://dummyimage.com/620x557/f7f7f7/999999{% endif %}">
+            <div class="explor-btn">
+              <h6 class="cat-title"><span>{{ category_product.title }}</span></h6>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script type="text/javascript">
+  $('#about-category-slider').owlCarousel({
+    loop: true,
+    rewind: true,
+    margin: 30,
+    nav: false,
+    navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>'],
+    dots: false,
+    {%- if settings.enable_rtl -%}
+    rtl: true,
+    {%- endif -%}
+    autoplay: true,
+    autoplayTimeout: 5000,
+    autoplayHoverPause: true,
+    responsive:{
+      0:{
+        margin: 15,
+        items: 1
+      },
+      479:{
+        margin: 15,
+        items: 1
+      },
+      768:{
+        items: 2
+      },
+      979:{
+        items: 3
+      },
+      1199:{
+        items: 3
+      }
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "About Category",
+  "settings": [
+    {
+    "type": "header",
+    "content": "Section Padding"
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Desktop / Laptop"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 100
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Ipad pro / Ipad"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_lg",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_lg",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 60
+  },
+  {
+    "type" : "paragraph",
+    "content" : "Mobile"
+  },
+  {
+    "type": "range",
+    "id": "section_padding_top_xs",
+    "label": "Section Padding Top",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  },
+  {
+    "type": "range",
+    "id": "section_padding_bottom_xs",
+    "label": "Section Padding bottom",
+    "min": 0,
+    "max": 100,
+    "step": 5,
+    "unit": "px",
+    "default": 40
+  }
+  ],
+  "blocks" : [
+    {
+      "type" : "about_category",
+      "name" : "Category Block",
+      "settings" : [
+        {
+          "type" : "header",
+          "content" : "Slider Category"
+        },
+        {
+          "type": "collection",
+          "id": "slider_category_handle",
+          "label": "Select Your Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "collection_img",
+          "label": "Collection image",
+          "info": "Recommended Size: 620px x 557px"
+        }
+      ]
+    }
+  ],
+  "presets":[
+    {
+      "name": "About Category",
+      "category": "About us"
+    }
+  ]
+}
+{% endschema %}
+<style>
+  .about-section4 {
+    padding-top: {{ section.settings.section_padding_top }}px;
+    padding-bottom: {{ section.settings.section_padding_bottom }}px;
+  }
+  @media (max-width: 1199px) {
+    .about-section4 {
+      padding-top: {{ section.settings.section_padding_top_ipad }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_ipad }}px;
+    }
+  }
+  @media (max-width: 767px) {
+    .about-section4 {
+      padding-top: {{ section.settings.section_padding_top_xs }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom_xs }}px;
+    }
+  }
+  .about-section4 .category-wrap .category-img-cont {
+    position: relative;
+  }
+  .about-section4 .category-wrap .category-img-cont .explor-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-left: auto;
+    max-width: max-content;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .about-cat-slider .category-wrap:hover .category-img-cont .explor-btn {
+    opacity: 1;
+    visibility: visible;
+  }
+  .about-section4 .category-wrap .category-img-cont .explor-btn h6.cat-title,
+  .about-cat-slider .category-wrap:hover .category-img-cont .explor-btn h6.cat-title{
+    -webkit-transition: all 0.3s ease-in-out 0s;
+    -o-transition: all 0.3s ease-in-out 0s;
+    transition: all 0.3s ease-in-out 0s;
+  }
+  .about-cat-slider .category-wrap .category-img-cont .explor-btn h6.cat-title{
+    transform: translateY(30px);
+  }
+  .about-cat-slider .category-wrap:hover .category-img-cont .explor-btn h6.cat-title{
+    transform: translateY(0px);
+  }
+  .about-cat-slider .category-wrap .category-img-cont a.cat-img{
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-cat-slider .category-wrap h6.cat-title{
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #fff;
+    padding: 20px 35px;
+    line-height: 1;
+  }
+  @media (max-width: 1199px){
+    .about-cat-slider .category-wrap a.cat-title{
+      position: unset;
+      width: 100%;
+      transform: translateY(0%);
+    }
+    .about-section4 .section-title h2{
+      font-size: 24px;
+    }
+  }
+  @media (max-width: 991px){
+    .about-section4 .section-capture{
+      flex-direction: column;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .about-section4 .section-title {
+      text-align: center;
+    }
+    .about-section4 .section-title::after{
+      margin-left: auto;
+      margin-right: auto;
+      left: 0;
+      right: 0;
+    }
+  }
+</style>
